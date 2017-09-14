@@ -11,6 +11,7 @@
     "browser-sync": "^2.2.1",
     "browserify": "^14.4.0",
     "del": "^2.2.0",
+    "dom-to-image": "^2.5.2",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.1",
     "gulp-babel": "^6.1.1",

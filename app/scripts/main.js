@@ -31,3 +31,8 @@ $('[data-type="jpg-btn"]').on('click', function(){
             link.click();
         });    
 });
+
+$('[data-type="show-block"]').on('click', function(){
+    $('#custom-wheel-container').show();    
+    $('#default-wheel-container').hide();    
+});
