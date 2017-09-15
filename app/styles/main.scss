@@ -92,6 +92,11 @@ body {
   }
 }
 
+
+.circle-wrapper {
+  position: relative;
+}
+
 .circle {
   position: relative;
   border: 1px solid black;
@@ -106,22 +111,23 @@ body {
   li {
     overflow: hidden;
     position: absolute;
-    top: 0; right: 0;
-    width: 50%; height: 50%;
+    top: 0; 
+    right: 0;
+    width: 50%; 
+    height: 50%;
     transform-origin: 0% 100%;
   }
-
 
   .text {
     position: absolute;
     left: -95%;
-    width: 200%; height: 175%;
+    width: 200%; 
+    height: 175%;
     text-align: center;
     -webkit-transform: skewY(60deg) rotate(15deg);
     -ms-transform: skewY(60deg) rotate(15deg);
     transform: skewY(60deg) rotate(15deg);
     padding-top: 27px;
-
 
     span {
       display: block;
@@ -216,18 +222,21 @@ body {
 }
 
 .circle4 {
+  @extend .circle;
+
   .text {
     position: absolute;
-    left: -133px;
-    width: 199%;
+    left: -134px;
+    width: 210%;
     height: 119%;
     text-align: center;
-    -webkit-transform: skewY(60deg) rotate(15deg);
-    transform: skewY(13deg) rotate(43deg);
-    padding-top: 1px;
+    -webkit-transform: skewY(180deg) rotate(45deg);
+    transform: skewY(180deg) rotate(45deg);
+    padding-top: 33px;
+
 
     span {
-      padding: 3px 0;
+      padding: 2px 0;
     }
   }
 
@@ -264,22 +273,57 @@ body {
   li:nth-child(4) .text {
     background: #6dcff6;
   }
+
+  &.headings {
+    @extend .circle.headings;
+
+    .text {
+      padding-top: 48px;
+      left: -160px;
+    }
+
+    li:first-child {
+      -webkit-transform: rotate(0deg) skewY(-180deg);
+      -ms-transform: rotate(0deg) skewY(-180deg);
+      transform: rotate(0deg) skewY(-180deg);
+    }
+    li:nth-child(2) {
+      -webkit-transform: rotate(90deg) skewY(-180deg);
+      -ms-transform: rotate(90deg) skewY(-180deg);
+      transform: rotate(90deg) skewY(-180deg);
+    }
+    li:nth-child(3) {
+      -webkit-transform: rotate(180deg) skewY(-180deg);
+      -ms-transform: rotate(180deg) skewY(-180deg);
+      transform: rotate(180deg) skewY(-180deg);
+    }
+    li:nth-child(4) {
+      -webkit-transform: rotate(270deg) skewY(-180deg);
+      -ms-transform: rotate(270deg) skewY(-180deg);
+      transform: rotate(270deg) skewY(-180deg);
+    }
+
+    li .text {
+      background: transparent;
+    }
+  }
 }
 
-
 .circle6 {
+  @extend .circle;
+
   .text {
     position: absolute;
-    left: -184px;
-    width: 200%;
-    height: 153%;
+    left: -205px;
+    width: 204%;
+    height: 183%;
     text-align: center;
-    -webkit-transform: skewY(60deg) rotate(15deg);
-    transform: skewY(31deg) rotate(29deg);
-    padding-top: 15px;
+    -webkit-transform: skewY(31deg) rotate(29deg);
+    transform: skewY(210deg) rotate(32deg);
+    padding-top: 7px; 
 
     span {
-      padding: 0;
+      padding: 1px 0;
     }
   }
 
@@ -332,22 +376,38 @@ body {
   li:nth-child(6) .text {
     background: #f6f36e;
   }
+
+  &.headings {
+    @extend .circle.headings;
+
+    .text {
+      padding-top: 0px;
+      left: -158px;
+      width: 127%;
+    }
+
+    li .text {
+      background: transparent;
+    }
+  }
 }
 
 
 .circle8 {
+  @extend .circle;
+
   .text {
     position: absolute;
-    left: -191px;
-    width: 200%;
-    height: 152%;
+    left: -170px;
+    width: 195%;
+    height: 155%;
     text-align: center;
-    -webkit-transform: skewY(60deg) rotate(15deg);
-    transform: skewY(45deg) rotate(22deg);
-    padding-top: 15px;
+    -webkit-transform: skewY(225deg) rotate(22deg);
+    transform: skewY(225deg) rotate(23deg);
+    padding-top: 43px;
 
     span {
-      padding: 0;
+      padding: 1px 0;
     }
   }
 
@@ -416,10 +476,26 @@ body {
   li:nth-child(8) .text {
     background: #1837f6;
   }
+
+  &.headings {
+    @extend .circle.headings;
+
+    .text {
+      padding-top: 51px;
+      left: -120px;
+      width: 125%;
+    }
+
+    li .text {
+      background: transparent;
+    }
+  }
 }
 
 
 .circle10 {
+  @extend .circle;
+
   .text {
     position: absolute;
     left: -191px;
@@ -427,14 +503,13 @@ body {
     height: 152%;
     text-align: center;
     -webkit-transform: skewY(60deg) rotate(15deg);
-    transform: skewY(45deg) rotate(22deg);
+    transform: skewY(225deg) rotate(22deg);
     padding-top: 15px;
-  }
 
-  span {
-    padding: 0;
+    span {
+      padding: 1px 0;
+    }
   }
-
 
   li:first-child {
     -webkit-transform: rotate(0deg) skewY(-225deg);
@@ -517,11 +592,25 @@ body {
   li:nth-child(10) .text {
     background: #4af6c1;
   }
+
+  &.headings {
+    @extend .circle.headings;
+
+    .text {
+      padding-top: 51px;
+      left: -120px;
+      width: 125%;
+    }
+
+    li .text {
+      background: transparent;
+    }
+  }   
 }
 
-
-
-
+.circle-empty {
+  @extend .circle;
+}
 
 .circle {
   position: relative;
@@ -537,23 +626,14 @@ body {
 
 .circle.headings {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -13px;
+  top: -32px;
   width: 36em;
   height: 36em;
   margin: -9px;
   border: 0;
 
-  li:first-child .text, li:nth-child(5) .text, li:nth-child(9) .text {
-    background: transparent;
-  }
-  li:nth-child(2) .text, li:nth-child(6) .text, li:nth-child(10) .text {
-    background: transparent;
-  }
-  li:nth-child(3) .text, li:nth-child(7) .text, li:nth-child(11) .text {
-    background: transparent;
-  }
-  li:nth-child(4) .text, li:nth-child(8) .text, li:nth-child(12) .text {
+  li .text {
     background: transparent;
   }
 }
@@ -581,4 +661,21 @@ h5 {
     list-style: none;
     padding: 0;
   }
+}
+
+
+.circle6.headings {
+  @extend .circle.headings;
+}
+
+.circle8.headings {
+  @extend .circle.headings;
+}
+
+.circle10.headings {
+  @extend .circle.headings;
+}
+
+.circle12.headings {
+  @extend .circle.headings;
 }
