@@ -1,6 +1,10 @@
 var domtoimage = require('dom-to-image');
 
-$('li span').on('click', function(){
+var headingSpans = $('.headings li span');
+
+$('li span').on('click', function(e){
+    e.preventDefault();
+
     var mark = $(this).find('a').text(),
         markArray = $(this).parent().find('span'),
         selected = markArray.splice(markArray.length - mark),
@@ -11,18 +15,26 @@ $('li span').on('click', function(){
         'background-color': 'transparent'
     });
 
-    $(selected).css({
-       'background': 'rgba(0,0,0, 0.50)'
-    });
+    //disable click if headings are epmty
+    //if (!$(this).parent('.circle-wrapper').find('.headings h5').empty()) {
+        $('.warning').addClass('hidden');
+        $(selected).css({
+           'background': 'rgba(0,0,0, 0.50)'
+        });
 
-    allSpans.find('a').css('color', '#000');
-    $(selected[0]).find('a').css('color', '#fff');
+        allSpans.find('a').css('color', '#000');
+        $(selected[0]).find('a').css('color', '#fff');
 
-    if($(this).parent('ul').hasClass('circle')) {
-        $('.marks-list li').eq(index).find('.mark').html(mark);
-    } else {
-        $('.custom-marks-list li').eq(index).find('.mark').html(mark);
-    }
+
+        if($(this).parents('ul').hasClass('circle')) {
+            $('.marks-list li').eq(index).find('.mark').html(mark);
+        } else {
+            $('.custom-marks-list li').eq(index).find('.mark').html(mark);
+        }
+    //} else {
+       // $(this).prop("disabled", true);
+       // $('.warning').removeClass('hidden');
+    //}
 });
 
 $('[data-type="jpg-btn"]').on('click', function(){
@@ -37,51 +49,67 @@ $('[data-type="jpg-btn"]').on('click', function(){
 
 var circles = $('.circle-wrapper'),
     field = '<div class="form-group">' + 
-                '<input type="text" id="image" class="form-control" aria-describedby="Image" placeholder="Field name">' +
+                '<input type="text" id="" class="form-control" aria-describedby="" placeholder="Field name">' +
             '</div>';
 
-$('[data-type="show-block"]').on('click', function(){
+$('[data-type="create-custom-circle"]').on('click', function(){
     circles.each(function(i) {
         if (!$(this).hasClass('hidden')) {
             $(this).addClass('hidden');
         }
-        $('.headings li h5').text('');
+        if (!$(this).prop('data-type', 'default')) {
+            console.log(this);
+            /*$('.headings li h5').text('');*/
+        }
+        /*$('.headings li h5').text('');*/
         $('[data-type="0"]').removeClass('hidden');    
     });
     
+    $('li span').css({
+        'background-color': 'transparent'
+    }).find('a').css('color', '#000');
     $('[data-type="create-circle"]').removeClass('hidden');
     $('[data-type="section-names"]').addClass('hidden');
     $('.section-marks').hide();
     $('#section-amt').val(0);   
-    $('.custom-marks-list').html('');  
+    $('.custom-marks-list').html();  
+    $('[data-type="section-names"] .form-group').remove();  
+    $('.custom-marks-list li').remove();  
 });
 
+//set all default states
 $('[data-type="show-default"]').on('click', function(){
     circles.addClass('hidden');
-   $('[data-type="default"]').removeClass('hidden');    
+    $('[data-type="default"]').removeClass('hidden');    
     $('[data-type="create-circle"]').addClass('hidden');
     $('[data-type="section-names"]').addClass('hidden');
     $('.section-marks').show();
+    $('li span').css({
+        'background-color': 'transparent'
+    }).find('a').css('color', '#000');
+    $('.marks-list .mark').html('0');
 });
 
 $('#section-amt').on('change', function(){
     var sectionAmt = $(this).val();
-  
+ 
+ 
     $('[data-type="section-names"]').append(field.repeat(sectionAmt)).removeClass('hidden'); 
     circles.addClass('hidden');    
     $('[data-type="'+ sectionAmt +'"]').removeClass('hidden');
     $('[data-type="create-circle"]').addClass('hidden');
 
     $('[data-type="section-names"] input').on('keyup', function(e){
-        var index = $(this).parent('div').index() - 1,
+        var index = $(this).parent('div').index() - 2,
             sectionName = $(this).val();
 
         var circleSection = $('[data-type="'+ sectionAmt +'"]').find('.headings li').get(index);
 
-        console.log($(circleSection).find('h5'))
-
         $(circleSection).find('h5').html(sectionName);
 
+         console.log(index); 
+         console.log('circleSection', $('[data-type="'+ sectionAmt +'"]').find('.headings li').length); 
+         console.log(circleSection); 
     });
 
     $('[data-type="section-names"] input').on('focusout', function(e){
@@ -89,13 +117,9 @@ $('#section-amt').on('change', function(){
 
         if (sectionName) {
             var li = '<li><span class="area-name">'+ sectionName +' </span> — <span class="mark">0</span></li>';
-            
             $(this).parents('div').siblings('ul').append(li);
-
-            $(this).hide();
+            $(this).parent().hide();
         }
-        
-        
     });
 });
 
