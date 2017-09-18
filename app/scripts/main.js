@@ -57,14 +57,14 @@ $('[data-type="create-custom-circle"]').on('click', function(){
         if (!$(this).hasClass('hidden')) {
             $(this).addClass('hidden');
         }
-        if (!$(this).prop('data-type', 'default')) {
-            console.log(this);
-            /*$('.headings li h5').text('');*/
+        if ($(this).data('type') == 'default') {
+            $('.headings h5').html('');
         }
+
         /*$('.headings li h5').text('');*/
         $('[data-type="0"]').removeClass('hidden');    
     });
-    
+
     $('li span').css({
         'background-color': 'transparent'
     }).find('a').css('color', '#000');
