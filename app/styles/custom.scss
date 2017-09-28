@@ -98,6 +98,11 @@ h2, h3{
   } 
 }
 
+.area-name {
+  max-width: 115px;
+  display: inline-block; 
+}
+
 .marks-list {
   padding-left: 0;
 
@@ -118,7 +123,7 @@ h2, h3{
 
   .progress {
     position: absolute;
-    top: 14px;
+    top: 18px;
     width: 60%;
     right: 30px;
   }
@@ -175,6 +180,7 @@ h2, h3{
         //border: 1px solid #ddd;
         color: #000;
         font-size: 11.5px;
+        line-height: 1.5;
       }
 
       &:last-child {
@@ -245,18 +251,6 @@ h2, h3{
     -ms-transform: rotate(330deg) skewY(-60deg);
     transform: rotate(330deg) skewY(-60deg);
   }
-  li:first-child .text, li:nth-child(5) .text, li:nth-child(9) .text {
-    @extend .pink;
-  }
-  li:nth-child(2) .text, li:nth-child(6) .text, li:nth-child(10) .text {
-    @extend .green;
-  }
-  li:nth-child(3) .text, li:nth-child(7) .text, li:nth-child(11) .text {
-    @extend .yellow;
-  }
-  li:nth-child(4) .text, li:nth-child(8) .text, li:nth-child(12) .text {
-    @extend .blue;
-  }
 
   &.headings {
     position: absolute;
@@ -286,9 +280,12 @@ h2, h3{
     transform: skewY(180deg) rotate(45deg);
     padding-top: 33px;
 
-
     span {
       padding: 2px 0;
+
+      a {
+        line-height: 1.3;
+      }
     }
   }
 
@@ -311,19 +308,6 @@ h2, h3{
     -webkit-transform: rotate(270deg) skewY(-180deg);
     -ms-transform: rotate(270deg) skewY(-180deg);
     transform: rotate(270deg) skewY(-180deg);
-  }
-
-  li:first-child .text {
-    @extend .pink;
-  }
-  li:nth-child(2) .text {
-    @extend .green;
-  }
-  li:nth-child(3) .text {
-    @extend .yellow;
-  }
-  li:nth-child(4) .text {
-    @extend .blue;
   }
 
   &.headings {
@@ -410,25 +394,6 @@ h2, h3{
     transform: rotate(300deg) skewY(-210deg);
   }
 
-  li:first-child .text {
-    @extend .pink;
-  }
-  li:nth-child(2) .text {
-    @extend .green;
-  }
-  li:nth-child(3) .text {
-    @extend .yellow;
-  }
-  li:nth-child(4) .text {
-    @extend .blue;
-  }
-  li:nth-child(5) .text {
-    @extend .red;
-  }
-  li:nth-child(6) .text {
-    @extend .orange;
-  }
-
   &.headings {
     @extend .circle.headings;
 
@@ -502,31 +467,6 @@ h2, h3{
     -webkit-transform: rotate(315deg) skewY(-225deg);
     -ms-transform: rotate(315deg) skewY(-225deg);
     transform: rotate(315deg) skewY(-225deg);
-  }
-
-  li:first-child .text {
-    @extend .pink;
-  }
-  li:nth-child(2) .text {
-    @extend .green;
-  }
-  li:nth-child(3) .text {
-    @extend .yellow;
-  }
-  li:nth-child(4) .text {
-    @extend .blue;
-  }
-  li:nth-child(5) .text {
-    @extend .red;
-  }
-  li:nth-child(6) .text {
-    @extend .orange;
-  }
-  li:nth-child(7) .text {
-     @extend .light-green;
-  }
-  li:nth-child(8) .text {
-    @extend .deep-purple;
   }
 
   &.headings {
@@ -614,36 +554,7 @@ h2, h3{
     transform: rotate(324deg) skewY(-225deg);
   }
 
-  li:first-child .text {
-    @extend .pink;
-  }
-  li:nth-child(2) .text {
-    @extend .green;
-  }
-  li:nth-child(3) .text {
-    @extend .yellow;
-  }
-  li:nth-child(4) .text {
-    @extend .blue;
-  }
-  li:nth-child(5) .text {
-    @extend .red;
-  }
-  li:nth-child(6) .text {
-    @extend .orange;
-  }
-  li:nth-child(7) .text {
-     @extend .light-green;
-  }
-  li:nth-child(8) .text {
-    @extend .deep-purple;
-  }
-  li:nth-child(9) .text {
-    @extend .lime;
-  }
-  li:nth-child(10) .text {
-    @extend .indigo;
-  }
+  
 
   &.headings {
     @extend .circle.headings;
