@@ -174,6 +174,7 @@ $(function(){
         defaultCircle.removeClass('hidden');
         defaultCategories.removeClass('hidden');
         $('.form-group.label-floating').remove();
+        $('.custom-categories').remove();
         $('.circle-wrapper li span').css('background-color', 'transparent').find('a').css('color', '#000');
         $('.default .mark').attr('style', '');
         $('.marks-list .mark').html('0').prop('class', 'mark');
