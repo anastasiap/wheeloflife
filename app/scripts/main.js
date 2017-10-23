@@ -112,7 +112,7 @@ $(function(){
         });
     });
 
-    $('.circle-wrapper li span').on('click', function(e){
+    /*$('.circle-wrapper li span').on('click', function(e){
         e.preventDefault();
 
         var clickedSpan = $(this),
@@ -155,7 +155,7 @@ $(function(){
                 scrollTop: errorContainer.offset().top
             }, 500);
         }
-    });
+    });*/
 
     $('[data-type="jpg-btn"]').on('click', function(){
         domtoimage.toJpeg(document.getElementById('default-wheel-container'), { quality: 0.95 })
