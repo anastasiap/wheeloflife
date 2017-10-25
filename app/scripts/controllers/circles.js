@@ -2,23 +2,31 @@
 
   angular
     .module("wheeloflife")
-    .controller("circlesController", circleCtrl);
+    .controller("dafaultCircleController", circleCtrl);
 
-  function circleCtrl(){
+  circleCtrl.$inject = ['circleMetrics'];
+
+  function circleCtrl(circleMetrics){
       var vm = this;
 
       vm.circleData = circleData;
       vm.gradesScale = gradesScale;
-      vm.activeCategory = {};
       vm.currentGrade = 0;
+      vm.defaultCircle = false;
       vm.setCategoryGrade = setCategoryGrade;
+      vm.activateCustomCircle = toggleDefaultCircle;
 
-    function setCategoryGrade (category, grade) {
-      vm.activeCategory = category;
-
+    function setCategoryGrade (category, grade, index) {
       category.grade = grade.index;
       category.gradeColor = category.color;
+
       grade.bgColor = "rgba(0,0,0, 0.6)";
+
+      console.log(grade);
+    };
+
+    function toggleDefaultCircle () {
+      vm.defaultCircle = true;
     };
   };
 
