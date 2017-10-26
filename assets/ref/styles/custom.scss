@@ -45,7 +45,6 @@ h2 {
   display: flex;
   justify-content: center;
   margin-bottom: 25px;
-  position: relative;
 }
 /*
 .section-marks {
@@ -108,23 +107,23 @@ h2 {
 
   &.green {
     @extend .green;
-  }
-
+  }  
+ 
   &.red {
     @extend .red;
   }
 
   &.deep-purple {
     @extend .deep-purple;
-  }
+  }  
 
   &.indigo {
     @extend .indigo;
-  }
+  }  
 
   &.lime {
     @extend .lime;
-  }
+  }  
 
   &.orange {
     @extend .orange;
@@ -132,12 +131,12 @@ h2 {
 
   &.light-green {
     @extend .light-green;
-  }
+  } 
 }
 
 .area-name {
   max-width: 115px;
-  display: inline-block;
+  display: inline-block; 
 }
 
 .marks-list {
@@ -185,9 +184,9 @@ h2 {
   li {
     overflow: hidden;
     position: absolute;
-    top: 0;
+    top: 0; 
     right: 0;
-    width: 50%;
+    width: 50%; 
     height: 50%;
     transform-origin: 0% 100%;
   }
@@ -195,7 +194,7 @@ h2 {
   .text {
     position: absolute;
     left: -95%;
-    width: 200%;
+    width: 200%; 
     height: 175%;
     text-align: center;
     -webkit-transform: skewY(60deg) rotate(15deg);
@@ -603,7 +602,7 @@ h2 {
     li .text {
       background: transparent;
     }
-  }
+  }   
 }
 
 .circle-empty {

@@ -18,10 +18,11 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/material-kit.css">
     <link rel="stylesheet" href="styles/custom.css">
+    <!-- endbuild -->
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-    <!-- endbuild -->
 
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
@@ -32,7 +33,7 @@
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container">
+    <div class="container" ng-controller="mainCtrl as main">
       <div class="new-circle-btn" ng-controller="actionBtns as btn">
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#area-number" data-type="create-custom-circle"
                 ng-click="circle.activateCustomCircle()">Create your own Wheel of Life</button>
@@ -41,7 +42,9 @@
       <h2 class="text-center"><strong>Check what your life is about at the moment</strong></h2>
       <h3 class="subtitle text-center">Don't overthink think it — just click it and save it</h3>
 
-      <div ng-controller="dafaultCircleController as dCircle" ng-hide="dCircle.defaultCircle">
+      <div ui-view  ></div>
+
+      <!--<div ng-controller="dafaultCircleController as dCircle" ng-hide="dCircle.defaultCircle">
         <div id="custom-wheel-container" class="center-block" >
           <div class="row">
 
@@ -52,9 +55,9 @@
             <div class="col-lg-5">
 
             </div>
-          </div> <!-- row default-wheel -->
-        </div> <!-- default-wheel-container -->
-      </div>
+          </div> &lt;!&ndash; row default-wheel &ndash;&gt;
+        </div> &lt;!&ndash; default-wheel-container &ndash;&gt;
+      </div>-->
 
 
       <div class="clearfix"></div>
@@ -83,6 +86,8 @@
       gtag('config', 'UA-107299149-1');
     </script>-->
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+    <script src="vendor/angular-ui-router.min.js"></script>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -103,29 +108,30 @@
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
-
-
     <script src="/node_modules/dom-to-image/dist/dom-to-image.min.js"></script>
 
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
-    <script src="scripts/material.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
-    <script src="scripts/vendor/angular-ui-router.min.js"></script>
-
+    <script src="vendor/material.min.js"></script>
 
     <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
     <!-- <script src="scripts/nouislider.min.js" type="text/javascript"></script> -->
     <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-    <script src="scripts/material-kit.js" type="text/javascript"></script>
+    <script src="vendor/material-kit.js" type="text/javascript"></script>
     <script src="scripts/bundle.js"></script>
     <!-- endbuild -->
 
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/actionBtns.js"></script>
-    <script src="scripts/controllers/circles.js"></script>
-    <script src="scripts/controllers/default.js"></script>
-    <script src="scripts/factories/circleMetrics.js"></script>
+
+    <script src="app.js"></script>
+    <script src="main/mainCtrl.js"></script>
+    <script src="circle/circle-directive.js"></script>
+    <script src="graph/graph-directive.js"></script>
+
+
+    <script src="controllers/actionBtns.js"></script>
+    <script src="controllers/circles.js"></script>
+    <script src="controllers/default.js"></script>
+    <script src="factories/circleMetrics.js"></script>
   </body>
 </html>

@@ -1,0 +1,17 @@
+<div class="circle-wrapper" data-type="">  <!--n of categories-->
+  <ul class="circle headings">
+    <li ng-repeat="category in main.categories"> <!-- repeat n-times -->
+      <div class="text"><h5>{{ category.categoryName }}</h5></div>
+    </li>
+  </ul>
+  <!-- todo: remove all inline styles -->
+  <ul class="circle body">
+    <li class="{{ category.bgColor }}" ng-repeat="category in main.categories">
+      <div class="text" >
+        <span style="" ng-repeat="grade in main.grades">
+          <a href="#">{{ grade }}</a>
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>
