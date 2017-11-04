@@ -1,7 +1,7 @@
 var domtoimage = require('dom-to-image');
 var headingSpans = $('.headings li span');
 
-
+/*
 function currentDate() {
     var today = new Date(),
         dd = today.getDate(),
@@ -112,7 +112,7 @@ $(function(){
         });
     });
 
-    /*$('.circle-wrapper li span').on('click', function(e){
+    $('.circle-wrapper li span').on('click', function(e){
         e.preventDefault();
 
         var clickedSpan = $(this),
@@ -155,7 +155,7 @@ $(function(){
                 scrollTop: errorContainer.offset().top
             }, 500);
         }
-    });*/
+    });
 
     $('[data-type="jpg-btn"]').on('click', function(){
         domtoimage.toJpeg(document.getElementById('default-wheel-container'), { quality: 0.95 })
@@ -180,4 +180,4 @@ $(function(){
         $('.marks-list .mark').html('0').prop('class', 'mark');
         $('.progress-bar').css('width', '0');
     });
-});
+});*/

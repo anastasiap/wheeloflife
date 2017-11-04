@@ -1,14 +1,14 @@
-<div class="" data-type="section-names">
+<div class="" >
   <h3>Your state for <span class="date"></span></h3>
   <ul class="marks-list">
     <!--todo group them by color for default wheel-->
-    <li class="default" ng-repeat="category in main.categories">
-      <span class="area-name">{{ category.categoryName }} </span>
-      <span class="mark {{ category.bgColor }}">{{ category.grade }}</span>
+    <li class="default" ng-repeat="category in default.categories">
+      <span class="area-name">{{ category.name }} </span>
+      <span class="mark {{ category.activeStyle }}">{{ category.grade }}</span>
       <div class="progress">
         <div
           style="width: {{ category.grade }}0%"
-          class="progress-bar {{ category.bgColor }}"
+          class="progress-bar {{ category.activeStyle }}"
           role="progressbar"
           aria-valuenow="60"
           aria-valuemin="0"

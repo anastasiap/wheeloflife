@@ -1,0 +1,50 @@
+[{
+  "name": "Image",
+  "grade": 0,
+  "activeStyle": "pink"
+  },{
+  "name": "Economics",
+  "grade": 0,
+  "activeStyle": "green"
+  },{
+  "name": "Education",
+  "grade": 0,
+  "activeStyle": "blue"
+  },{
+  "name": "Family",
+  "grade": 0,
+  "activeStyle": "yellow"
+  },{
+  "name": "Creative / Art",
+  "grade": 0,
+  "activeStyle": "pink"
+  },{
+  "name": "Health",
+  "grade": 0,
+  "activeStyle": "green"
+  },{
+  "name": "Love",
+  "grade": 0,
+  "activeStyle": "blue"
+  },{
+  "name": "Sex",
+  "grade": 0,
+  "activeStyle": "yellow"
+  },{
+  "name": "Altruism",
+  "grade": 0,
+  "activeStyle": "pink"
+  },{
+  "name": "Work",
+  "grade": 0,
+  "activeStyle": "green"
+  },{
+  "name": "Friendship",
+  "grade": 0,
+  "activeStyle": "blue"
+  },{
+  "name": "Spiritual",
+  "grade": 0,
+  "activeStyle": "yellow"
+  }
+]
