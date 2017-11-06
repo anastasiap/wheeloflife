@@ -1,50 +1,50 @@
 [{
   "name": "Image",
   "grade": 0,
-  "activeStyle": "pink"
+  "bgColor": "pink"
   },{
   "name": "Economics",
   "grade": 0,
-  "activeStyle": "green"
+  "bgColor": "green"
   },{
   "name": "Education",
   "grade": 0,
-  "activeStyle": "blue"
+  "bgColor": "blue"
   },{
   "name": "Family",
   "grade": 0,
-  "activeStyle": "yellow"
+  "bgColor": "yellow"
   },{
   "name": "Creative / Art",
   "grade": 0,
-  "activeStyle": "pink"
+  "bgColor": "pink"
   },{
   "name": "Health",
   "grade": 0,
-  "activeStyle": "green"
+  "bgColor": "green"
   },{
   "name": "Love",
   "grade": 0,
-  "activeStyle": "blue"
+  "bgColor": "blue"
   },{
   "name": "Sex",
   "grade": 0,
-  "activeStyle": "yellow"
+  "bgColor": "yellow"
   },{
   "name": "Altruism",
   "grade": 0,
-  "activeStyle": "pink"
+  "bgColor": "pink"
   },{
   "name": "Work",
   "grade": 0,
-  "activeStyle": "green"
+  "bgColor": "green"
   },{
   "name": "Friendship",
   "grade": 0,
-  "activeStyle": "blue"
+  "bgColor": "blue"
   },{
   "name": "Spiritual",
   "grade": 0,
-  "activeStyle": "yellow"
+  "bgColor": "yellow"
   }
 ]

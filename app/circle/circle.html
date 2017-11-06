@@ -1,5 +1,5 @@
 
-<div class="circle-wrapper" ng-show="common.isDefault">
+<div class="circle-wrapper">
   <ul class="circle headings">
     <li ng-repeat="category in default.categories">
       <div class="text"><h5>{{ category.name }}</h5></div>
@@ -9,27 +9,7 @@
   <ul class="circle body">
     <li ng-repeat="category in default.categories" class="{{ category.bgColor }}">
       <div class="text" >
-        <span class="{{ category.activeStyle }}" ng-repeat="grade in default.grades" ng-click="common.setGrades(category, grade)">
-          <a href="#">{{ grade.grade }}</a>
-        </span>
-      </div>
-    </li>
-  </ul>
-</div>
-
-<div class="circle-wrapper" ng-hide="common.isDefault">
-  More than {{ common.isDefault }}
-  <h5>Custom is Showing</h5>
-  <ul class="circle{{common.number}} headings">
-    <li ng-repeat="category in common.categories">
-      <div class="text"><h5>{{ category.name }}</h5></div>
-    </li>
-  </ul>
-  <!-- todo: remove all inline styles -->
-  <ul class="circle{{common.number}} body">
-    <li ng-repeat="category in common.defcategories track by $index" class="{{ category.bgColor }}">
-      <div class="text" >
-        <span class="{{ category.activeStyle }}" ng-repeat="grade in default.grades" ng-click="default.setGrades(category, grade)">
+        <span class="{{ category.bgColor }}" ng-repeat="grade in default.grades" ng-click="common.setGrades(category, grade)">
           <a href="#">{{ grade.grade }}</a>
         </span>
       </div>

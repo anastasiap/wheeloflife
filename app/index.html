@@ -53,29 +53,17 @@
             class="btn btn-info" data-type="show-default"
             ng-click="common.setDefault()">Show default Wheel of Life</button>
         </div>
-        <h2 class="text-center"><strong>Check what your life is about at the moment</strong></h2>
-        <h3 class="subtitle text-center">Don't overthink think it — just click it and save it</h3>
-        {{ common.isDefault }}
+        <div ng-hide="common.formShown">
+          <h2 class="text-center"><strong>Check what your life is about at the moment</strong></h2>
+          <h3 class="subtitle text-center">Don't overthink think it — just click it and save it</h3>
+        </div>
+
+        {{ common.number }}
+        {{ common.formShown }}
         <div ui-view></div>
 
-        <!--<div ng-controller="dafaultCircleController as dCircle" ng-hide="dCircle.defaultCircle">
-          <div id="custom-wheel-container" class="center-block" >
-            <div class="row">
-
-              <div class="col-lg-7">
-
-              </div>
-
-              <div class="col-lg-5">
-
-              </div>
-            </div> &lt;!&ndash; row default-wheel &ndash;&gt;
-          </div> &lt;!&ndash; default-wheel-container &ndash;&gt;
-        </div>-->
-
-
         <div class="clearfix"></div>
-        <div class="row">
+        <div class="row" ng-hide="common.formShown">
           <div class="col-xs-12">
             <div class="export-btns">
               <button type="button" data-type="jpg-btn" class="btn btn-info btn-block">Save as .JPG</button>
@@ -89,34 +77,7 @@
         <p class="center-block text-center">♥ from <a href="http://www.thewebbird.me">thewebbird.me</a></p>
       </div>
 
-      <div class="modal fade" id="area-number" tabindex="-1" role="dialog" aria-labelledby="area-numberLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="area-numberLabel">Select an even number of areas</h4>
-            </div>
-            <div class="modal-body">
-              <form ng-submit="common.setNumber(common.number)">
-                <div class="form-group">
-                  <label for="section-amt">How many areas of your life would you like to evaluate?</label>
-                  <select name="section-amt" id="section-amt" class="form-control"
-                          ng-model="common.number">
-                    <option value="0" selected>Select amount</option>111
-                    <option>4</option>
-                    <option>6</option>
-                    <option>8</option>
-                    <option>10</option>
-                    <option>12</option>
-                  </select>
-                <button type="submit">Submit {{ common.number }}</button>
 
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
       <!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -185,6 +146,8 @@
 
       <script src="custom/customCtrl.js"></script>
       <script src="custom/customService.js"></script>
+
+      <script src="form/form-directive.js"></script>
 
 
      <!-- <script src="controllers/actionBtns.js"></script>

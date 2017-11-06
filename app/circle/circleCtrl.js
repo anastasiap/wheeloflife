@@ -5,5 +5,5 @@ angular.module("wheeloflife")
 
 function circleCtrl (defaultService, $http, $scope) {
   var circle = this;
-  
+
 }

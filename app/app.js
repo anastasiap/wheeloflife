@@ -32,7 +32,15 @@ angular.module("wheeloflife", [
         url:'/custom',
         templateUrl: 'custom/custom.html',
         controller: 'customCtrl',
-        controllerAs: 'custom'
+        controllerAs: 'custom',
+        resolve: {
+          'grades': ['defaultService', function (defaultService) {
+            return defaultService.getDefaultGrades().then(function (result) {
+              console.log('app custom grades', result);
+              return result.data;
+            });
+          }]
+        }
       });
   });
 

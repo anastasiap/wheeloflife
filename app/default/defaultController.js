@@ -6,9 +6,9 @@ angular.module("wheeloflife")
   function setDefaultState (categories, grades) {
     var defaultState = this;
 
-    console.log(categories, grades);
 
     defaultState.categories = categories;
     defaultState.grades = grades;
+
   }
 

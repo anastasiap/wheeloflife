@@ -3,12 +3,12 @@
 angular.module("wheeloflife")
   .controller("commonCtrl", commonCtrl);
 
-function commonCtrl (commonService) {
-  var common = this,
-      colors = ["pink", "green", "blue", "yellow", "deep-purple", "indigo", "lime", "orange", "light-green", "red"];
+function commonCtrl (commonService, $scope) {
+  var common = this;
 
-  common.number = 12;
+  common.number = commonService.getNumber();
   common.isDefault = true;
+  common.formShown = commonService.setFormHidden();
 
   common.extract = function (result) {
     return result.data;
@@ -19,9 +19,13 @@ function commonCtrl (commonService) {
   };
 
   common.setCustom = function () {
-    common.isDefault = "false";
+    common.isDefault = false;
+    common.formShown = true;
   };
   common.setDefault = function () {
-    common.isDefault = "true";
+    common.isDefault = true;
+    common.formShown = false;
   };
+
+  common.date = new Date();
 }

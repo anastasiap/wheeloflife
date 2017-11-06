@@ -3,29 +3,44 @@
 angular.module("wheeloflife")
   .controller("customCtrl", customController);
 
-function customController (defaultService, customService) {
+function customController (grades, defaultService, customService) {
   var custom = this,
-      grades = defaultService.getDefaultGrades();
+      colors = ["pink", "green", "blue", "yellow", "deep-purple", "indigo", "lime", "orange", "light-green", "red", "light-blue", "blue-darken"];
 
-  common.setNumber = function (num) {
-    common.number = num;
-    common.categoriesTemplate = populateCategories(num);
 
-    return num;
+  custom.categoriesTemplate = [];
+  custom.grades = grades;
+
+
+  custom.setCategoriesNumber = function (num) {
+    custom.categoriesTemplate = populateCategories(num);
+  };
+
+  custom.titles = [];
+  custom.setName = function(name, $event) {
+    console.log($event);
+
+
+    if (name) {
+      var newObj =  {
+        name: name,
+        bgColor: "",
+        activeStyle: "",
+        grade: 0
+      };
+
+      custom.titles.push(newObj);
+
+
+    }
   };
 
   function populateCategories (num) {
     var cstmCategories = [];
 
-    if (!common.isDefault) {
-      var names = defaultService.getDefaultCategories().then(function(grades) {
-        return grades;
-      });
-    }
-
     for (var i = 0; i < num; i++ ) {
       var newObj =  {
-        categoryName: "",
+        name: "",
         bgColor: colors[i],
         activeStyle: "",
         grade: 0
@@ -33,6 +48,8 @@ function customController (defaultService, customService) {
 
       cstmCategories.push(newObj);
     }
+
+    console.log(cstmCategories);
 
     return cstmCategories;
   }

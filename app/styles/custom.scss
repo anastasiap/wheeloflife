@@ -93,6 +93,14 @@ h2 {
   background-color: #8BC34A;
 }
 
+.light-blue {
+  background-color: #e1f5fe;
+}
+
+.blue-darken {
+  background-color: #1e88e5;
+}
+
 .progress-bar {
   &.yellow {
     @extend .yellow;
@@ -173,7 +181,7 @@ h2 {
   margin: 0 0 5px;
 }
 
-.circle {
+.circle, .circle12 {
   position: relative;
   border: 1px solid #9c9c9c;
   width: 30em;
