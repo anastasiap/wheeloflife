@@ -8,6 +8,8 @@ function setCircleBody () {
       var wrapper = element.children();
 
       wrapper.on("click", function() {
+        wrapper.removeClass("active-span");
+
         var value = 9 - scope.category.grade;
 
         for (var i = 9; i > value; i--) {
