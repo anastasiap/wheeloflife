@@ -1,8 +1,7 @@
-'use strict';
+"use strict";
 
-angular.module("wheeloflife", [
-    'ui.router',
-    'wheelCommon' // TODO rename
+var app = angular.module("wheeloflife", [
+    "ui.router"
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('default');
@@ -15,17 +14,14 @@ angular.module("wheeloflife", [
         controllerAs: 'default',
         resolve: {
           'categories': ['defaultService', function (defaultService) {
-            return defaultService.getDefaultCategories().then(function(result){
-              console.log('app result categories', result);
-              return result.data;
-            });
+            return defaultService.getDefaultCategories();
           }],
           'grades': ['defaultService', function (defaultService) {
-            return defaultService.getDefaultGrades().then(function(result){
-              console.log('app result grades', result);
-              return result.data;
-            });
-          }]
+            return defaultService.getDefaultGrades();
+          }],
+          'formShown': function() {
+            return true;
+          }
         }
       })
       .state('custom', {
@@ -35,11 +31,11 @@ angular.module("wheeloflife", [
         controllerAs: 'custom',
         resolve: {
           'grades': ['defaultService', function (defaultService) {
-            return defaultService.getDefaultGrades().then(function (result) {
-              console.log('app custom grades', result);
-              return result.data;
-            });
-          }]
+            return defaultService.getDefaultGrades();
+          }],
+          'formShown': function() {
+            return false;
+          }
         }
       });
   });

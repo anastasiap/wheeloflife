@@ -1,50 +1,62 @@
 [{
   "name": "Image",
   "grade": 0,
-  "bgColor": "pink"
+  "bgColor": "pink",
+  "activeStyle": ""
   },{
   "name": "Economics",
   "grade": 0,
-  "bgColor": "green"
+  "bgColor": "green",
+  "activeStyle": ""
   },{
   "name": "Education",
   "grade": 0,
-  "bgColor": "blue"
+  "bgColor": "blue",
+  "activeStyle": ""
   },{
   "name": "Family",
   "grade": 0,
-  "bgColor": "yellow"
+  "bgColor": "yellow",
+  "activeStyle": ""
   },{
   "name": "Creative / Art",
   "grade": 0,
-  "bgColor": "pink"
+  "bgColor": "pink",
+  "activeStyle": ""
   },{
   "name": "Health",
   "grade": 0,
-  "bgColor": "green"
+  "bgColor": "green",
+  "activeStyle": ""
   },{
   "name": "Love",
   "grade": 0,
-  "bgColor": "blue"
+  "bgColor": "blue",
+  "activeStyle": ""
   },{
   "name": "Sex",
   "grade": 0,
-  "bgColor": "yellow"
+  "bgColor": "yellow",
+  "activeStyle": ""
   },{
   "name": "Altruism",
   "grade": 0,
-  "bgColor": "pink"
+  "bgColor": "pink",
+  "activeStyle": ""
   },{
   "name": "Work",
   "grade": 0,
-  "bgColor": "green"
+  "bgColor": "green",
+  "activeStyle": ""
   },{
   "name": "Friendship",
   "grade": 0,
-  "bgColor": "blue"
+  "bgColor": "blue",
+  "activeStyle": ""
   },{
   "name": "Spiritual",
   "grade": 0,
-  "bgColor": "yellow"
+  "bgColor": "yellow",
+  "activeStyle": ""
   }
 ]

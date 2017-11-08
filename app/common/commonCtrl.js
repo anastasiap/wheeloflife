@@ -1,21 +1,30 @@
 "use strict";
 
-angular.module("wheeloflife")
-  .controller("commonCtrl", commonCtrl);
+app.controller("commonCtrl", commonCtrl);
 
-function commonCtrl (commonService, $scope) {
+
+function commonCtrl (commonService, errorService, $http, customService, defaultService) {
   var common = this;
 
+  common.showError = false;
+  common.errorMessage = errorService.getErrorMessage();
   common.number = commonService.getNumber();
-  common.isDefault = true;
-  common.formShown = commonService.setFormHidden();
+  common.isDefault = commonService.getDefault();
+  common.formShown = defaultService.setFormState();
+  common.grades = [];
 
-  common.extract = function (result) {
-    return result.data;
+  setCommonGrades ();
+
+  common.hideErrorContainer = function () {
+    common.showError = false;
   };
 
   common.setGrades = function (category, grade) {
-    commonService.setGrade(category, grade);
+    if (!category.name) {
+      common.showError = true;
+    } else {
+      commonService.setGrade(category, grade);
+    }
   };
 
   common.setCustom = function () {
@@ -27,5 +36,13 @@ function commonCtrl (commonService, $scope) {
     common.formShown = false;
   };
 
+  /* TODO move to services */
   common.date = new Date();
+
+  function setCommonGrades () {
+    return $http.get('data/grades.json').then(function(result) {
+      common.grades = result.data;
+      return common.grades;
+    });
+  }
 }

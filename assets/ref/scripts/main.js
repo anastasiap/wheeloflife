@@ -150,10 +150,10 @@ $(function(){
         } else {
             clickedSpan.prop('disabled', true);
             errorContainer.removeClass('hidden');
+          $('html, body').animate({
+            scrollTop: errorContainer.offset().top
+          }, 500);
 
-            $('html, body').animate({
-                scrollTop: errorContainer.offset().top
-            }, 500);
         }
     });
 

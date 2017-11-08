@@ -1,6 +1,8 @@
-
 <div class="circle-wrapper">
   <ul class="circle headings">
+
+    {{ common.categories === default.categories ? default.categories : custom.categoriesTemplate }}
+
     <li ng-repeat="category in default.categories">
       <div class="text"><h5>{{ category.name }}</h5></div>
     </li>
@@ -9,9 +11,7 @@
   <ul class="circle body">
     <li ng-repeat="category in default.categories" class="{{ category.bgColor }}">
       <div class="text" >
-        <span class="{{ category.bgColor }}" ng-repeat="grade in default.grades" ng-click="common.setGrades(category, grade)">
-          <a href="#">{{ grade.grade }}</a>
-        </span>
+        <circle-body></circle-body>
       </div>
     </li>
   </ul>

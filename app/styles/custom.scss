@@ -189,6 +189,7 @@ h2 {
   border-radius: 50%;
   list-style: none;
   overflow: hidden;
+  top: 35px;
 
   li {
     overflow: hidden;
@@ -304,7 +305,7 @@ h2 {
     width: 35em;
     height: 35em;
     border: 0;
-    top: -35px;
+    top: 0;
 
     li .text {
       background: transparent;
@@ -668,6 +669,19 @@ h5 {
   font-weight: 700;
 
   a {
-    color: #fff;
+    color: #000;
   }
+}
+
+.form-titles {
+  margin-top: 55px;
+}
+
+#custom-wheel-container, .default-wheel-container, .container {
+  background: white !important;
+}
+
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 0;
 }
