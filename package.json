@@ -51,6 +51,5 @@
         "single"
       ]
     }
-  },
-  "scripts": { "deploy": "ng build -sm -ec -bh wheeloflife & ngh --silent=false" }
+  }
 }
