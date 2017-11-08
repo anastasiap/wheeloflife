@@ -5,4 +5,15 @@
         function gtag(){dataLayer.push(arguments)};
         gtag('js', new Date());
 
-        gtag('config', 'UA-107299149-1');</script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script><script src="scripts/vendor.js"></script><script src="scripts/plugins.js"></script><script src="scripts/main.js"></script><script src="app.js"></script><script src="common/commonCtrl.js"></script><script src="common/commonService.js"></script><script src="directives/error/error-directive.js"></script><script src="directives/error/errorService.js"></script><script src="directives/circle/circle-directive.js"></script><script src="directives/circle/circle-body-directive.js"></script><script src="directives/graph/graph-directive.js"></script><script src="default/defaultCtrl.js"></script><script src="default/defaultService.js"></script><script src="custom/customCtrl.js"></script><script src="custom/customService.js"></script><script src="directives/form/category-title-form-directive.js"></script></body></html>
+        gtag('config', 'UA-107299149-1');</script><script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+<script>
+  (function(){
+    var redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+      history.replaceState(null, null, redirect);
+    }
+
+  })();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script><script src="scripts/vendor.js"></script><script src="scripts/plugins.js"></script><script src="scripts/main.js"></script><script src="app.js"></script><script src="common/commonCtrl.js"></script><script src="common/commonService.js"></script><script src="directives/error/error-directive.js"></script><script src="directives/error/errorService.js"></script><script src="directives/circle/circle-directive.js"></script><script src="directives/circle/circle-body-directive.js"></script><script src="directives/graph/graph-directive.js"></script><script src="default/defaultCtrl.js"></script><script src="default/defaultService.js"></script><script src="custom/customCtrl.js"></script><script src="custom/customService.js"></script><script src="directives/form/category-title-form-directive.js"></script></body></html>
