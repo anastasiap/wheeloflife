@@ -9,7 +9,7 @@ var app = angular.module("wheeloflife", [
     $stateProvider
       .state('default', {
         url:'/default',
-        templateUrl: 'wheeloflife/default/default.html',
+        templateUrl: '/default/default.html',
         controller: 'defaultController',
         controllerAs: 'default',
         resolve: {
@@ -26,7 +26,7 @@ var app = angular.module("wheeloflife", [
       })
       .state('custom', {
         url:'/custom',
-        templateUrl: 'wheeloflife/custom/custom.html',
+        templateUrl: '/custom/custom.html',
         controller: 'customCtrl',
         controllerAs: 'custom',
         resolve: {
