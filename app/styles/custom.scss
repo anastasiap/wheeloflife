@@ -3,6 +3,10 @@ body {
 
   &>.container {
     min-height: 600px;
+
+    @media (max-width: 768px){
+      min-width: 40em;
+    }
   }
 }
 
@@ -46,6 +50,10 @@ h2 {
   justify-content: center;
   margin-bottom: 25px;
   position: relative;
+
+  @media (max-width: 768px){
+    height: 500px;
+  }
 }
 /*
 .section-marks {
@@ -632,6 +640,11 @@ h5 {
   display: flex;
   justify-content: center;
 
+  @media (max-width: 768px){
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
   button {
     width: 510px;
   }
@@ -685,3 +698,4 @@ ul, ol {
   margin-top: 0;
   margin-bottom: 0;
 }
+
