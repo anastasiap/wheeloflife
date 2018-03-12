@@ -2,7 +2,6 @@
 
 app.controller("commonCtrl", commonCtrl);
 
-
 function commonCtrl (commonService, errorService, $http, customService, defaultService) {
   var common = this;
 
