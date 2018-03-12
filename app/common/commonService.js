@@ -1,5 +1,4 @@
 "use strict";
-"use strict";
 
 app.service("commonService", commonService);
 
@@ -7,7 +6,6 @@ function commonService ($http) {
   var service = this;
 
   service.getDefaultGrades = function () {
-    console.log('Common Service: load grades');
     return $http.get('data/grades.json');
   };
 
@@ -20,9 +18,11 @@ function commonService ($http) {
       return true;
     }
   };
+  
   service.getDefault = function() {
     return true;
   };
+
   service.setDefault = function(val) {
     return val;
   };
