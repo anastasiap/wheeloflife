@@ -1,27 +1,34 @@
 <template>
     <div>
-        <button @click="isDefault = true">Button 1</button>
-        <button @click="isDefault = false">Button 2</button>
+        <button @click="setDefault(true)">Button 1</button>
+        <button @click="setDefault(false)">Button 2</button>
+
+        <router-link to="/custom">Custom</router-link>
+
 
         <wheel></wheel>
     </div>
 </template>
 
 <script>
-    import Wheel from './Wheel.vue'
+    import Wheel from './Wheel.vue';
+    import { mapMutations } from 'vuex'
 
     export default {
         name: 'MainButtons',
         components: { Wheel },
         data() {
             return {
-                isDefault: this.$store.state.isDefault
-            }
+                isDefault: this.$store.state.isDefault,
+            };
         },
         methods: {
-            setActiveCircle() {
-                this.$store.commit('updateDefault', isDefault);
-            }
+            setDefault(set) {
+                this.$store.commit('updateDefault', set);
+            },
+            /*...mapMutations[{
+                updateDefault: 'updateDefault'
+            }],*/
         }
     }
 </script>

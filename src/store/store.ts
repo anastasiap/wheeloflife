@@ -5,13 +5,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        isDefault: true,
+        isDefault: false,
         categories: [],
         grades: []
     },
     mutations: {
         updateDefault(state, status) {
-            console.log({status});
             state.isDefault = status;
         }
     },
