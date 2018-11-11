@@ -1,4 +1,43 @@
-export default const defaultState = [{
+export interface ICategory {
+    name: string
+    grade: number
+    bgColor: string
+    activeStyle: string
+}
+
+export const gradesList = [{
+    grade: 10,
+    bgColor: ''
+  }, {
+    grade: 9,
+    bgColor: ''
+  }, {
+    grade: 8,
+    bgColor: ''
+  }, {
+    grade: 7,
+    bgColor: ''
+  }, {
+    grade: 6,
+    bgColor: ''
+  }, {
+    grade: 5,
+    bgColor: ''
+  }, {
+    grade: 4,
+    bgColor: ''
+  }, {
+    grade: 3,
+    bgColor: ''
+  }, {
+    grade: 2,
+    bgColor: ''
+  }, {
+    grade: 1,
+    bgColor: ''
+}]
+
+export const defaultState: ICategory[] = [{
     name: 'Image',
     grade: 0,
     bgColor: 'pink',

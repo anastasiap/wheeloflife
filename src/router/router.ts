@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../components/Home.vue';
-import Custom from '../components/Custom.vue';
-import Default from '../components/Default.vue';
+import Howto from '../components/Howto.vue';
 
 Vue.use(Router);
 
@@ -14,14 +13,9 @@ export default new Router({
             component: Home,
         },
         {
-            path: '/custom',
-            name: 'custom',
-            component: Custom,
-        },
-        {
-            path: '/default',
-            name: 'default',
-            component: Default,
+            path: '/howto',
+            name: 'howto',
+            component: Howto,
         },
         {
             path: '/about',

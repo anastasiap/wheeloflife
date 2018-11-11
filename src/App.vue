@@ -1,18 +1,41 @@
 <template>
     <div id="app">
-        <Header />
+        <Navigation />
         <router-view/>
     </div>
 </template>
 
 <script lang="ts">
-    import Header from './components/Header.vue'
+    import Navigation from './components/Navigation.vue'
+    import Category from './services/Category'
+    import { ICategory } from './data/categories'
 
     export default {
-        name: 'app',
+        data() {
+            return {
+                categories: this.$store.state.categories    
+            }
+        },
+        computed: {
+            
+        },
+        name: 'App',
         components: {
-            Header
-        }
+            Navigation
+        },
+        methods: {
+            loadDefaultCategories() {
+                // return all categories prepared for circle creation and manipulation
+                // у меня есть массив со всеми категориями.
+                // создай круг
+                return this.categories.map((cat: ICategory) => {
+                   new Category(cat.name, cat.bgColor);
+                });
+            },
+        },
+        created() {
+            // this.loadDefaultCategories();
+        },
     }
 </script>
 
@@ -24,14 +47,8 @@
         text-align: center;
         color: #2c3e50;
     }
-    #nav {
-        padding: 30px;
-        a {
-            font-weight: bold;
-            color: #2c3e50;
-            &.router-link-exact-active {
-                color: #42b983;
-            }
-        }
-    }
+    
+
+
+
 </style>

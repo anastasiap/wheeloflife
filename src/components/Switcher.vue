@@ -3,10 +3,7 @@
         <button @click="setDefault(true)">Button 1</button>
         <button @click="setDefault(false)">Button 2</button>
 
-        <router-link to="/custom">Custom</router-link>
-
-
-        <wheel></wheel>
+        <Wheel />
     </div>
 </template>
 
@@ -15,7 +12,7 @@
     import { mapMutations } from 'vuex'
 
     export default {
-        name: 'MainButtons',
+        name: 'Switcher',
         components: { Wheel },
         data() {
             return {
