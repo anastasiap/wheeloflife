@@ -40,18 +40,16 @@
     import { mapState } from 'vuex'
 
     export default {
-        methods: {
-            setGrades(category, grade) {
-
-            },
-        },
-        name: 'Wheel',
         computed: mapState({
-            isDefault: 'isDefault',
             catNumber: 'categoriesNumber',
             categories: 'categories',
-            gradesList: 'gradesList'
-        })
+            gradesList: 'gradesList',
+            isDefault: 'isDefault',
+        }),
+        methods: {
+            setGrades(category, grade) {},
+        },
+        name: 'Wheel',
     }
 </script>
 

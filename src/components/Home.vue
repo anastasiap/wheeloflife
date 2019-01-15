@@ -5,11 +5,10 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
-    import Switcher from './Switcher.vue'; // @ is an alias to /src
+    import Switcher from './Switcher.vue'
 
     export default {
+        components: { Switcher },
         name: 'Home',
-        components: { Switcher }
     }
 </script>

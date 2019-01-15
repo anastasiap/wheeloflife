@@ -11,31 +11,27 @@
     import { ICategory } from './data/categories'
 
     export default {
-        data() {
-            return {
-                categories: this.$store.state.categories    
-            }
-        },
-        computed: {
-            
-        },
-        name: 'App',
         components: {
-            Navigation
-        },
-        methods: {
-            loadDefaultCategories() {
-                // return all categories prepared for circle creation and manipulation
-                // у меня есть массив со всеми категориями.
-                // создай круг
-                return this.categories.map((cat: ICategory) => {
-                   new Category(cat.name, cat.bgColor);
-                });
-            },
+            Navigation,
         },
         created() {
             // this.loadDefaultCategories();
         },
+        data() {
+            return { // categories: this.$store.state.categories    
+            }
+        },
+        methods: {
+            // loadDefaultCategories(): any { // todo return a tuple wth types object
+            //     // return all categories prepared for circle creation and manipulation
+            //     // у меня есть массив со всеми категориями.
+            //     // создай круг
+            //     return this.categories.map((cat: ICategory) => {
+            //        new Category(cat.name, cat.bgColor);
+            //     });
+            // },
+        },
+        name: 'App',
     }
 </script>
 
@@ -47,8 +43,4 @@
         text-align: center;
         color: #2c3e50;
     }
-    
-
-
-
 </style>

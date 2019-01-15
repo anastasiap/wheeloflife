@@ -1,101 +1,101 @@
 export interface ICategory {
-    name: string
-    grade: number
-    bgColor: string
     activeStyle: string
+    bgColor: string
+    grade: number
+    name: string
 }
 
 export const gradesList = [{
+    bgColor: '',
     grade: 10,
-    bgColor: ''
   }, {
+    bgColor: '',
     grade: 9,
-    bgColor: ''
   }, {
+    bgColor: '',
     grade: 8,
-    bgColor: ''
   }, {
+    bgColor: '',
     grade: 7,
-    bgColor: ''
   }, {
+    bgColor: '',
     grade: 6,
-    bgColor: ''
   }, {
+    bgColor: '',
     grade: 5,
-    bgColor: ''
   }, {
+    bgColor: '',
     grade: 4,
-    bgColor: ''
   }, {
+    bgColor: '',
     grade: 3,
-    bgColor: ''
   }, {
+    bgColor: '',
     grade: 2,
-    bgColor: ''
   }, {
+    bgColor: '',
     grade: 1,
-    bgColor: ''
 }]
 
 export const defaultState: ICategory[] = [{
+    activeStyle: '',
+    bgColor: 'pink',
+    grade: 0,
     name: 'Image',
-    grade: 0,
-    bgColor: 'pink',
-    activeStyle: ''
 }, {
+    activeStyle: '',
+    bgColor: 'green',
+    grade: 0,
     name: 'Economics',
-    grade: 0,
-    bgColor: 'green',
-    activeStyle: ''
 }, {
+    activeStyle: '',
+    bgColor: 'blue',
+    grade: 0,
     name: 'Education',
-    grade: 0,
-    bgColor: 'blue',
-    activeStyle: ''
 }, {
+    activeStyle: '',
+    bgColor: 'yellow',
+    grade: 0,
     name: 'Family',
-    grade: 0,
-    bgColor: 'yellow',
-    activeStyle: ''
 }, {
+    activeStyle: '',
+    bgColor: 'pink',
+    grade: 0,
     name: 'Creative / Art',
-    grade: 0,
-    bgColor: 'pink',
-    activeStyle: ''
 }, {
+    activeStyle: '',
+    bgColor: 'green',
+    grade: 0,
     name: 'Health',
-    grade: 0,
-    bgColor: 'green',
-    activeStyle: ''
 }, {
+    activeStyle: '',
+    bgColor: 'blue',
+    grade: 0,
     name: 'Love',
-    grade: 0,
-    bgColor: 'blue',
-    activeStyle: ''
 }, {
+    activeStyle: '',
+    bgColor: 'yellow',
+    grade: 0,
     name: 'Sex',
-    grade: 0,
-    bgColor: 'yellow',
-    activeStyle: ''
 }, {
-    name: 'Altruism',
-    grade: 0,
+    activeStyle: '',
     bgColor: 'pink',
-    activeStyle: ''
-}, {
-    name: 'Work',
     grade: 0,
+    name: 'Altruism',
+}, {
+    activeStyle: '',
     bgColor: 'green',
-    activeStyle: ''
-}, {
-    name: 'Friendship',
     grade: 0,
+    name: 'Work',
+}, {
+    activeStyle: '',
     bgColor: 'blue',
-    activeStyle: ''
-}, {
-    name: 'Spiritual',
     grade: 0,
+    name: 'Friendship',
+}, {
+    activeStyle: '',
     bgColor: 'yellow',
-    activeStyle: ''
-}
+    grade: 0,
+    name: 'Spiritual',
+},
 ]

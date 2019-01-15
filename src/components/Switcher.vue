@@ -8,25 +8,25 @@
 </template>
 
 <script>
-    import Wheel from './Wheel.vue';
     import { mapMutations } from 'vuex'
-
+    import Wheel from './Wheel.vue'
+    
     export default {
-        name: 'Switcher',
         components: { Wheel },
         data() {
             return {
                 isDefault: this.$store.state.isDefault,
-            };
+            }
         },
         methods: {
             setDefault(set) {
-                this.$store.commit('updateDefault', set);
+                this.$store.commit('updateDefault', set)
             },
             /*...mapMutations[{
                 updateDefault: 'updateDefault'
             }],*/
-        }
+        },
+        name: 'Switcher',
     }
 </script>
 
