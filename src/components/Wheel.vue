@@ -46,9 +46,6 @@
             gradesList: 'gradesList',
             isDefault: 'isDefault',
         }),
-        methods: {
-            setGrades(category, grade) {},
-        },
         name: 'Wheel',
     }
 </script>

@@ -2,16 +2,27 @@
     <div id="nav">
         <router-link to="/">Home</router-link> |
         <router-link to="/howto">How to</router-link> |
-        <router-link to="/about">About</router-link> |
+        <router-link to="/info">Info</router-link> |
     </div>
 </template>
 
-<script>
+<script lang="ts">
+
     export default {
+        // mixins: [template],
+        created() {
+        },
+        data() {
+            return {
+                msg: 'main container some',
+            }
+        },
+        methods: {
+            hello() {
+                return 'hello'
+            },
+        },
         name: 'Navigation',
     }
+
 </script>
-
-<style scoped>
-
-</style>
