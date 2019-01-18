@@ -1,23 +1,71 @@
 <template>
     <div id="main-wrapper">
-        <h1>Hello</h1>
-        <Navigation />
+        <el-container>
+            <h4>{{ msg }}</h4>
+            <p>{{ count }}</p>
+            <p>
+                <button @click="increment">+</button>
+                <button @click="decrement">-</button>
+            </p>
+            <el-header>
+                <Header>
+                    <Navigation />
+                </Header>
+            </el-header>
+        
+            <router-view />
+        
+            <el-footer>
+                <PromoFooter />
+                <Footer />
+            </el-footer>
+        </el-container>
     </div>
 </template>
 
 <script lang="ts">
-import Navigation from './Navigation.vue'
+    import Content from './Content.vue'
+    import Footer from './Footer.vue'
+    import Header from './Header.vue'
+    import Navigation from './Navigation.vue'
+    import PromoFooter from './PromoFooter.vue'
+    import Vue from 'vue'
 
-export default {
-    components: {
-        Navigation,
-    },
-    data() {
-        return {
-            msg: 'main container some',
-        }
-    },
-    name: 'MainContainer',
-}
+    const MainContainer = Vue.extend({
+        components: {
+            Content,
+            Footer,
+            Header,
+            Navigation,
+            PromoFooter,
+        },
+        computed: {
+            count (): number {
+                return this.$store.state.count
+            }
+        },
+        data() {
+            return {
+                msg: 'Hi',
+            }
+        },
+        methods: {
+            sum: (a: number, b: number): number => a + b,
+            increment() {
+                this.$store.commit('increment')
+            },
+            decrement() {
+                this.$store.commit('decrement')
+            }
+        },
+    })
 
+    export default MainContainer
 </script>
+
+<style lang="scss">
+    body {
+        font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    }
+</style>
+

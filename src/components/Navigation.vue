@@ -7,11 +7,7 @@
 </template>
 
 <script lang="ts">
-
     export default {
-        // mixins: [template],
-        created() {
-        },
         data() {
             return {
                 msg: 'main container some',
@@ -24,5 +20,4 @@
         },
         name: 'Navigation',
     }
-
 </script>
