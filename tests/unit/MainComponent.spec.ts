@@ -9,10 +9,10 @@ describe('MainComponent.vue', () => {
       expect(1).toEqual(1)
     })
 
-    test('sum method should add number together', () => {
-      const wrapper = shallowMount(MainContainer, { localVue })
-      expect(wrapper.vm.count()).toEqual(3)
-    })
+    // test('sum method should add number together', () => {
+    //   const wrapper = shallowMount(MainContainer, { localVue })
+    //   expect(wrapper.vm.sum()).toEqual('3')
+    // })
 
     // test('Data should say', () => {
     //   expect(typeof MainContainer.data).toBe('function')

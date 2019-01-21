@@ -1,12 +1,12 @@
 <template>
-    <main>
-        <slot></slot>
-    </main>
+    <div>
+        <h3>Description</h3>
+    </div>
 </template>
 
 <script>
     export default {
-        name: 'Main',
+        name: 'Description',
     }
 </script>
 

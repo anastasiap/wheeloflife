@@ -1,20 +1,18 @@
 <template>
     <div id="main-wrapper">
         <el-container>
-            <h4>{{ msg }}</h4>
+            <!-- <h4>{{ msg }}</h4>
             <p>{{ count }}</p>
             <p>
                 <button @click="increment">+</button>
                 <button @click="decrement">-</button>
-            </p>
+            </p> -->
             <el-header>
                 <Header>
                     <Navigation />
                 </Header>
             </el-header>
-        
-            <router-view />
-        
+            <router-view />      
             <el-footer>
                 <PromoFooter />
                 <Footer />
