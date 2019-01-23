@@ -10,6 +10,11 @@
                         <Description/>
                     </el-col>
                 </el-row>
+                <el-row>
+                    <el-col :span="24">
+                        Buttons
+                    </el-col>
+                </el-row>
             </Main>
         </el-main>
     </div>

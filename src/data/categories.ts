@@ -1,101 +1,88 @@
-export interface ICategory {
-    activeStyle: string
-    bgColor: string
-    grade: number
-    name: string
-}
-
-export const gradesList = [{
-    bgColor: '',
-    grade: 10,
-  }, {
-    bgColor: '',
-    grade: 9,
-  }, {
-    bgColor: '',
-    grade: 8,
-  }, {
-    bgColor: '',
-    grade: 7,
-  }, {
-    bgColor: '',
-    grade: 6,
-  }, {
-    bgColor: '',
-    grade: 5,
-  }, {
-    bgColor: '',
-    grade: 4,
-  }, {
-    bgColor: '',
-    grade: 3,
-  }, {
-    bgColor: '',
-    grade: 2,
-  }, {
-    bgColor: '',
-    grade: 1,
-}]
+import { ICategory } from '../configs/app.config'
 
 export const defaultState: ICategory[] = [{
-    activeStyle: '',
-    bgColor: 'pink',
-    grade: 0,
+    color: 'pink',
+    description: 'Image - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.',
+    id: 0,
+    mark: 0,
     name: 'Image',
+    order: 1,
 }, {
-    activeStyle: '',
-    bgColor: 'green',
-    grade: 0,
+    color: 'green',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+    id: 1,
+    mark: 0,
     name: 'Economics',
+    order: 2,
 }, {
-    activeStyle: '',
-    bgColor: 'blue',
-    grade: 0,
+    color: 'blue',
+    description: 'Lorem ipsum dolor sit amet',
+    id: 1,
+    mark: 0,
     name: 'Education',
+    order: 3,
 }, {
-    activeStyle: '',
-    bgColor: 'yellow',
-    grade: 0,
+    color: 'yellow',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.',
+    id: 3,
+    mark: 0,
     name: 'Family',
+    order: 4,
 }, {
-    activeStyle: '',
-    bgColor: 'pink',
-    grade: 0,
+    color: 'pink',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.',
+    id: 4,
+    mark: 0,
     name: 'Creative / Art',
+    order: 5,
 }, {
-    activeStyle: '',
-    bgColor: 'green',
-    grade: 0,
+    color: 'green',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    id: 5,
+    mark: 0,
     name: 'Health',
+    order: 6,
 }, {
-    activeStyle: '',
-    bgColor: 'blue',
-    grade: 0,
+    color: 'blue',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.',
+    id: 6,
+    mark: 0,
     name: 'Love',
+    order: 7,
 }, {
-    activeStyle: '',
-    bgColor: 'yellow',
-    grade: 0,
+    color: 'yellow',
+    description: 'Lorem ipsum dolor sit amet.',
+    id: 7,
+    mark: 0,
     name: 'Sex',
+    order: 8,
 }, {
-    activeStyle: '',
-    bgColor: 'pink',
-    grade: 0,
+    color: 'pink',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.',
+    id: 8,
+    mark: 0,
     name: 'Altruism',
+    order: 9,
 }, {
-    activeStyle: '',
-    bgColor: 'green',
-    grade: 0,
+    color: 'green',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.',
+    id: 9,
+    mark: 0,
     name: 'Work',
+    order: 10,
 }, {
-    activeStyle: '',
-    bgColor: 'blue',
-    grade: 0,
+    color: 'blue',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.',
+    id: 10,
+    mark: 0,
     name: 'Friendship',
+    order: 11,
 }, {
-    activeStyle: '',
-    bgColor: 'yellow',
-    grade: 0,
+    color: 'yellow',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    id: 11,
+    mark: 0,
     name: 'Spiritual',
+    order: 12,
 },
 ]
