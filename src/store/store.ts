@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex'
 import { RootState } from '../types'
 import { defaultState } from '../data/categories'
-import { ICategory } from '@/configs/app.config';
+import { ICategory, Category } from '@/configs/app.config';
 
 Vue.use(Vuex)
 
@@ -10,6 +10,11 @@ const store: StoreOptions<RootState> = {
     mutations: {
         decrement: state => state.count--,
         increment: state => state.count++,
+        addCategory(state) {
+            const order = state.categories.length;
+            const id = state.categories[order - 1]['id'] + 1
+            state.categories.push(new Category(order, id))
+        },
         updateName: (state, obj) => {
             const newName = obj.newName
             const catID = obj.id

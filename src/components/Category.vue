@@ -37,30 +37,30 @@
             return {
                 isDisplayMode: true as boolean,
                 isColorEditMode: false as boolean,
-                catColor: this.color
+                catColor: this.color as string
             }
         },
         components: {
             'compact-picker': compact,
         },
         methods: {
-            updateName(e, id) {
+            updateName(e, id): void {
                 this.$store.commit('updateName', {newName: e.target.value, id: id })
             },
-            updateDesc(e, id) {
+            updateDesc(e, id): void {
                 this.$store.commit('updateDesc', {newDesc: e.target.value, id: id })
             },
-            toggleView() {
+            toggleView(): boolean {
                 // TODO research how to reverse boolean
                 return this.isDisplayMode = !this.isDisplayMode
             },
-            deleteCategory(id) {
+            deleteCategory(id): void {
                 this.$store.commit('deleteCategory', id);
             },
-            toggleColorPicker() {
+            toggleColorPicker(): boolean {
                 return this.isColorEditMode = !this.isColorEditMode
             },
-            updateColor (value) {
+            updateColor(value): void {
                 this.catColor = value.hex
             },
         },
@@ -74,7 +74,6 @@
         .heading { 
             display: flex;
             justify-content: space-between;
-            
         }
 
         .title, .mark {
@@ -91,10 +90,10 @@
 
         .el-icon-menu {
             background: #1e5799;
-background: -moz-linear-gradient(45deg, #1e5799 0%, #1e5799 10%, #2ab722 35%, #f2dd26 52%, #f2dd26 62%, #ff0cca 100%);
-background: -webkit-linear-gradient(45deg, #1e5799 0%,#1e5799 10%,#2ab722 35%,#f2dd26 52%,#f2dd26 62%,#ff0cca 100%);
-background: linear-gradient(45deg, #1e5799 0%,#1e5799 10%,#2ab722 35%,#f2dd26 52%,#f2dd26 62%,#ff0cca 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#ff0cca',GradientType=1 );
+            background: -moz-linear-gradient(45deg, #1e5799 0%, #1e5799 10%, #2ab722 35%, #f2dd26 52%, #f2dd26 62%, #ff0cca 100%);
+            background: -webkit-linear-gradient(45deg, #1e5799 0%,#1e5799 10%,#2ab722 35%,#f2dd26 52%,#f2dd26 62%,#ff0cca 100%);
+            background: linear-gradient(45deg, #1e5799 0%,#1e5799 10%,#2ab722 35%,#f2dd26 52%,#f2dd26 62%,#ff0cca 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#ff0cca',GradientType=1 );
         }
 
         .el-icon-delete {

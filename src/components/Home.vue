@@ -12,7 +12,7 @@
                 </el-row>
                 <el-row>
                     <el-col :span="24">
-                        Buttons
+                        <ActionBtn type="add" label="$t('hello')" icon='plus' />
                     </el-col>
                 </el-row>
             </Main>
