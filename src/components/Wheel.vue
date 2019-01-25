@@ -1,6 +1,6 @@
 <template>
     <div class="wheel-container">
-      <canvas id="canvas3" width="648" height="648"></canvas>
+      <canvas id="canvas3" width="548" height="548"></canvas>
     </div>
 </template>
 
@@ -58,8 +58,8 @@
             }
         },
         mounted() {
-                var canvas = document.getElementById("canvas3"),
-                  canvasEl = canvas.getContext('2d')
+            var canvas = document.getElementById("canvas3"),
+                canvasEl = canvas.getContext('2d')
 
             this.pie(canvasEl, canvas.width, canvas.height, this.categories) 
         },
@@ -69,8 +69,8 @@
 
 <style lang="scss">
   .wheel-container {
-    margin: 0 auto;
-    width: 450px;
-    height: 450px;
+    margin: 20px auto;
+    width: 550px;
+    height: 550px;
   }
 </style>
