@@ -12,7 +12,7 @@
                 </el-row>
                 <el-row>
                     <el-col :span="24">
-                        <ActionBtn type="add" label="$t('hello')" icon='plus' />
+                        <ActionBtn type="add" label="hello" icon='plus' />
                     </el-col>
                 </el-row>
             </Main>
@@ -21,12 +21,14 @@
 </template>
 
 <script lang="ts">
+    import ActionBtn from './ActionBtn.vue'
     import Description from './Description.vue'
     import Main from './Main.vue'
     import Wheel from './Wheel.vue'
 
     export default {
         components: {
+            ActionBtn,
             Description,
             Main,
             Wheel,

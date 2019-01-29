@@ -1,20 +1,17 @@
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex'
+
+import { getInitialData } from '../services/service'
 import { RootState } from '../types'
-import { defaultState } from '../data/categories'
 import { ICategory, Category } from '@/configs/app.config';
 
 Vue.use(Vuex)
 
 const store: StoreOptions<RootState> = {
     mutations: {
-        decrement: state => state.count--,
-        increment: state => state.count++,
-        addCategory(state) {
-            const order = state.categories.length;
-            const id = state.categories[order - 1]['id'] + 1
-            state.categories.push(new Category(order, id))
-        },
+        /*
+         * Update existing category name
+         */
         updateName: (state, obj) => {
             const newName = obj.newName
             const catID = obj.id
@@ -27,6 +24,9 @@ const store: StoreOptions<RootState> = {
                 }
             })
         },
+        /*
+         * Update existing category description
+         */
         updateDesc: (state, obj) => {
             const newDesc = obj.newDesc
             const catID = obj.id
@@ -37,14 +37,48 @@ const store: StoreOptions<RootState> = {
                 }
             })
         },
+        /*
+         * Delete category
+         */
         deleteCategory: (state, id) => {
             state.categories.splice(id, 1)
         },
+        /*
+         * Add new empty category
+         */
+        addCategory(state) {
+            const order = state.categories.length;
+            const id = state.categories[order - 1]['id'] + 1
+            state.categories.push(new Category(order, id))
+        },
+        /*
+         * Set all marks to zero
+         */
+        resetMarks(state){
+            state.categories.map((c: ICategory) => c.mark = 0)
+        },
+        /*
+         * Load default categories
+         */
+        loadDefaultCategories(state, payload) {
+            console.log(getInitialData());
+            state.categories = payload;
+        },
+    },
+    actions: {
+        getData(context){
+            return getInitialData().then((data) => {
+                context.commit('loadDefaultCategories', data)
+                console.log('res store', data)
+                return data
+            })
+        },
+        setInitialCategories(context, data) {
+            context.commit('loadDefaultCategories', data)
+        },
     },
     state: {
-        categories: defaultState,
-        count: 0,
-        version: '1.0.0', // a simple property
+        categories: 'getInitialData().then((res) => res.data)',
     },
 }
 

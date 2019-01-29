@@ -8,6 +8,9 @@ const App = Vue.extend({
             msg: 'Test',
         }
     },
+    created() {
+        this.$store.dispatch('getData')
+    },
     name: 'App',
     template: `<MainContainer />`,
 })
