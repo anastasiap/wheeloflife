@@ -1,5 +1,6 @@
 <template>
     <div class="wheel-container">
+        <div></div>
       <canvas id="canvas3" width="548" height="548"></canvas>
     </div>
 </template>
@@ -9,16 +10,8 @@
 
     export default {
         computed: mapState({
-            catNumber: 'categoriesNumber',
             categories: 'categories',
-            gradesList: 'gradesList',
-            isDefault: 'isDefault',
         }),
-        data() {
-          return {
-            
-          }
-        },
         methods: {
           pie(canvasEl, weight, height, categories) {
               var radius = height / 2 - 5,

@@ -13,8 +13,10 @@ const store: StoreOptions<RootState> = {
          * Load default categories
          */
         loadDefaultCategories(state, payload) {
-            state.categories = []
-            state.categories = payload
+            console.log('state.categories', state.categories)
+            console.log('payload', payload)
+            return state.categories = payload
+            console.log('state.categories', state.categories)
         },
         /*
          * Update existing category name

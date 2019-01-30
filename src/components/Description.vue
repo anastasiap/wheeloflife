@@ -21,9 +21,6 @@ import { ICategory } from '../configs/app.config'
         components: {
             Category,
         },
-        created() {
-            //this.splitData(this.categories);
-        },
         data() {
             return {
                 categories: this.$store.state.categories,
@@ -45,6 +42,7 @@ import { ICategory } from '../configs/app.config'
                 return self.categories.filter(item =>
                         self.categories.indexOf(item) >= bottom && self.categories.indexOf(item) <= top);
             },
+
 
             // orderData(d){
             //     // todo sort array by order key before splitting
