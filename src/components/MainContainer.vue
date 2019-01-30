@@ -37,25 +37,6 @@
             Navigation,
             PromoFooter,
         },
-        computed: {
-            count (): number {
-                return this.$store.state.count
-            }
-        },
-        data() {
-            return {
-                msg: 'Hi',
-            }
-        },
-        methods: {
-            sum: (a: number, b: number): number => a + b,
-            increment() {
-                this.$store.commit('increment')
-            },
-            decrement() {
-                this.$store.commit('decrement')
-            }
-        },
     })
 
     export default MainContainer

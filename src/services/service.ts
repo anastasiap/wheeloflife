@@ -7,9 +7,8 @@ import { data } from '../data/data.json'
 export const getInitialData = (): void => {
     return fetch('/data/data.json')
         .then((response) => {
-            console.log('service res', )
-            let clone = response.clone();
-            return clone.json()
+            console.log(response.clone().json())
+            return response.clone().json()
         })
         .catch((error) => console.log(error))
 }

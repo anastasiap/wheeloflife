@@ -10,6 +10,13 @@ Vue.use(Vuex)
 const store: StoreOptions<RootState> = {
     mutations: {
         /*
+         * Load default categories
+         */
+        loadDefaultCategories(state, payload) {
+            state.categories = []
+            state.categories = payload
+        },
+        /*
          * Update existing category name
          */
         updateName: (state, obj) => {
@@ -57,20 +64,13 @@ const store: StoreOptions<RootState> = {
         resetMarks(state){
             state.categories.map((c: ICategory) => c.mark = 0)
         },
-        /*
-         * Load default categories
-         */
-        loadDefaultCategories(state, payload) {
-            console.log(getInitialData());
-            state.categories = payload;
-        },
     },
     actions: {
         getData(context){
             return getInitialData().then((data) => {
-                context.commit('loadDefaultCategories', data)
                 console.log('res store', data)
-                return data
+                context.commit('loadDefaultCategories', data.data)
+                return data.data
             })
         },
         setInitialCategories(context, data) {
@@ -78,28 +78,8 @@ const store: StoreOptions<RootState> = {
         },
     },
     state: {
-        categories: 'getInitialData().then((res) => res.data)',
+        categories: [] as ICategory[],
     },
 }
 
 export default new Vuex.Store<RootState>(store)
-
-
-// export default new Vuex.Store({
-//     actions: {
-
-//     },
-//     mutations: {
-//         updateDefault(state, status) {
-//             state.isDefault = status
-//         },
-//         increment(state) {
-//             state.count++
-//         },
-//     },
-//     state: {
-//         categories: defaultState,
-//         count: 0,
-//         isDefault: true,
-//     },
-// })

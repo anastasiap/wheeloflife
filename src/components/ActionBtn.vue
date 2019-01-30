@@ -31,7 +31,7 @@
                 this.$store.commit('resetMarks')
             },
             resetWheel() {
-                this.$store.commit('loadDefaultState')
+                this.$store.dispatch('getData')
             },
             download() {},
         },
