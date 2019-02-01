@@ -6,12 +6,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
-
     export default {
-        computed: mapState({
-            categories: 'categories',
-        }),
         methods: {
           pie(canvasEl, weight, height, categories) {
               var radius = height / 2 - 5,
@@ -54,9 +49,11 @@
             var canvas = document.getElementById("canvas3"),
                 canvasEl = canvas.getContext('2d')
 
+console.log('mounted wheel', this.categories);
             this.pie(canvasEl, canvas.width, canvas.height, this.categories) 
         },
         name: 'Wheel',
+        props: [ 'categories' ],
     }
 </script>
 

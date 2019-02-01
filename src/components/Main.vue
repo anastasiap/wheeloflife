@@ -1,12 +1,12 @@
 <template>
     <main>
-        <slot></slot>
+        <slot categories=categories></slot>
     </main>
 </template>
 
 <script>
     export default {
-        name: 'Main',
+        name: 'Main',      
     }
 </script>
 

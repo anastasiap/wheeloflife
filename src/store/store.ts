@@ -15,7 +15,7 @@ const store: StoreOptions<RootState> = {
         loadDefaultCategories(state, payload) {
             console.log('state.categories', state.categories)
             console.log('payload', payload)
-            return state.categories = payload
+            state.categories = payload
             console.log('state.categories', state.categories)
         },
         /*

@@ -23,16 +23,16 @@ import { ICategory } from '../configs/app.config'
         },
         data() {
             return {
-                categories: this.$store.state.categories,
                 firstCol: [] as ICategory[],
                 secondCol: [] as ICategory[],
             }
         },
+        props: [ 'categories' ],
         methods: {
             // TODO refactor this
             filteredItems(column, columns): any {
                 const self  = this;                         // Enables us to pass this to the method
-                const total = this.categories.length;            // How many items
+                const total = this.categories.length;       // How many items
                 const gap   = Math.ceil(total / columns);   // How many per col
                 let top     = (gap * column);               // Top of the col
                 const bottom = ((top - gap) + 1);           // Bottom of the col

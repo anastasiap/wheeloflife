@@ -4,10 +4,10 @@
             <Main class="main-container">
                 <el-row>
                     <el-col :span="12">
-                        <Wheel/>
+                        <Wheel :categories="categories" />
                     </el-col>
                     <el-col :span="12">
-                        <Description/>
+                        <Description :categories="categories" />
                     </el-col>
                 </el-row>
                 <el-row>
@@ -32,6 +32,11 @@
             Description,
             Main,
             Wheel,
+        },
+        computed: {
+            categories() {
+                return this.$store.state.categories
+            }
         },
         name: 'Home',
     }
