@@ -1,7 +1,8 @@
 <template>
     <div class="home">
         <el-main>
-            <Main class="main-container">
+            <!-- TODO try to fix it with watcher in child (wheel) -->
+            <Main v-if="categories.length > 0" class="main-container">
                 <el-row>
                     <el-col :span="12">
                         <Wheel :categories="categories" />
