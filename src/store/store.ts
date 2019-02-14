@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex'
 
 import { getInitialData } from '../services/service'
+import { messages } from '@/configs/app.config'
 import { RootState } from '../types'
-import { ICategory, Category } from '@/configs/app.config';
 
 Vue.use(Vuex)
 
@@ -13,10 +13,7 @@ const store: StoreOptions<RootState> = {
          * Load default categories
          */
         loadDefaultCategories(state, payload) {
-            console.log('state.categories', state.categories)
-            console.log('payload', payload)
             state.categories = payload
-            console.log('state.categories', state.categories)
         },
         /*
          * Update existing category name
@@ -68,11 +65,10 @@ const store: StoreOptions<RootState> = {
         },
     },
     actions: {
-        getData(context){
+        getData(context, lang){
             return getInitialData().then((data) => {
-                console.log('res store', data)
-                context.commit('loadDefaultCategories', data.data)
-                return data.data
+                context.commit('loadDefaultCategories', data[lang])
+                return data[lang]
             })
         },
         setInitialCategories(context, data) {

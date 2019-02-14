@@ -13,7 +13,7 @@
             </el-col>
             <el-col :span="2">
                 <div class="lang-switch">
-                    <select v-model="$i18n.locale">
+                    <select v-model="locale">
                         <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
                     </select>
                 </div>
@@ -30,10 +30,18 @@
     export default {
         data () {
             return { 
-                langs: ['ru', 'en'],
+                langs: [ 'ru', 'en' ],
+                locale: initialLang
             }
         },
         name: 'Header',
+        props: [ 'initialLang' ],
+        watch: {
+            locale (val) {
+                this.$i18n.locale = val
+                this.$store.dispatch('getData', this.$i18n.locale)      
+            }
+        },
     }
 </script>
 

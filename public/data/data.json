@@ -1,89 +1,116 @@
-{ "data": [
-    {
-        "color": "pink",
-        "description": "Image - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
-        "id": 0,
-        "mark": 0,
-        "name": "Image",
-        "order": 1
-    }, {
-        "color": "green",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-        "id": 1,
-        "mark": 0,
-        "name": "Economics",
-        "order": 2
-    }, {
-        "color": "blue",
-        "description": "Lorem ipsum dolor sit amet",
-        "id": 1,
-        "mark": 0,
-        "name": "Education",
-        "order": 3
-    }, {
-        "color": "yellow",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
-        "id": 3,
-        "mark": 0,
-        "name": "Family",
-        "order": 4
-    }, {
-        "color": "pink",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.",
-        "id": 4,
-        "mark": 0,
-        "name": "Creative / Art",
-        "order": 5
-    }, {
-        "color": "green",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "id": 5,
-        "mark": 0,
-        "name": "Health",
-        "order": 6
-    }, {
-        "color": "blue",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
-        "id": 6,
-        "mark": 0,
-        "name": "Love",
-        "order": 7
-    }, {
-        "color": "yellow",
-        "description": "Lorem ipsum dolor sit amet.",
-        "id": 7,
-        "mark": 0,
-        "name": "Sex",
-        "order": 8
-    }, {
-        "color": "pink",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.",
-        "id": 8,
-        "mark": 0,
-        "name": "Altruism",
-        "order": 9
-    }, {
-        "color": "green",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
-        "id": 9,
-        "mark": 0,
-        "name": "Work",
-        "order": 10
-    }, {
-        "color": "blue",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
-        "id": 10,
-        "mark": 7,
-        "name": "Friendship",
-        "order": 11
-    }, {
-        "color": "yellow",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "id": 11,
-        "mark": 5,
-        "name": "Spiritual",
-        "order": 12
-    }
-    ]
+{
+	"ru": [{
+		"color": "pink",
+		"description": "Самочувствие, внешний вид, подвижность, настроение, прогулки, бодрость, питание, режим, спорт, сон",
+		"id": 0,
+		"mark": 0,
+		"name": "Здоровье",
+		"order": 1
+	}, {
+		"color": "green",
+		"description": "Общение, дружба, любовь, семья",
+		"id": 1,
+		"mark": 0,
+		"name": "Отношения",
+		"order": 2
+	}, {
+		"color": "blue",
+		"description": "Родные, коллеги, друзья, соседи, оппоненты",
+		"id": 2,
+		"mark": 0,
+		"name": "Окружение",
+		"order": 3
+	}, {
+		"color": "yellow",
+		"description": "Работа, карьера, бизнес, профессия, занятость, социальный статус",
+		"id": 3,
+		"mark": 0,
+		"name": "Призвание",
+		"order": 4
+	}, {
+		"color": "pink",
+		"description": "Доходы, расходы, условия жизни",
+		"id": 4,
+		"mark": 0,
+		"name": "Обеспеченность",
+		"order": 5
+	}, {
+		"color": "green",
+		"description": "Обучение, работа над собой, личностный рост",
+		"id": 5,
+		"mark": 0,
+		"name": "Самосовершенствование",
+		"order": 6
+	}, {
+		"color": "blue",
+		"description": "Развлечения, отдых, хобби, путешествия, впечатления",
+		"id": 6,
+		"mark": 5,
+		"name": "Яркость жизни",
+		"order": 7
+	}, {
+		"color": "yellow",
+		"description": "Вера, творчество, искусство",
+		"id": 7,
+		"mark": 3,
+		"name": "Духовность",
+		"order": 8
+	}],
+	"en": [{
+		"color": "pink",
+		"description": "Самочувствие, внешний вид, подвижность, настроение, прогулки, бодрость, питание, режим, спорт, сон",
+		"id": 0,
+		"mark": 0,
+		"name": "Health",
+		"order": 1
+	}, {
+		"color": "green",
+		"description": "Общение, дружба, любовь, семья",
+		"id": 1,
+		"mark": 0,
+		"name": "Relationships",
+		"order": 2
+	}, {
+		"color": "blue",
+		"description": "Родные, коллеги, друзья, соседи, оппоненты",
+		"id": 2,
+		"mark": 0,
+		"name": "Social",
+		"order": 3
+	}, {
+		"color": "yellow",
+		"description": "Работа, карьера, бизнес, профессия, занятость, социальный статус",
+		"id": 3,
+		"mark": 0,
+		"name": "Job",
+		"order": 4
+	}, {
+		"color": "pink",
+		"description": "Доходы, расходы, условия жизни",
+		"id": 4,
+		"mark": 0,
+		"name": "Finance",
+		"order": 5
+	}, {
+		"color": "green",
+		"description": "Обучение, работа над собой, личностный рост",
+		"id": 5,
+		"mark": 0,
+		"name": "Education",
+		"order": 6
+	}, {
+		"color": "blue",
+		"description": "Развлечения, отдых, хобби, путешествия, впечатления",
+		"id": 6,
+		"mark": 5,
+		"name": "Life quality",
+		"order": 7
+	}, {
+		"color": "yellow",
+		"description": "Вера, творчество, искусство",
+		"id": 7,
+		"mark": 3,
+		"name": "Spiritual",
+		"order": 8
+	}]
 }
-    

@@ -8,7 +8,7 @@
                 <button @click="decrement">-</button>
             </p> -->
             <el-header>
-                <Header>
+                <Header :initialLang=initialLang>
                     <Navigation />
                 </Header>
             </el-header>
@@ -37,6 +37,9 @@
             Navigation,
             PromoFooter,
         },
+        props: [
+            'initialLang'
+        ]
     })
 
     export default MainContainer

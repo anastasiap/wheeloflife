@@ -1,13 +1,25 @@
 <template>
     <el-row>
         <el-col :span="12">
-            <div v-for="category in filteredItems(1, 2)" :key="category.id">
-                <Category :name="category.name" :description="category.description" :mark="category.mark" :id="category.id" :color="category.color" />
+            <div v-for="(category, index) in filteredItems(1, 2)" :key="index">
+                {{category.id}}
+                <Category 
+                    :name="category.name" 
+                    :description="category.description" 
+                    :mark="category.mark" 
+                    :id="category.id" 
+                    :color="category.color" />
             </div>
         </el-col>
         <el-col :span="12">
-            <div v-for="category in filteredItems(2, 2)" :key="category.id">
-                <Category :name="category.name" :description="category.description" :mark="category.mark" :id="category.id" :color="category.color" />
+            <div v-for="(category, index) in filteredItems(2, 2)" :key="index">
+                {{category.id}}
+                <Category 
+                    :name="category.name" 
+                    :description="category.description" 
+                    :mark="category.mark" 
+                    :id="category.id" 
+                    :color="category.color" />
             </div>
         </el-col>
     </el-row>
@@ -33,16 +45,20 @@ import { ICategory } from '../configs/app.config'
             filteredItems(column, columns): any {
                 const self  = this;                         // Enables us to pass this to the method
                 const total = this.categories.length;       // How many items
-                const gap   = Math.ceil(total / columns);   // How many per col
-                let top     = (gap * column);               // Top of the col
-                const bottom = ((top - gap) + 1);           // Bottom of the col
-                top -= 1;                                   // Adjust top back down one
+                const gap   = Math.ceil(total / columns);   // 4  How many per col
+                let   top   = gap * column;                 // 4 , 8  Top of the column
+                const bottom = top - gap;           // 0 , 4  Bottom of the column
+                top -= 1;                                   // 3 , 7 Adjust top back down one
 
+
+                const result = self.categories.filter(item => 
+                    self.categories.indexOf(item) >= bottom  
+                    && self.categories.indexOf(item) <= top);
+                
                 // Return the items for the given col
-                return self.categories.filter(item =>
-                        self.categories.indexOf(item) >= bottom && self.categories.indexOf(item) <= top);
+                return result;
+                
             },
-
 
             // orderData(d){
             //     // todo sort array by order key before splitting
