@@ -1,12 +1,12 @@
 <template>
     <div class="action-button">
-        <label for="">Добавить категорию</label>
+        <label for="">{{ $t("addCat") }}</label>
         <el-button @click="add" type="primary" icon="el-icon-plus" circle></el-button>
-        <label for="">Обнулить оценки</label>
+        <label for="">{{ $t("resetMarks") }}</label>
         <el-button @click="resetMarks" type="primary" icon="el-icon-refresh" circle></el-button>
-        <label for="">Сбросить изменения круга</label>
+        <label for="">{{ $t("resetWheel") }}</label>
         <el-button @click="resetWheel" type="primary" icon="el-icon-close" circle></el-button>
-        <label for="">Скачать</label>
+        <label for="">{{ $t("download") }}</label>
         <el-button @click="download" type="primary" icon="el-icon-download" circle></el-button>
     </div>
 </template>
@@ -24,7 +24,6 @@
         },
         methods: {
             add() {
-                console.log('add worked');
                 this.$store.commit('addCategory')
             }, 
             resetMarks() {

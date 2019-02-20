@@ -18,11 +18,8 @@
                     </select>
                 </div>
             </el-col>
-            <!-- <div class="lang-switch">
-                <a @click="setLanguage('ru')" href="#">rus</a> | <a @click="setLanguage('en')" href="#">en</a> 
-            </div> -->
         </el-row>
-        <p>{{ $t("message.hello") }}</p>
+        <p>{{ $t("hello") }}</p>
     </header>
 </template>
 
@@ -30,14 +27,17 @@
     export default {
         data () {
             return { 
+                // move array to config
                 langs: [ 'ru', 'en' ],
-                locale: initialLang
+                locale: this.initialLang
             }
         },
         name: 'Header',
-        props: [ 'initialLang' ],
+        props: [ 
+            'initialLang' 
+        ],
         watch: {
-            locale (val) {
+            locale(val) {
                 this.$i18n.locale = val
                 this.$store.dispatch('getData', this.$i18n.locale)      
             }
@@ -47,8 +47,6 @@
 
 <style lang="scss" scoped>
     .header-container {
-        
-
         // .header-logo {
         
         // }

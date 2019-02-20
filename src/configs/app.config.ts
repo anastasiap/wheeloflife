@@ -17,14 +17,18 @@ export const routes: {[key: string]: {[key: string]: string}} = {
 // i18n config
 export const messages = {
     en: {
-        message: {
-            hello: 'hello world',
-        },
+        hello: 'hello world',
+        addCat: 'Add category',
+        resetMarks: 'Reset marks',
+        resetWheel: 'Reset wheel changes',
+        download: 'Download result',
     },
     ru: {
-        message: {
-            hello: 'Привет',
-        },
+        hello: 'Привет!',
+        addCat: 'Добавить категорию',
+        resetMarks: 'Обнулить оценки',
+        resetWheel: 'Сбросить изменения колеса',
+        download: 'Скачать результат',
     },
 }
 
