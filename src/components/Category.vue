@@ -1,11 +1,11 @@
 <template>
-    <div class="m-category">
+    <div class="c-category">
         <div v-if="isDisplayMode" class="display-mode">
-            <div class="heading">
-                <h5 class="title" :style="{ color: catColor }">{{ name }}</h5>
-                <div class="mark">{{ mark }}</div>
+            <div class="c-category__heading">
+                <h4 class="c-category__title" :style="{ color: catColor }">{{ name }}</h4>
+                <div class="c-category__mark">{{ mark }}</div>
             </div>
-            <div class="description">{{ description }}</div>
+            <div class="c-category__description">{{ description }}</div>
         </div>
         <div v-if="!isDisplayMode" class="edit-mode">
             <form action="">
@@ -13,7 +13,7 @@
             <textarea :value="description" @input="updateDesc($event, id)" placeholder="What is this"></textarea>
             </form>
         </div>
-        <div class="icon-wrapper">
+        <div class="icons-container">
             <span class="icon-wrapper" @click="toggleView">
                 <i class="el-icon-edit"></i>
             </span>
@@ -70,22 +70,38 @@
 </script>
 
 <style lang="scss" scoped>
-    .m-category {
-        .heading { 
+    .c-category {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        max-width: 350px;
+
+        &__heading { 
             display: flex;
             justify-content: space-between;
         }
 
-        .title, .mark {
+        &__title {
+            text-transform: uppercase;
+        }
+
+        &__title, 
+        &__mark {
             margin: 5px 0;
         }
 
-        .description {
+        &__description {
             margin: 5px 0;
+            font-size: 0.8rem;
+        }
+
+        .icons-container {
+            max-width: 20px;
+            padding: 10px;
         }
 
         .icon-wrapper {
-            padding: 10px;
+            padding: 5px;
         }
 
         .el-icon-menu {

@@ -1,17 +1,15 @@
 <template>
     <header>
         <el-row>
-             <el-col :span="3">
+             <el-col :xs="24" :lg="3">
                 <div class="header-logo">
                     <img src="../assets/wil-logo.jpg" alt="WiL Logo">
                 </div>
             </el-col>
-            <el-col :span="19">
-                <div class="nav-slot">
-                    <slot></slot>
-                </div>
+            <el-col :xs="24" :lg="19">
+                <slot></slot>
             </el-col>
-            <el-col :span="2">
+            <el-col :xs="24" :lg="2">
                 <div class="lang-switch">
                     <select v-model="locale">
                         <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>

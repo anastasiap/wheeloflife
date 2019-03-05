@@ -1,8 +1,7 @@
 <template>
-    <el-row>
-        <el-col :span="12">
+    <el-row :gutter="40">
+        <el-col :xs="24" :lg="12">
             <div v-for="(category, index) in filteredItems(1, 2)" :key="index">
-                {{category.id}}
                 <Category 
                     :name="category.name" 
                     :description="category.description" 
@@ -11,9 +10,8 @@
                     :color="category.color" />
             </div>
         </el-col>
-        <el-col :span="12">
+        <el-col :xs="24" :lg="12">
             <div v-for="(category, index) in filteredItems(2, 2)" :key="index">
-                {{category.id}}
                 <Category 
                     :name="category.name" 
                     :description="category.description" 

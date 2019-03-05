@@ -39,7 +39,12 @@
         },
         props: [
             'initialLang'
-        ]
+        ],
+        methods: {
+            sum: function(a: number, b: number) {
+                return a + b;
+            }
+        }
     })
 
     export default MainContainer

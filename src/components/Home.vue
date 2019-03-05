@@ -4,10 +4,10 @@
             <!-- TODO try to fix it with watcher in child (wheel) -->
             <Main v-if="categories.length > 0" class="main-container">
                 <el-row>
-                    <el-col :span="12">
+                    <el-col :xs="24" :lg="12">
                         <Wheel :categories="categories" />
                     </el-col>
-                    <el-col :span="12">
+                    <el-col :xs="24" :lg="12">
                         <Description :categories="categories" />
                     </el-col>
                 </el-row>
