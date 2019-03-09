@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex'
 
+import { Category } from '@/configs/app.config'
 import { getInitialData } from '../services/service'
-import { messages } from '@/configs/app.config'
 import { RootState } from '../types'
 
 Vue.use(Vuex)
@@ -53,6 +53,7 @@ const store: StoreOptions<RootState> = {
          * Add new empty category
          */
         addCategory(state) {
+            // set new category to edit mode
             const order = state.categories.length;
             const id = state.categories[order - 1]['id'] + 1
             state.categories.push(new Category(order, id))

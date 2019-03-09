@@ -1,13 +1,21 @@
 <template>
-    <div class="action-button">
-        <label for="">{{ $t("addCat") }}</label>
-        <el-button @click="add" type="primary" icon="el-icon-plus" circle></el-button>
-        <label for="">{{ $t("resetMarks") }}</label>
-        <el-button @click="resetMarks" type="primary" icon="el-icon-refresh" circle></el-button>
-        <label for="">{{ $t("resetWheel") }}</label>
-        <el-button @click="resetWheel" type="primary" icon="el-icon-close" circle></el-button>
-        <label for="">{{ $t("download") }}</label>
-        <el-button @click="download" type="primary" icon="el-icon-download" circle></el-button>
+    <div class="m-action-buttons">
+        <div class="c-button">
+            <label for="">{{ $t("addCat") }}</label>    
+            <el-button @click="add" type="primary" icon="el-icon-plus" circle></el-button>
+        </div>
+        <div class="c-button">
+            <label for="">{{ $t("resetMarks") }}</label>
+            <el-button @click="resetMarks" type="primary" icon="el-icon-refresh" circle></el-button>
+        </div>
+        <div class="c-button">
+            <label for="">{{ $t("resetWheel") }}</label>
+            <el-button @click="resetWheel" type="primary" icon="el-icon-close" circle></el-button>
+        </div>
+        <div class="c-button">
+            <label for="">{{ $t("download") }}</label>
+            <el-button @click="download" type="primary" icon="el-icon-download" circle></el-button>
+        </div>
     </div>
 </template>
 
@@ -43,6 +51,17 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    .m-action-buttons {
+        display: flex;
+        justify-content: center; 
+    }
 
+    .c-button {
+        margin: .3rem .7rem;
+        
+        .el-button {
+            margin: 0 .3rem;
+        }  
+    }
 </style>

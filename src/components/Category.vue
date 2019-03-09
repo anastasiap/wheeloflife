@@ -1,19 +1,28 @@
 <template>
     <div class="c-category">
-        <div v-if="isDisplayMode" class="display-mode">
+        <div v-if="!isEditMode" v-on:mouseover="toggleTools = !toggleTools"  class="display-mode">
             <div class="c-category__heading">
                 <h4 class="c-category__title" :style="{ color: catColor }">{{ name }}</h4>
                 <div class="c-category__mark">{{ mark }}</div>
             </div>
             <div class="c-category__description">{{ description }}</div>
         </div>
-        <div v-if="!isDisplayMode" class="edit-mode">
+        <div v-if="isEditMode" class="edit-mode">
             <form action="">
-            <input :value="name" @input="updateName($event, id)" />
-            <textarea :value="description" @input="updateDesc($event, id)" placeholder="What is this"></textarea>
+                <input 
+                    class="c-category__inputTitle" 
+                    :style="{ color: catColor }"
+                    :value="name" 
+                    @input="updateName($event, id)" />
+                <textarea 
+                    class="c-category__inputDesc" 
+                    :value="description" 
+                    @input="updateDesc($event, id)" 
+                    placeholder="What is this">
+                </textarea>
             </form>
         </div>
-        <div class="icons-container">
+        <div v-if="toggleTools" class="icons-container">
             <span class="icon-wrapper" @click="toggleView">
                 <i class="el-icon-edit"></i>
             </span>
@@ -35,13 +44,27 @@
     export default {
         data() {
             return {
-                isDisplayMode: true as boolean,
+                isEditMode: false as boolean,
+                toggleTools: false as boolean,
                 isColorEditMode: false as boolean,
                 catColor: this.color as string
             }
         },
         components: {
             'compact-picker': compact,
+        },
+        mounted() {
+            const blockHeight = document.getElementsByClassName('c-category__description');
+            const minDescHeight = blockHeight[0].offsetHeight;
+            //const inputDescEl = document.getElementsByClassName('c-category__inputDesc');
+
+            //console.log(inputDescEl)
+
+            // inputDescEl.map((t) => {
+            //     t.attr('height', minDescHeight);
+            // })
+
+            
         },
         methods: {
             updateName(e, id): void {
@@ -52,7 +75,10 @@
             },
             toggleView(): boolean {
                 // TODO research how to reverse boolean
-                return this.isDisplayMode = !this.isDisplayMode
+
+                // fix textarea height
+                this.toggleTools = true;
+                return this.isEditMode = !this.isEditMode
             },
             deleteCategory(id): void {
                 this.$store.commit('deleteCategory', id);
@@ -62,7 +88,7 @@
             },
             updateColor(value): void {
                 this.catColor = value.hex
-            },
+            }
         },
         name: 'Category',
         props: ['name', 'description', 'mark', 'id', 'color']
@@ -75,6 +101,7 @@
         display: flex;
         justify-content: space-between;
         max-width: 350px;
+        position: relative;
 
         &__heading { 
             display: flex;
@@ -83,21 +110,62 @@
 
         &__title {
             text-transform: uppercase;
+            font-size: 1.2rem;
+
+            padding: .2rem;
+            margin: 0 0 .2rem;
+            width: 100%;
+            
         }
 
-        &__title, 
         &__mark {
-            margin: 5px 0;
+            padding: .2rem;
+            // margin: 5px 0;
         }
 
         &__description {
-            margin: 5px 0;
+            margin: 0 0 .2rem;
             font-size: 0.8rem;
+
+            padding: .2rem;
+            width: 100%;
+        }
+
+        &__inputTitle {
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 1.2rem;
+        } 
+
+
+        &__inputTitle,
+        &__inputDesc {
+            background: #ddd;
+            border: none;
+            padding: .2rem;
+            width: 100%;
+            margin: 0 0 .2rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        &__inputDesc {
+            resize: none;
+        }
+
+        .display-mode,
+        .edit-mode {
+            min-height: 5rem;
+            max-width: 18rem;
+            width: 100%;
         }
 
         .icons-container {
             max-width: 20px;
             padding: 10px;
+            
         }
 
         .icon-wrapper {
@@ -114,6 +182,13 @@
 
         .el-icon-delete {
             color: red;
+        }
+
+        .vs-compact {
+            position: absolute;
+            right: 0;
+            bottom: -31px;
+            z-index: 20;
         }
     }
 </style>
