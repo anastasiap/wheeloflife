@@ -17,7 +17,7 @@
                     offset = Math.PI / 2;
 
                 for (var j = 0; j < categories.length; j++) {
-               
+               console.log('categories.length', j)
                     var thisPart = total / categories.length; 
 
                         canvasEl.beginPath();
@@ -25,7 +25,8 @@
                         canvasEl.moveTo(centerX, centerY);
                         
                         // Длина окружности, полный круг = Math.PI * 2
-                        // thisPart / total = размер текущей части поделенная на сумму всех частей (процент части от общей суммы)
+                        // thisPart / total = размер текущей части поделенная на сумму всех частей 
+                        // (процент части от общей суммы)
                     var arcSector = Math.PI * 2 * thisPart / total; 
                         
                         // M: centerX, centerY, 
@@ -42,14 +43,12 @@
 
                         // click on path https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath
                         canvasEl.lineTo(centerX, centerY);
-                        canvasEl.fill();
+                        canvasEl.fill();    
                         canvasEl.closePath();
 
                         lastEnd += arcSector; 
 
                         // start marks
-
-                     
                         var counter = 0;
                         var gradeSystem = 10;
                         var color = '';
@@ -83,19 +82,23 @@
                             color = 'grey'
                         }
 
-                        this.createMarks(canvasEl, this.categories, markRadius, centerX, centerY, total, color, lastEnd)
+                        this.createMarks(canvasEl, this.categories, markRadius, centerX, centerY, total, color, startAngle)
                         markRadius -= radius / 10;
                         counter++
+
+                    
+                        console.log('counter', counter)
                     }
 
                     // todo refactor this shit
-                    console.log('counter',counter)
                 }
             },
 
-            createMarks(canvasEl, categories, radius, startX, startY, total, color, lastEnd) {
-                var lastEnd = lastEnd,
+            createMarks(canvasEl, categories, radius, startX, startY, total, color, startAngle) {
+                var lastEnd = startAngle    ,
                     offset = Math.PI / 2;
+
+                    console.log('startAngle', startAngle)
                 
                 var thisPart = total / categories.length; 
 

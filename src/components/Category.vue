@@ -1,11 +1,11 @@
 <template>
-    <div class="c-category">
-        <div v-if="!isEditMode" v-on:mouseover="toggleTools = !toggleTools"  class="display-mode">
+    <div class="c-category" @mouseenter="toggleTools" @mouseleave="toggleTools"> 
+        <div v-if="!isEditMode" class="display-mode">
             <div class="c-category__heading">
                 <h4 class="c-category__title" :style="{ color: catColor }">{{ name }}</h4>
                 <div class="c-category__mark">{{ mark }}</div>
             </div>
-            <div class="c-category__description">{{ description }}</div>
+            <div ref="descViewMode" class="c-category__description">{{ description }}</div>
         </div>
         <div v-if="isEditMode" class="edit-mode">
             <form action="">
@@ -15,6 +15,8 @@
                     :value="name" 
                     @input="updateName($event, id)" />
                 <textarea 
+                    ref="descEditMode"
+                    v-bind:style="descInputHeight"
                     class="c-category__inputDesc" 
                     :value="description" 
                     @input="updateDesc($event, id)" 
@@ -22,7 +24,7 @@
                 </textarea>
             </form>
         </div>
-        <div v-if="toggleTools" class="icons-container">
+        <div v-if="toggleToolsIcons" class="icons-container animated fadeIn">
             <span class="icon-wrapper" @click="toggleView">
                 <i class="el-icon-edit"></i>
             </span>
@@ -33,7 +35,7 @@
                 <i class="el-icon-delete"></i>
             </span>
         </div>
-        <compact-picker v-model="catColor" v-if="isColorEditMode" @input="updateColor"></compact-picker>
+        <compact-picker class="" v-model="catColor" v-if="isColorEditMode" @input="updateColor"></compact-picker>
     </div>   
 </template>
 
@@ -45,26 +47,17 @@
         data() {
             return {
                 isEditMode: false as boolean,
-                toggleTools: false as boolean,
+                toggleToolsIcons: false as boolean,
                 isColorEditMode: false as boolean,
-                catColor: this.color as string
+                catColor: this.color as string,
+                descInputHeight: {} 
             }
         },
         components: {
             'compact-picker': compact,
         },
         mounted() {
-            const blockHeight = document.getElementsByClassName('c-category__description');
-            const minDescHeight = blockHeight[0].offsetHeight;
-            //const inputDescEl = document.getElementsByClassName('c-category__inputDesc');
-
-            //console.log(inputDescEl)
-
-            // inputDescEl.map((t) => {
-            //     t.attr('height', minDescHeight);
-            // })
-
-            
+            const FormHeight = this.$refs.descViewMode.clientHeight;
         },
         methods: {
             updateName(e, id): void {
@@ -73,11 +66,15 @@
             updateDesc(e, id): void {
                 this.$store.commit('updateDesc', {newDesc: e.target.value, id: id })
             },
+            toggleTools(): void {
+                this.toggleToolsIcons = !this.toggleToolsIcons;
+            },
             toggleView(): boolean {
                 // TODO research how to reverse boolean
-
-                // fix textarea height
-                this.toggleTools = true;
+                if (this.$refs.descViewMode) {
+                    this.$set(this.descInputHeight, 'height', this.$refs.descViewMode.clientHeight + 10  + 'px')
+                }
+                
                 return this.isEditMode = !this.isEditMode
             },
             deleteCategory(id): void {
@@ -98,8 +95,8 @@
 <style lang="scss" scoped>
     .c-category {
         margin-bottom: 1rem;
-        display: flex;
-        justify-content: space-between;
+        // display: flex;
+        // justify-content: space-between;
         max-width: 350px;
         position: relative;
 
@@ -124,7 +121,7 @@
         }
 
         &__description {
-            margin: 0 0 .2rem;
+            margin: 0 0 .4rem;
             font-size: 0.8rem;
 
             padding: .2rem;
@@ -157,19 +154,20 @@
 
         .display-mode,
         .edit-mode {
-            min-height: 5rem;
+            //min-height: 5rem;
             max-width: 18rem;
             width: 100%;
         }
 
         .icons-container {
-            max-width: 20px;
-            padding: 10px;
+            //max-width: 20px;
             
         }
 
         .icon-wrapper {
-            padding: 5px;
+            margin: 0.2rem 0.4rem 0.4rem;
+            display: inline-block;
+            cursor: pointer;
         }
 
         .el-icon-menu {
@@ -184,11 +182,13 @@
             color: red;
         }
 
-        .vs-compact {
-            position: absolute;
-            right: 0;
-            bottom: -31px;
-            z-index: 20;
-        }
+        
+    }
+
+    .vs-compact {
+        position: absolute;
+        right: 0;
+        bottom: -50px;
+        z-index: 1;
     }
 </style>
