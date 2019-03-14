@@ -75,5 +75,7 @@ import { ICategory } from '../configs/app.config'
 </script>
 
 <style scoped>
-
+    .el-col:last-child {
+        margin-left: -30px;
+    }
 </style>

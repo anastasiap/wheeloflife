@@ -22,6 +22,7 @@ export const messages = {
         resetMarks: 'Reset marks',
         resetWheel: 'Reset wheel changes',
         download: 'Download result',
+        labelEditCategory: 'Edit description or color',
     },
     ru: {
         hello: 'Привет!',
@@ -29,6 +30,7 @@ export const messages = {
         resetMarks: 'Обнулить оценки',
         resetWheel: 'Сбросить изменения колеса',
         download: 'Скачать результат',
+        labelEditCategory: 'Изменить текст или цвет',
     },
 }
 

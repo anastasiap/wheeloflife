@@ -1,9 +1,36 @@
 <template>
-    <div class="c-category" @mouseenter="toggleTools" @mouseleave="toggleTools"> 
+    <div class="c-category" @mouseenter="toggleTools" @mouseleave="toggleTools">
+        <div v-bind:class="{ 'hide-visually': isHidden }" class="c-editing-icons animated fadeIn">
+            <span class="c-editing-icons__icon-wrapper" @click="toggleView" @mouseenter="toggleLabel" @mouseleave="toggleLabel">
+                <!-- <el-tooltip>{{ $t("labelEditCategory") }}</el-tooltip> -->
+                <!-- <label v-if="!isEditMode">{{ $t("labelEditCategory") }}</label> -->
+                <i v-if="!isEditMode" class="el-icon-edit"></i>
+                <i v-if="isEditMode" class="el-icon-check"></i>
+            </span>
+            <span class="c-editing-icons__icon-wrapper" @click="toggleColorPicker">
+                <i class="el-icon-menu"></i>
+            </span>
+            <span class="c-editing-icons__icon-wrapper" @click="deleteCategory">
+                <i class="el-icon-delete"></i>
+            </span>
+        </div>
+
         <div v-if="!isEditMode" class="display-mode">
             <div class="c-category__heading">
                 <h4 class="c-category__title" :style="{ color: catColor }">{{ name }}</h4>
-                <div class="c-category__mark">{{ mark }}</div>
+                <div @click="toggleMarkInput" 
+                    
+                    
+                    :style="{ color: catColor }"
+                    class="c-category__mark"
+                    v-if="!isMarkEditMode">{{ mark }}</div>
+                <input v-if="isMarkEditMode" 
+                    @mouseout="toggleMarkInput"
+                    class="c-category__inputMark" 
+                    :style="{ color: catColor }"
+                    :value="mark" 
+                    @input="updateMark($event, id)"
+                />   
             </div>
             <div ref="descViewMode" class="c-category__description">{{ description }}</div>
         </div>
@@ -24,17 +51,7 @@
                 </textarea>
             </form>
         </div>
-        <div v-if="toggleToolsIcons" class="icons-container animated fadeIn">
-            <span class="icon-wrapper" @click="toggleView">
-                <i class="el-icon-edit"></i>
-            </span>
-            <span class="icon-wrapper" @click="toggleColorPicker">
-                <i class="el-icon-menu"></i>
-            </span>
-            <span class="icon-wrapper" @click="deleteCategory">
-                <i class="el-icon-delete"></i>
-            </span>
-        </div>
+        
         <compact-picker class="" v-model="catColor" v-if="isColorEditMode" @input="updateColor"></compact-picker>
     </div>   
 </template>
@@ -47,8 +64,9 @@
         data() {
             return {
                 isEditMode: false as boolean,
-                toggleToolsIcons: false as boolean,
+                isHidden: true as boolean,
                 isColorEditMode: false as boolean,
+                isMarkEditMode: false as boolean,
                 catColor: this.color as string,
                 descInputHeight: {} 
             }
@@ -60,6 +78,12 @@
             const FormHeight = this.$refs.descViewMode.clientHeight;
         },
         methods: {
+            toggleMarkInput(): void {
+                this.isMarkEditMode = !this.isMarkEditMode;
+            },
+            updateMark(e, id): void {
+                this.$store.commit('updateMark', {newMark: e.target.value, id: id })
+            },
             updateName(e, id): void {
                 this.$store.commit('updateName', {newName: e.target.value, id: id })
             },
@@ -67,7 +91,10 @@
                 this.$store.commit('updateDesc', {newDesc: e.target.value, id: id })
             },
             toggleTools(): void {
-                this.toggleToolsIcons = !this.toggleToolsIcons;
+                this.isHidden = this.isEditMode ? false : !this.isHidden;
+            },
+            toggleLabel(e): void {
+                console.log(e);
             },
             toggleView(): boolean {
                 // TODO research how to reverse boolean
@@ -93,10 +120,15 @@
 </script>
 
 <style lang="scss" scoped>
+    // helpers
+    .hide-visually {
+        visibility: hidden;
+    }
+
     .c-category {
         margin-bottom: 1rem;
-        // display: flex;
-        // justify-content: space-between;
+        display: flex;
+        justify-content: space-between;
         max-width: 350px;
         position: relative;
 
@@ -121,22 +153,28 @@
         }
 
         &__description {
-            margin: 0 0 .4rem;
+            margin: 0;
             font-size: 0.8rem;
 
             padding: .2rem;
             width: 100%;
         }
 
-        &__inputTitle {
+        &__inputTitle,
+        &__inputMark {
+            font-family: 'Amatic SC', italic;
             text-transform: uppercase;
             font-weight: 700;
             font-size: 1.2rem;
-        } 
-
+        }
+        
+        &__inputMark {
+            max-width: 25px;
+        }
 
         &__inputTitle,
-        &__inputDesc {
+        &__inputDesc,
+        &__inputMark {
             background: #ddd;
             border: none;
             padding: .2rem;
@@ -149,7 +187,9 @@
         }
 
         &__inputDesc {
+            font-family: 'Didact Gothic', sans-serif;
             resize: none;
+            line-break: 1;
         }
 
         .display-mode,
@@ -159,15 +199,24 @@
             width: 100%;
         }
 
-        .icons-container {
-            //max-width: 20px;
-            
-        }
+    }
 
-        .icon-wrapper {
-            margin: 0.2rem 0.4rem 0.4rem;
-            display: inline-block;
+    .c-editing-icons {
+        max-width: 75px;
+        text-align: center;
+        margin-right: 5px;
+        padding-top: 5px;
+        display: flex;
+        justify-content: space-between;
+
+        &__icon-wrapper {
+            margin: 0.1rem 0.3rem 0;
             cursor: pointer;
+
+            label {
+                font-size: 0.6rem;
+                margin: 0 0.5rem;
+            }
         }
 
         .el-icon-menu {
@@ -181,14 +230,10 @@
         .el-icon-delete {
             color: red;
         }
-
-        
     }
 
     .vs-compact {
         position: absolute;
-        right: 0;
-        bottom: -50px;
         z-index: 1;
     }
 </style>

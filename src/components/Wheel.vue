@@ -1,6 +1,6 @@
 <template>
     <div class="wheel-container" id="canvas-wrapper">
-        <canvas id="canvas3" width="448" height="448"></canvas>
+        <canvas id="canvas3" width="408" height="408"></canvas>
     </div>
 </template>
 
@@ -130,14 +130,14 @@
             // canvas.setAttribute("height", canvasWrapperWidth);
 
             // todo update attributes with window resize
-            canvas.style.width = "100%";
-            canvas.style.height = "100%";
+            // canvas.style.width = "100%";
+            // canvas.style.height = "100%";
 
             console.log(canvas.width)
             console.log(canvas.height)
                 
 
-                this.createWheel(canvasEl, canvas.width, canvas.height, this.categories)
+            this.createWheel(canvasEl, canvas.width, canvas.height, this.categories)
             
         },
         name: 'Wheel',
@@ -148,8 +148,9 @@
 <style lang="scss">
   .wheel-container {
     margin: 20px auto;
-    max-width: 550px;
-    max-height: 550px;
+    max-width: 410px;
+    max-height: 410px;
+    text-align: center;
   }
 
   #canvas3{

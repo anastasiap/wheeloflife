@@ -3,11 +3,11 @@
         <el-main>
             <!-- TODO try to fix it with watcher in child (wheel) -->
             <Main v-if="categories.length > 0" class="main-container">
-                <el-row>
-                    <el-col :xs="24" :lg="12">
+                <el-row gutter="-40">
+                    <el-col :xs="24" :lg="10">
                         <Wheel :categories="categories" />
                     </el-col>
-                    <el-col :xs="24" :lg="12">
+                    <el-col :xs="24" :lg="14">
                         <Description :categories="categories" />
                     </el-col>
                 </el-row>

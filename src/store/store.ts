@@ -31,6 +31,21 @@ const store: StoreOptions<RootState> = {
             })
         },
         /*
+         * Update existing category mark
+         */
+        updateMark: (state, obj) => {
+            const newMark = obj.newMark
+            const catID = obj.id
+
+            // TODO this of some other detector for categories object
+            // TODO create one helper function for category update
+            state.categories.forEach((element: ICategory, index: number) => {
+                if (element.id === catID)  {
+                    state.categories[index]['mark'] = newMark
+                }
+            })
+        },
+        /*
          * Update existing category description
          */
         updateDesc: (state, obj) => {

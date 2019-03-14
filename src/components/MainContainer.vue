@@ -52,7 +52,12 @@
 
 <style lang="scss">
     body {
-        font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+        font-family: 'Didact Gothic', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Amatic SC', italic;
+
     }
 </style>
 
