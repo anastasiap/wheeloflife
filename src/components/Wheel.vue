@@ -7,27 +7,38 @@
 <script>
     export default {
         methods: {
+
+            //  todo refactor - one function creates arc. other functions set other things
             createWheel(canvasEl, width, height, categories) {
-                var radius = height / 2 - 5,
+                var radius = height / 2 - 5,  // TODO why 5?
                     centerX = width / 2,
                     centerY = height / 2,
-                    total = 100; // percentage
+                    total = 100, // percentage
+                    lastEnd = 0;
 
-                var lastEnd = 0,
-                    offset = Math.PI / 2;
+                    // длина окружности 2 r * pi = D * pi   
+
+                    var lradius = radius * 3 / 4; 
+                //store the position of each label which is calculated when the graph is drawn
+                var labelxy = [];
+                var fontSize = Math.floor(canvasEl.height / 33);
+                    canvasEl.textAlign = 'center';
+                    canvasEl.font = fontSize * 2 + "px Arial";
+
 
                 for (var j = 0; j < categories.length; j++) {
-               console.log('categories.length', j)
-                    var thisPart = total / categories.length; 
+                    
+                    var thisSection = total / categories.length; // Percents? Width?  
 
                         canvasEl.beginPath();
                         canvasEl.fillStyle = categories[j]['color'];
                         canvasEl.moveTo(centerX, centerY);
                         
                         // Длина окружности, полный круг = Math.PI * 2
-                        // thisPart / total = размер текущей части поделенная на сумму всех частей 
+                        // thisSection / total = размер текущей части поделенная на сумму всех частей 
                         // (процент части от общей суммы)
-                    var arcSector = Math.PI * 2 * thisPart / total; 
+                    
+                    var arcSector = Math.PI * 2 * thisSection / total; // длина окружности этой секции
                         
                         // M: centerX, centerY, 
                         // A: radius 
@@ -35,9 +46,9 @@
                         // sweep-flag: lastEnd + arcSector - offset
 
                         // конец предыдущей арки минус длина окружности
-                    var startAngle = lastEnd - offset;                   
+                    var startAngle = lastEnd;                   
                         // конец предылущей арки + размер текущей арки - минус длина окружности
-                    var endAngle = lastEnd + arcSector - offset;
+                    var endAngle = lastEnd + arcSector;
                         
                         canvasEl.arc(centerX, centerY, radius, startAngle, endAngle, false);
 
@@ -50,13 +61,14 @@
 
                         // start marks
                         var counter = 0;
-                        var gradeSystem = 10;
+                        var gradeSystem = 5;
                         var color = '';
                         var startMarkX = centerX;
                         var startMarkY = centerY;
-                        var markRadius = radius;
+                        var markRadius = radius;  //  
 
                     while (counter < gradeSystem) {
+
 
                         if (counter === 0) {
                             color = 'blue'
@@ -82,38 +94,59 @@
                             color = 'grey'
                         }
 
-                        this.createMarks(canvasEl, this.categories, markRadius, centerX, centerY, total, color, startAngle)
-                        markRadius -= radius / 10;
+                        // this.createMarks(
+                        //     canvasEl, 
+                        //     this.categories, 
+                        //     markRadius, 
+                        //     centerX, 
+                        //     centerY, 
+                        //     total, 
+                        //     color, 
+                        //     startAngle)
+                        
+                        markRadius -= radius / gradeSystem;
                         counter++
 
-                    
-                        console.log('counter', counter)
                     }
 
-                    // todo refactor this shit
+                    let coordinates = lastEnd + arcSector / 2 + Math.PI;
+                    let categoryName = categories[j]['name'];
+                    labelxy.push({coord: coordinates, name: categoryName});
+
+                }
+
+                for (var i = 0; i < labelxy.length; i++) {
+                    var langle = labelxy[i]['coord'];
+                    var dx = centerX + lradius * Math.cos(langle);
+                    var dy = centerX + lradius * Math.sin(langle);
+                    canvasEl.fillText(labelxy[i]['name'], dx, dy);
+                    canvasEl.fillStyle = 'black';	
                 }
             },
 
             createMarks(canvasEl, categories, radius, startX, startY, total, color, startAngle) {
-                var lastEnd = startAngle    ,
-                    offset = Math.PI / 2;
+                var lastEnd = startAngle;
 
                     console.log('startAngle', startAngle)
-                
-                var thisPart = total / categories.length; 
+                    
+                var thisSection = total / categories.length; 
 
                     canvasEl.beginPath();
-                    canvasEl.fillStyle = color;
+                    canvasEl.fillStyle = `rgba(0,0,0, 0.1)`;
 
                     // какие координаты у линии проведенной до десятой части радиуса
                     canvasEl.moveTo(startX, startY);
                     
-                var arcSector = Math.PI * 2 * thisPart / total; 
-                var startAngle = lastEnd - offset;
-                var endAngle = lastEnd + arcSector - offset;
+                var arcSector = Math.PI * 2 * thisSection / total; 
+                var startAngle = lastEnd;
+                var endAngle = lastEnd + arcSector;
                     
                     canvasEl.arc(startX, startY, radius, startAngle, endAngle, false);
                     canvasEl.lineTo(startX, startY);
+
+                    // canvasEl.strokeStyle = "rgb(0,0,0)";
+                    // canvasEl.fillStyle = "rgb(0,0,0)";
+
                     canvasEl.fill();
                     canvasEl.closePath();
 
@@ -124,7 +157,7 @@
             const canvas = document.getElementById("canvas3");
             const canvasEl = canvas.getContext('2d');
             const canvasWrapper = document.getElementById("canvas-wrapper");
-            let canvasWrapperWidth = document.getElementById("canvas-wrapper").width;
+            // let canvasWrapperWidth = document.getElementById("canvas-wrapper").width;
 
             // canvas.setAttribute("width", canvasWrapperWidth);
             // canvas.setAttribute("height", canvasWrapperWidth);
@@ -133,9 +166,8 @@
             // canvas.style.width = "100%";
             // canvas.style.height = "100%";
 
-            console.log(canvas.width)
-            console.log(canvas.height)
-                
+            // console.log(canvas.width)
+            // console.log(canvas.height)
 
             this.createWheel(canvasEl, canvas.width, canvas.height, this.categories)
             

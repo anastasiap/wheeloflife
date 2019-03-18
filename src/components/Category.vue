@@ -1,26 +1,21 @@
 <template>
     <div class="c-category" @mouseenter="toggleTools" @mouseleave="toggleTools">
         <div v-bind:class="{ 'hide-visually': isHidden }" class="c-editing-icons animated fadeIn">
-            <span class="c-editing-icons__icon-wrapper" @click="toggleView" @mouseenter="toggleLabel" @mouseleave="toggleLabel">
-                <!-- <el-tooltip>{{ $t("labelEditCategory") }}</el-tooltip> -->
-                <!-- <label v-if="!isEditMode">{{ $t("labelEditCategory") }}</label> -->
-                <i v-if="!isEditMode" class="el-icon-edit"></i>
-                <i v-if="isEditMode" class="el-icon-check"></i>
+            <span class="c-editing-icons__icon-wrapper" @click="deleteCategory">
+                <i class="el-icon-delete"></i>
             </span>
             <span class="c-editing-icons__icon-wrapper" @click="toggleColorPicker">
                 <i class="el-icon-menu"></i>
             </span>
-            <span class="c-editing-icons__icon-wrapper" @click="deleteCategory">
-                <i class="el-icon-delete"></i>
+            <span class="c-editing-icons__icon-wrapper" @click="toggleView">
+                <i v-if="!isEditMode" class="el-icon-edit"></i>
+                <i v-if="isEditMode" class="el-icon-check"></i>
             </span>
         </div>
-
         <div v-if="!isEditMode" class="display-mode">
             <div class="c-category__heading">
                 <h4 class="c-category__title" :style="{ color: catColor }">{{ name }}</h4>
                 <div @click="toggleMarkInput" 
-                    
-                    
                     :style="{ color: catColor }"
                     class="c-category__mark"
                     v-if="!isMarkEditMode">{{ mark }}</div>
@@ -93,18 +88,20 @@
             toggleTools(): void {
                 this.isHidden = this.isEditMode ? false : !this.isHidden;
             },
-            toggleLabel(e): void {
-                console.log(e);
-            },
             toggleView(): boolean {
+                if (this.isColorEditMode) {
+                    this.toggleColorPicker();
+                }
                 // TODO research how to reverse boolean
                 if (this.$refs.descViewMode) {
                     this.$set(this.descInputHeight, 'height', this.$refs.descViewMode.clientHeight + 10  + 'px')
                 }
-                
                 return this.isEditMode = !this.isEditMode
             },
             deleteCategory(id): void {
+                if (this.isColorEditMode) {
+                    this.toggleColorPicker();
+                }
                 this.$store.commit('deleteCategory', id);
             },
             toggleColorPicker(): boolean {
@@ -232,8 +229,8 @@
         }
     }
 
-    .vs-compact {
+    .vc-compact {
         position: absolute;
-        z-index: 1;
+        top: 35px; 
     }
 </style>
