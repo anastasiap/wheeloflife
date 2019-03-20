@@ -1,12 +1,34 @@
 <template>
     <div class="wheel-container" id="canvas-wrapper">
-        <canvas id="canvas3" width="408" height="408"></canvas>
+        <canvas id="labels" width="408" height="408"></canvas>
+        <canvas id="wheel" width="408" height="408"></canvas>
+        <canvas id="marks" width="408" height="408"></canvas>
     </div>
 </template>
 
 <script>
     export default {
         methods: {
+            drawTextAlongArc(context, str, centerX, centerY, radius, angle) {
+                context.save();
+                context.translate(centerX, centerY);
+                context.rotate(-1 * angle / 2);
+                context.rotate(-1 * (angle / str.length) / 2);
+  
+                for (var n = 0; n < str.length; n++) {
+                    context.rotate(angle / str.length);
+                    context.save();
+                    context.translate(0, -1 * radius);
+                    var char = str[n];
+
+
+
+                    context.fillText(char, 0, 0);
+                    context.fillStyle = 'black';
+                    context.restore();
+                }
+                context.restore();
+            },
 
             //  todo refactor - one function creates arc. other functions set other things
             createWheel(canvasEl, width, height, categories) {
@@ -18,20 +40,22 @@
 
                     // длина окружности 2 r * pi = D * pi   
 
-                    var lradius = radius * 3 / 4; 
+                    var lradius = radius * 3 / 6; 
                 //store the position of each label which is calculated when the graph is drawn
                 var labelxy = [];
                 var fontSize = Math.floor(canvasEl.height / 33);
                     canvasEl.textAlign = 'center';
                     canvasEl.font = fontSize * 2 + "px Arial";
 
+                    const marksCanvas = document.getElementById("marks");
+                    const marksCtx = marksCanvas.getContext('2d');
 
                 for (var j = 0; j < categories.length; j++) {
-                    
                     var thisSection = total / categories.length; // Percents? Width?  
 
                         canvasEl.beginPath();
-                        canvasEl.fillStyle = categories[j]['color'];
+                        //canvasEl.fillStyle = `rgba(${categories[j]['color']}, 0.5)`;
+                        canvasEl.fillStyle = "transparent";
                         canvasEl.moveTo(centerX, centerY);
                         
                         // Длина окружности, полный круг = Math.PI * 2
@@ -58,119 +82,88 @@
                         canvasEl.closePath();
 
                         lastEnd += arcSector; 
-
-                        // start marks
-                        var counter = 0;
-                        var gradeSystem = 5;
-                        var color = '';
-                        var startMarkX = centerX;
-                        var startMarkY = centerY;
-                        var markRadius = radius;  //  
-
-                    while (counter < gradeSystem) {
-
-
-                        if (counter === 0) {
-                            color = 'blue'
-                        } else if (counter === 1) {
-                            color = 'yellow'
-                        } else if (counter === 2) {
-                            color = 'red'
-                        } else if (counter === 3) {
-                            color = 'green'
-                        } else if (counter === 4) {
-                            color = 'orange'
-                        } else if (counter === 5) {
-                            color = 'darkred'
-                        } else if (counter === 6) {
-                            color = 'darkblue'
-                        } else if (counter === 7) {
-                            color = 'lightblue'
-                        } else if (counter === 8) {
-                            color = 'purple'
-                        } else if (counter === 9) {
-                            color = 'black'
-                        } else if (counter === 10) {
-                            color = 'grey'
-                        }
-
-                        // this.createMarks(
-                        //     canvasEl, 
-                        //     this.categories, 
-                        //     markRadius, 
-                        //     centerX, 
-                        //     centerY, 
-                        //     total, 
-                        //     color, 
-                        //     startAngle)
-                        
-                        markRadius -= radius / gradeSystem;
-                        counter++
-
-                    }
-
+                           
+                        // this.createMarkArc(canvasEl, marksCtx, categories, radius, centerX, centerY, total, startAngle)
+                   
                     let coordinates = lastEnd + arcSector / 2 + Math.PI;
                     let categoryName = categories[j]['name'];
                     labelxy.push({coord: coordinates, name: categoryName});
-
                 }
 
+            const labelsCanvas = document.getElementById("labels");
+            const labelsCtx = labelsCanvas.getContext('2d');
+            
                 for (var i = 0; i < labelxy.length; i++) {
-                    var langle = labelxy[i]['coord'];
-                    var dx = centerX + lradius * Math.cos(langle);
-                    var dy = centerX + lradius * Math.sin(langle);
-                    canvasEl.fillText(labelxy[i]['name'], dx, dy);
-                    canvasEl.fillStyle = 'black';	
-                }
+                    // var langle = labelxy[i]['coord'];
+                    // var dx = centerX + lradius * Math.cos(langle);
+                    // var dy = centerY + lradius * Math.sin(langle);
+                    // canvasEl.fillText(labelxy[i]['name'], dx, dy);
+                    // canvasEl.fillStyle = 'black';	
+                
+                    
+                    var angle2 = Math.PI * 2; // radians
+                    
+                    this.drawTextAlongArc(labelsCtx, labelxy[i]['name'], centerX, centerY, radius, angle2);
+                
+                }                
             },
 
-            createMarks(canvasEl, categories, radius, startX, startY, total, color, startAngle) {
-                var lastEnd = startAngle;
+            createMarkArc(canvasEl, marksCtx, categories, radius, startX, startY, total, startAngle) {
+                var counter = 0;
+                var gradeSystem = 10;
+                var color = '';
+                var markRadius = radius;
+                 
+                //store the position of each label which is calculated when the graph is drawn
+                var labelxy = [];
+                var fontSize = Math.floor(marksCtx.height / 33);
+                    marksCtx.textAlign = 'center';
+                    canvasEl.textBaseline = 'bottom';
+                    marksCtx.font = fontSize * 2 + "px Arial";
+                
 
-                    console.log('startAngle', startAngle)
-                    
-                var thisSection = total / categories.length; 
+                while (counter < gradeSystem) {
+                    var lradius = markRadius - 15;
+                    // обьявляются ли эти переменные с каждой итерацией или сущестуют в скоупе фу
+                    var lastEnd = startAngle;
+                    var thisSection = total / categories.length; 
 
                     canvasEl.beginPath();
                     canvasEl.fillStyle = `rgba(0,0,0, 0.1)`;
+                    //canvasEl.fillStyle = `red`;
 
                     // какие координаты у линии проведенной до десятой части радиуса
                     canvasEl.moveTo(startX, startY);
                     
-                var arcSector = Math.PI * 2 * thisSection / total; 
-                var startAngle = lastEnd;
-                var endAngle = lastEnd + arcSector;
+                    var arcSector = Math.PI * 2 * thisSection / total; 
+                    var startAngle = lastEnd;
+                    var endAngle = lastEnd + arcSector;
                     
-                    canvasEl.arc(startX, startY, radius, startAngle, endAngle, false);
+                    canvasEl.arc(startX, startY, markRadius, startAngle, endAngle, false);
                     canvasEl.lineTo(startX, startY);
-
-                    // canvasEl.strokeStyle = "rgb(0,0,0)";
-                    // canvasEl.fillStyle = "rgb(0,0,0)";
 
                     canvasEl.fill();
                     canvasEl.closePath();
+                    lastEnd += arcSector;
 
-                    lastEnd += arcSector; 
+                    var labelxy = [];
+                    var langle = lastEnd + arcSector / 2 + Math.PI;
+                    var dx = startX + lradius * Math.cos(langle);
+                    var dy = startY + lradius * Math.sin(langle);
+
+                    // labelxy.push({langle: langle, dx: dx, dy: dy, counter: counter});
+                    // marksCtx.fillText(gradeSystem - counter, dx, dy);
+                    
+                    markRadius -= radius / gradeSystem;
+                    counter++
+                }
             }
         },
         mounted() {
-            const canvas = document.getElementById("canvas3");
-            const canvasEl = canvas.getContext('2d');
-            const canvasWrapper = document.getElementById("canvas-wrapper");
-            // let canvasWrapperWidth = document.getElementById("canvas-wrapper").width;
-
-            // canvas.setAttribute("width", canvasWrapperWidth);
-            // canvas.setAttribute("height", canvasWrapperWidth);
-
-            // todo update attributes with window resize
-            // canvas.style.width = "100%";
-            // canvas.style.height = "100%";
-
-            // console.log(canvas.width)
-            // console.log(canvas.height)
-
-            this.createWheel(canvasEl, canvas.width, canvas.height, this.categories)
+            const wheelCanvas = document.getElementById("wheel");
+            const wheelCtx = wheelCanvas.getContext('2d');
             
+            this.createWheel(wheelCtx, wheelCanvas.width, wheelCanvas.height, this.categories)
         },
         name: 'Wheel',
         props: [ 'categories' ],
@@ -179,13 +172,16 @@
 
 <style lang="scss">
   .wheel-container {
+    position: relative;
     margin: 20px auto;
-    max-width: 410px;
-    max-height: 410px;
+    width: 410px;
+    height: 410px;
     text-align: center;
   }
 
-  #canvas3{
-      //width: 98%;
+  #labels, #marks, #wheel {
+      position: absolute;
+      left: 0;
+      top: 0;
 }
 </style>
