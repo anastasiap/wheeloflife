@@ -70,12 +70,16 @@
             'compact-picker': compact,
         },
         mounted() {
-            const FormHeight = this.$refs.descViewMode.clientHeight;
+            if (!this.isEditMode) {
+                const FormHeight = this.$refs.descViewMode.clientHeight;
+            }
         },
         methods: {
             toggleMarkInput(): void {
                 this.isMarkEditMode = !this.isMarkEditMode;
             },
+
+            // TODO create one method
             updateMark(e, id): void {
                 this.$store.commit('updateMark', {newMark: e.target.value, id: id })
             },
@@ -85,7 +89,9 @@
             updateDesc(e, id): void {
                 this.$store.commit('updateDesc', {newDesc: e.target.value, id: id })
             },
+
             toggleTools(): void {
+                // todo check if color picker is on and hide it
                 this.isHidden = this.isEditMode ? false : !this.isHidden;
             },
             toggleView(): boolean {
@@ -172,11 +178,13 @@
         &__inputTitle,
         &__inputDesc,
         &__inputMark {
-            background: #ddd;
+            background: #fff;
             border: none;
-            padding: .2rem;
+            padding: .25rem .5rem;
             width: 100%;
             margin: 0 0 .2rem;
+            box-shadow: inset 0px 0px 2px 0px rgba(56, 56, 56, 0.2);
+
 
             &:focus {
                 outline: none;
