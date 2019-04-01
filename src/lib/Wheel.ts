@@ -10,17 +10,24 @@ interface ILabel {
 interface IArc {
     arc: Path2D
     name: string
+    arcType: string
+}
+
+interface IUserData {
+    categoryName: string
+    mark: number
 }
 
 export default class Wheel {
-    public canvas: HTMLElement
-    public ctx: object
-    public categories: ICategory[]
-    public markSystem: number
-    public centerX: number
-    public centerY: number
-    public radius: number
-    public arcs = []
+    public data: IUserData
+    private canvas: HTMLElement
+    private ctx: object
+    private categories: ICategory[]
+    private markSystem: number
+    private centerX: number
+    private centerY: number
+    private radius: number
+    private arcs = []
 
     constructor(canvas: HTMLElement, categories: ICategory[], markSystem: number) {
         this.canvas = canvas
@@ -32,16 +39,15 @@ export default class Wheel {
         this.centerY = canvas.height / 2
         this.radius = canvas.width / 2
 
+        // todo check if setting returning value to default values in constructor is a good idea
+        this.data = { categoryName: '', mark: 0}
+
         this.setEventListener()
     }
 
     public drawWheel(): void {
-
-        /*
-         * Set wheel params
-         */
         // dividing half circle by negative 0.5 for some reason
-        // sets the start at the top of circle
+        // sets the start at the top of a circle
         let startingPoint = -0.5 * Math.PI
 
         // assume sum of all arcs is 100%
@@ -50,16 +56,13 @@ export default class Wheel {
         // todo ? what's happening here
         const arcLength = total / this.categories.length
 
-        /*
-         * Set text params
-         */
-
         // store the position of each label
         const labels: ILabel[] = []
 
         // font settings for labels
         // todo move this to config as constants
         const fontSize = Math.floor(this.ctx.height / 33)
+
         this.ctx.textAlign = 'center'
         this.ctx.textBaseline = 'middle'
         this.ctx.font = `${fontSize} * 3 px Didact Gothic`
@@ -68,7 +71,7 @@ export default class Wheel {
         this.categories.forEach((category) => {
             const arcAngle = arcLength / total * 2 * Math.PI
 
-            this.drawArc(this.radius, startingPoint, arcAngle, category.name, category.color)
+            this.drawArc(this.radius, startingPoint, arcAngle, category.name, category.color, 'category')
             this.drawMarks(category, startingPoint, arcAngle, this.markSystem)
 
             // save settings for current arc label
@@ -88,7 +91,7 @@ export default class Wheel {
 
         this.addLabels(labels)
     }
-    
+
     private drawTextAlongArc(context, str, centerX, centerY, radius, angle, dx, dy, color) {
         context.save()
         context.translate(centerX, centerY)
@@ -109,7 +112,7 @@ export default class Wheel {
         context.restore()
     }
 
-    private drawArc(radius: number, startingPoint: number, arcAngle: number, name: string, color: string): void {
+    private drawArc(radius: number, startingPoint: number, arcAngle: number, name: string, color: string, arcType: string): void {
         const endPoint = startingPoint + arcAngle
 
         // create Path object with to keep track of each arc
@@ -123,7 +126,7 @@ export default class Wheel {
         this.ctx.fill(section)
 
         // save all paths for future manipulations
-        const newArc: IArc = { arc: section, name: name } 
+        const newArc: IArc = { arc: section, name: name, arcType: arcType } 
         this.arcs.push(newArc)
     }
 
@@ -134,7 +137,7 @@ export default class Wheel {
         const marksLabels: ILabel[] = []
 
         while (counter < marks) {
-            this.drawArc(markRadius, startingPoint, arcAngle, `${counter + 1}`, 'rgba(0,0,0, 0.1)')
+            this.drawArc(markRadius, startingPoint, arcAngle, `${counter + 1}`, 'rgba(0,0,0, 0.1)', 'mark')
 
             // save settings for current arc label
             const labelRadius = markRadius - 10
@@ -173,30 +176,53 @@ export default class Wheel {
         this.arcs.push(arc)
     }
 
-    private getCursorPosition(event): void {
-        const rect = this.ctx.getBoundingClientRect()
+    private getCursorPosition(event: MouseEvent): object {
+        const rect = this.canvas.getBoundingClientRect()
         const x = event.clientX - rect.left
         const y = event.clientY - rect.top
-        console.log("x: " + x + " y: " + y)
 
+        return {x, y}
     }
 
     private setEventListener(): void {
+        //todo fin another way to keep context
         const that = this
 
-        this.canvas.addEventListener('click', function(e) {
-            //var loc = windowToCanvas(e.clientX, e.clientY);
+        // todo add return void type to callback
+        this.canvas.addEventListener('click', (e: MouseEvent): void => {
+            const mouseCoords = that.getCursorPosition(e)
 
-            const rect = that.canvas.getBoundingClientRect()
-            const mx = e.clientX - rect.left
-            const my = e.clientY - rect.top
-            const shapes = that.arcs
-
-            shapes.forEach((a: object) => {
-                if (that.ctx.isPointInPath(a.arc, mx, my)) {
-                    console.log('contains', a.name)
-                }
-            })
+            that.getClickedData(mouseCoords)
         })
+    }
+
+    private getClickedData(coords: object) {
+        const data = {
+            categoryName: '',
+            mark: 0,
+        }
+        let marksCollection: number[] = []
+
+        this.arcs.forEach((a: object) => {
+            if (this.ctx.isPointInPath(a.arc, coords.x, coords.y)) {
+                if (a.arcType === 'category') {
+                    data.categoryName = a.name
+                } else {
+                    marksCollection.push(+a.name)
+                }
+            }
+        })
+
+        data.mark = this.markSystem - this.getMark(marksCollection) + 1
+        this.setData(data)
+    }
+
+    private getMark(marks: number[]) {
+        return marks.reduce((acc, cur) => Math.max(acc, cur), marks[0])
+    }
+
+    // todo check how setters and getters work here
+    private setData(selected: IUserData) {
+        this.data = selected
     }
 }
