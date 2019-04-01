@@ -1,8 +1,6 @@
 <template>
     <div class="wheel-container" id="canvas-wrapper">
-        <canvas id="labels" width="408" height="408"></canvas>
-        <canvas id="wheel" width="408" height="408"></canvas>
-        <canvas id="marks" width="408" height="408"></canvas>
+        <canvas id="wheel" width="408" height="408"></canvas>        
     </div>
 </template>
 

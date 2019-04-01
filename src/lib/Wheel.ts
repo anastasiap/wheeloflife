@@ -8,6 +8,7 @@ interface ILabel {
 }
 
 export default class Wheel {
+    public canvas: HTMLElement
     public ctx: object
     public categories: ICategory[]
     public markSystem: number
@@ -17,6 +18,7 @@ export default class Wheel {
     public arcs = []
 
     constructor(canvas: HTMLElement, categories: ICategory[], markSystem: number) {
+        this.canvas = canvas
         this.ctx = canvas.getContext('2d')
         this.categories = categories
         this.markSystem = markSystem
@@ -60,11 +62,12 @@ export default class Wheel {
             const arcAngle = arcLength / total * 2 * Math.PI
 
             this.drawArc(this.radius, startingPoint, arcAngle, category)
-            this.drawMarks(category, startingPoint, arcAngle, this.markSystem)
+            //this.drawMarks(category, startingPoint, arcAngle, this.markSystem)
 
             // save settings for current arc label
             const coordinates = startingPoint + arcAngle / 2 + Math.PI * 2
             const labelRadius = this.radius * 3 / 4
+
             labels.push({
                 color: category.color,
                 coord: coordinates,
@@ -72,19 +75,48 @@ export default class Wheel {
                 radius: labelRadius,
             })
 
-            // move starting point to the end of current arc
+             // move starting point to the end of current arc
             startingPoint += arcAngle
         })
 
-        this.addLabels(labels)
+        //this.addLabels(labels)
+    }
+    
+    private drawTextAlongArc(context, str, centerX, centerY, radius, angle, dx, dy, color) {
+        context.save()
+        context.translate(centerX, centerY)
+        context.rotate(-1 * angle / 2) // rotate context
+        context.rotate(-1 * (angle / str.length) / 2)
+
+        for (var n = 0; n < str.length; n++) {
+            context.rotate(angle / str.length)
+            context.save()
+            context.translate(0, -1 * radius)
+
+            var char = str[n]
+
+            context.fillText(char, 0, 0)
+            context.fillStyle = `color`
+            context.restore()
+        }
+        context.restore()
     }
 
     private drawArc(radius: number, startingPoint: number, arcAngle: number, category: ICategory, color: string): void {
-        this.ctx.beginPath()
-        this.ctx.arc(this.centerX, this.centerY, radius, startingPoint, startingPoint + arcAngle)
-        this.ctx.lineTo(this.centerX, this.centerY)
+        const endPoint = startingPoint + arcAngle
+
+        // create Path object with to keep track of each arc
+        const section = new Path2D()
+
+        section.moveTo(this.centerX, this.centerY)
+        section.arc(this.centerX, this.centerY, radius, startingPoint, endPoint)
+        section.lineTo(this.centerX, this.centerY)
+
         this.ctx.fillStyle = color || category.color
-        this.ctx.fill()
+        this.ctx.fill(section)
+
+        // save all paths for future manipulations
+        this.arcs.push({ arc: section, name: category.name })
     }
 
     private drawMarks(category: ICategory, startingPoint: number, arcAngle: number, marks: number): void {
@@ -122,8 +154,10 @@ export default class Wheel {
             const dx = this.centerX + l.radius * Math.cos(labelAngle)
             const dy = this.centerY + l.radius * Math.sin(labelAngle)
 
-            this.ctx.fillText(l.name, dx, dy)
-            this.ctx.fillStyle = l.color
+            // this.ctx.fillText(l.name, dx, dy)
+            // this.ctx.fillStyle = l.color
+
+            this.drawTextAlongArc(labelsCtx, labelxy[i]['name'], centerX, centerY, radius, thisCategoryPercentage, dx, dy, labelxy[i]['color'])
         })
     }
 
@@ -142,27 +176,27 @@ export default class Wheel {
     private setEventListener(): void {
         const that = this
 
-        this.ctx.addEventListener('mousedown', function(e) {
-            const rect = that.ctx.getBoundingClientRect()
+        this.canvas.addEventListener('click', function(e) {
+            //var loc = windowToCanvas(e.clientX, e.clientY);
+
+            const rect = that.canvas.getBoundingClientRect()
             const mx = e.clientX - rect.left
             const my = e.clientY - rect.top
 
-            let shapes = myState.shapes
+            let shapes = that.arcs
 
             console.log('click')
+            console.log(shapes)
 
-
-            for (var i = l-1; i >= 0; i--) {
-              if (shapes[i].contains(mx, my)) {
-                console.log('contains')
-              }
-            }
-        }
+            shapes.forEach((a) => {
+                if (that.ctx.isPointInPath(a.arc, mx, my)) {
+                    console.log('contains', a.name)
+                }
+            })
+        })
     }
 
-    private contains(mx, my): boolean {
-        // All we have to do is make sure the Mouse X,Y fall in the area between
-        // the shape's X and (X + Width) and its Y and (Y + Height)
-        //return  (this.x <= mx) && (this.x + this.w >= mx) && (this.y <= my) && (this.y + this.h >= my)
+    contains(mx, my) {
+        return  
     }
 }
