@@ -7,6 +7,11 @@ interface ILabel {
     radius: number
 }
 
+interface IArc {
+    arc: Path2D
+    name: string
+}
+
 export default class Wheel {
     public canvas: HTMLElement
     public ctx: object
@@ -53,16 +58,18 @@ export default class Wheel {
         const labels: ILabel[] = []
 
         // font settings for labels
+        // todo move this to config as constants
         const fontSize = Math.floor(this.ctx.height / 33)
         this.ctx.textAlign = 'center'
+        this.ctx.textBaseline = 'middle'
         this.ctx.font = `${fontSize} * 3 px Didact Gothic`
 
         // iterate through given categories to draw arcs
         this.categories.forEach((category) => {
             const arcAngle = arcLength / total * 2 * Math.PI
 
-            this.drawArc(this.radius, startingPoint, arcAngle, category)
-            //this.drawMarks(category, startingPoint, arcAngle, this.markSystem)
+            this.drawArc(this.radius, startingPoint, arcAngle, category.name, category.color)
+            this.drawMarks(category, startingPoint, arcAngle, this.markSystem)
 
             // save settings for current arc label
             const coordinates = startingPoint + arcAngle / 2 + Math.PI * 2
@@ -79,7 +86,7 @@ export default class Wheel {
             startingPoint += arcAngle
         })
 
-        //this.addLabels(labels)
+        this.addLabels(labels)
     }
     
     private drawTextAlongArc(context, str, centerX, centerY, radius, angle, dx, dy, color) {
@@ -102,7 +109,7 @@ export default class Wheel {
         context.restore()
     }
 
-    private drawArc(radius: number, startingPoint: number, arcAngle: number, category: ICategory, color: string): void {
+    private drawArc(radius: number, startingPoint: number, arcAngle: number, name: string, color: string): void {
         const endPoint = startingPoint + arcAngle
 
         // create Path object with to keep track of each arc
@@ -112,11 +119,12 @@ export default class Wheel {
         section.arc(this.centerX, this.centerY, radius, startingPoint, endPoint)
         section.lineTo(this.centerX, this.centerY)
 
-        this.ctx.fillStyle = color || category.color
+        this.ctx.fillStyle = color
         this.ctx.fill(section)
 
         // save all paths for future manipulations
-        this.arcs.push({ arc: section, name: category.name })
+        const newArc: IArc = { arc: section, name: name } 
+        this.arcs.push(newArc)
     }
 
     private drawMarks(category: ICategory, startingPoint: number, arcAngle: number, marks: number): void {
@@ -126,10 +134,10 @@ export default class Wheel {
         const marksLabels: ILabel[] = []
 
         while (counter < marks) {
-            this.drawArc(markRadius, startingPoint, arcAngle, category, 'rgba(0,0,0, 0.1)')
+            this.drawArc(markRadius, startingPoint, arcAngle, `${counter + 1}`, 'rgba(0,0,0, 0.1)')
 
             // save settings for current arc label
-            const labelRadius = markRadius - 15
+            const labelRadius = markRadius - 10
             const coordinates = startingPoint + arcAngle / 2 + Math.PI * 2
             const name = marks - counter
 
@@ -154,10 +162,10 @@ export default class Wheel {
             const dx = this.centerX + l.radius * Math.cos(labelAngle)
             const dy = this.centerY + l.radius * Math.sin(labelAngle)
 
-            // this.ctx.fillText(l.name, dx, dy)
-            // this.ctx.fillStyle = l.color
+             this.ctx.fillText(l.name, dx, dy)
+             this.ctx.fillStyle = l.color
 
-            this.drawTextAlongArc(labelsCtx, labelxy[i]['name'], centerX, centerY, radius, thisCategoryPercentage, dx, dy, labelxy[i]['color'])
+            //this.drawTextAlongArc(labelsCtx, labelxy[i]['name'], centerX, centerY, radius, thisCategoryPercentage, dx, dy, labelxy[i]['color'])
         })
     }
 
@@ -182,21 +190,13 @@ export default class Wheel {
             const rect = that.canvas.getBoundingClientRect()
             const mx = e.clientX - rect.left
             const my = e.clientY - rect.top
+            const shapes = that.arcs
 
-            let shapes = that.arcs
-
-            console.log('click')
-            console.log(shapes)
-
-            shapes.forEach((a) => {
+            shapes.forEach((a: object) => {
                 if (that.ctx.isPointInPath(a.arc, mx, my)) {
                     console.log('contains', a.name)
                 }
             })
         })
-    }
-
-    contains(mx, my) {
-        return  
     }
 }
