@@ -24,9 +24,6 @@
                 this.wil.getClickedData(e);
                 const mark = this.wil.getData().mark
                 const categoryID = this.wil.getData().categoryID
-
-                console.log({mark}, {categoryID})
-
                 updateData(mark, categoryID, 'mark')
             },
         },

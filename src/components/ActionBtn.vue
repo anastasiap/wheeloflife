@@ -22,10 +22,6 @@
 <script lang="ts">
     export default {
         computed: {
-            // TODO make btn translations work
-            // label() {
-            //     return this.$t(`messages.${this.label}`)
-            // },
             btnMethod(): string {
                 return this.type;
             },
@@ -38,7 +34,7 @@
                 this.$store.commit('resetMarks')
             },
             resetWheel() {
-                this.$store.dispatch('getData')
+                this.$store.dispatch('getData', this.$i18n.locale)
             },
             download() {},
         },

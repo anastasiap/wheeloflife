@@ -133,22 +133,29 @@ export default class Wheel {
         context.restore()
     }
 
-    private drawArc(radius: number, startingPoint: number, arcAngle: number, id: number, color: string, arcType: string): void {
-        const endPoint = startingPoint + arcAngle
+    private drawArc(
+        radius: number,
+        startingPoint: number,
+        arcAngle: number,
+        id: number,
+        color: string,
+        arcType: string): void {
 
-        // create Path object with to keep track of each arc
-        const section = new Path2D()
+            const endPoint = startingPoint + arcAngle
 
-        section.moveTo(this.centerX, this.centerY)
-        section.arc(this.centerX, this.centerY, radius, startingPoint, endPoint)
-        section.lineTo(this.centerX, this.centerY)
+            // create Path object with to keep track of each arc
+            const section = new Path2D()
 
-        this.ctx.fillStyle = color
-        this.ctx.fill(section)
+            section.moveTo(this.centerX, this.centerY)
+            section.arc(this.centerX, this.centerY, radius, startingPoint, endPoint)
+            section.lineTo(this.centerX, this.centerY)
 
-        // save all paths for future manipulations
-        const newArc: IArc = { arc: section, name: id, arcType: arcType } 
-        this.arcs.push(newArc)
+            this.ctx.fillStyle = color
+            this.ctx.fill(section)
+
+            // save all paths for future manipulations
+            const newArc: IArc = { arc: section, name: id, arcType: arcType } 
+            this.arcs.push(newArc)
     }
 
     private drawMarks(category: ICategory, startingPoint: number, arcAngle: number, marks: number): void {

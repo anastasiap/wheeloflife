@@ -13,5 +13,5 @@ export const getInitialData = (): void => {
 }
 
 export const updateData = (value: string, categoryID: string, target: string): void => {
-    store.commit(`updateItem`, { newItem: value, id: categoryID, target: target })
+    store.commit('updateItem', { newItem: value, id: categoryID, target: target })
 }

@@ -15,66 +15,16 @@ const store: StoreOptions<RootState> = {
         loadDefaultCategories(state, payload) {
             state.categories = payload
         },
-/*
-         * Update existing category name
+        /*
+         * Update entry
          */
         updateItem: (state, obj) => {
-            const newItem = obj.newItem
-            const catID = obj.id
-            const target = obj.target
-
-            // TODO this of some other detector for categories object
-            // TODO create one helper function for category update
             state.categories.forEach((element: ICategory, index: number) => {
-                if (element.id === catID)  {
-                    state.categories[index][target] = newItem
+                if (element.id === obj.id)  {
+                    state.categories[index][obj.target] = obj.newItem
                 }
             })
         },
-
-        // /*
-        //  * Update existing category name
-        //  */
-        // updateName: (state, obj) => {
-        //     const newName = obj.newName
-        //     const catID = obj.id
-
-        //     // TODO this of some other detector for categories object
-        //     // TODO create one helper function for category update
-        //     state.categories.forEach((element: ICategory, index: number) => {
-        //         if (element.id === catID)  {
-        //             state.categories[index]['name'] = newName
-        //         }
-        //     })
-        // },
-        // /*
-        //  * Update existing category mark
-        //  */
-        // updateMark: (state, obj) => {
-        //     const newMark = obj.newMark
-        //     const catID = obj.id
-
-        //     // TODO this of some other detector for categories object
-        //     // TODO create one helper function for category update
-        //     state.categories.forEach((element: ICategory, index: number) => {
-        //         if (element.id === catID)  {
-        //             state.categories[index]['mark'] = newMark
-        //         }
-        //     })
-        // },
-        // /*
-        //  * Update existing category description
-        //  */
-        // updateDesc: (state, obj) => {
-        //     const newDesc = obj.newDesc
-        //     const catID = obj.id
-
-        //     state.categories.forEach((element: ICategory, index: number) => {
-        //         if (element.id === catID)  {
-        //             state.categories[index]['description'] = newDesc
-        //         }
-        //     })
-        // },
         /*
          * Delete category
          */

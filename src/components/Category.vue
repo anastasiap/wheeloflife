@@ -24,7 +24,7 @@
                     class="c-category__inputMark" 
                     :style="{ color: catColor }"
                     :value="mark" 
-                    @input="updateMark($event, id)"
+                    @input="updateData($event.target.value, id, 'mark')"
                 />   
             </div>
             <div ref="descViewMode" class="c-category__description">{{ description }}</div>
@@ -35,13 +35,13 @@
                     class="c-category__inputTitle" 
                     :style="{ color: catColor }"
                     :value="name" 
-                    @input="updateName($event, id)" />
+                    @input="updateData($event.target.value, id, 'name')" />
                 <textarea 
                     ref="descEditMode"
                     v-bind:style="descInputHeight"
                     class="c-category__inputDesc" 
                     :value="description" 
-                    @input="updateDesc($event, id)" 
+                    @input="updateData($event.target.value, id, 'description')" 
                     placeholder="What is this">
                 </textarea>
             </form>
@@ -54,6 +54,7 @@
 <script lang="ts">
     import { ICategory } from '../configs/app.config'
     import compact from 'vue-color/src/components/Compact.vue'
+    import { updateData } from '../services/service'
 
     export default {
         data() {
@@ -63,7 +64,7 @@
                 isColorEditMode: false as boolean,
                 isMarkEditMode: false as boolean,
                 catColor: this.color as string,
-                descInputHeight: {} 
+                descInputHeight: {},
             }
         },
         components: {
@@ -75,21 +76,10 @@
             }
         },
         methods: {
+            updateData: updateData, 
             toggleMarkInput(): void {
                 this.isMarkEditMode = !this.isMarkEditMode;
             },
-
-            // TODO create one method
-            updateMark(e, id): void {
-                this.$store.commit('updateMark', {newMark: e.target.value, id: id })
-            },
-            updateName(e, id): void {
-                this.$store.commit('updateName', {newName: e.target.value, id: id })
-            },
-            updateDesc(e, id): void {
-                this.$store.commit('updateDesc', {newDesc: e.target.value, id: id })
-            },
-            
             toggleTools(): void {
                 // todo check if color picker is on and hide it
                 this.isHidden = this.isEditMode ? false : !this.isHidden;
@@ -104,7 +94,7 @@
                 }
                 return this.isEditMode = !this.isEditMode
             },
-            deleteCategory(id): void {
+            deleteCategory(id: string): void {
                 if (this.isColorEditMode) {
                     this.toggleColorPicker();
                 }
