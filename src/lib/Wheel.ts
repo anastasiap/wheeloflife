@@ -14,7 +14,7 @@ interface IArc {
 }
 
 interface IUserData {
-    categoryName: string
+    categoryID: string
     mark: number
 }
 
@@ -40,12 +40,33 @@ export default class Wheel {
         this.radius = canvas.width / 2
 
         // todo check if setting returning value to default values in constructor is a good idea
-        this.data = { categoryName: '', mark: 0}
-
-        this.setEventListener()
+        this.setData({ categoryID: '', mark: 0})
+        this.drawWheel()
     }
 
-    public drawWheel(): void {
+    // todo check how setters and getters work here
+    public getData() {
+        return this.data
+    }
+
+    public getClickedData(e: MouseEvent) {
+        const marksCollection: number[] = []
+        const coords: object = this.getCursorPosition(e)
+
+        this.arcs.forEach((a: IArc) => {
+            if (this.ctx.isPointInPath(a.arc, coords.x, coords.y)) {
+                if (a.arcType === 'category') {
+                    this.data.categoryID = a.name
+                } else {
+                    marksCollection.push(+a.name)
+                }
+            }
+        })
+
+        this.data.mark = this.markSystem - this.getMark(marksCollection) + 1
+    }
+
+    private drawWheel(): void {
         // dividing half circle by negative 0.5 for some reason
         // sets the start at the top of a circle
         let startingPoint = -0.5 * Math.PI
@@ -71,7 +92,7 @@ export default class Wheel {
         this.categories.forEach((category) => {
             const arcAngle = arcLength / total * 2 * Math.PI
 
-            this.drawArc(this.radius, startingPoint, arcAngle, category.name, category.color, 'category')
+            this.drawArc(this.radius, startingPoint, arcAngle, category.id, category.color, 'category')
             this.drawMarks(category, startingPoint, arcAngle, this.markSystem)
 
             // save settings for current arc label
@@ -112,7 +133,7 @@ export default class Wheel {
         context.restore()
     }
 
-    private drawArc(radius: number, startingPoint: number, arcAngle: number, name: string, color: string, arcType: string): void {
+    private drawArc(radius: number, startingPoint: number, arcAngle: number, id: number, color: string, arcType: string): void {
         const endPoint = startingPoint + arcAngle
 
         // create Path object with to keep track of each arc
@@ -126,7 +147,7 @@ export default class Wheel {
         this.ctx.fill(section)
 
         // save all paths for future manipulations
-        const newArc: IArc = { arc: section, name: name, arcType: arcType } 
+        const newArc: IArc = { arc: section, name: id, arcType: arcType } 
         this.arcs.push(newArc)
     }
 
@@ -137,7 +158,7 @@ export default class Wheel {
         const marksLabels: ILabel[] = []
 
         while (counter < marks) {
-            this.drawArc(markRadius, startingPoint, arcAngle, `${counter + 1}`, 'rgba(0,0,0, 0.1)', 'mark')
+            this.drawArc(markRadius, startingPoint, arcAngle, counter + 1, 'rgba(0,0,0, 0.1)', 'mark')
 
             // save settings for current arc label
             const labelRadius = markRadius - 10
@@ -172,49 +193,12 @@ export default class Wheel {
         })
     }
 
-    private addArc(arc: any): void {
-        this.arcs.push(arc)
-    }
-
     private getCursorPosition(event: MouseEvent): object {
         const rect = this.canvas.getBoundingClientRect()
         const x = event.clientX - rect.left
         const y = event.clientY - rect.top
 
         return {x, y}
-    }
-
-    private setEventListener(): void {
-        //todo fin another way to keep context
-        const that = this
-
-        // todo add return void type to callback
-        this.canvas.addEventListener('click', (e: MouseEvent): void => {
-            const mouseCoords = that.getCursorPosition(e)
-
-            that.getClickedData(mouseCoords)
-        })
-    }
-
-    private getClickedData(coords: object) {
-        const data = {
-            categoryName: '',
-            mark: 0,
-        }
-        let marksCollection: number[] = []
-
-        this.arcs.forEach((a: object) => {
-            if (this.ctx.isPointInPath(a.arc, coords.x, coords.y)) {
-                if (a.arcType === 'category') {
-                    data.categoryName = a.name
-                } else {
-                    marksCollection.push(+a.name)
-                }
-            }
-        })
-
-        data.mark = this.markSystem - this.getMark(marksCollection) + 1
-        this.setData(data)
     }
 
     private getMark(marks: number[]) {

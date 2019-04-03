@@ -89,7 +89,7 @@
             updateDesc(e, id): void {
                 this.$store.commit('updateDesc', {newDesc: e.target.value, id: id })
             },
-
+            
             toggleTools(): void {
                 // todo check if color picker is on and hide it
                 this.isHidden = this.isEditMode ? false : !this.isHidden;
