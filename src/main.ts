@@ -1,13 +1,14 @@
 import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+import router from './router/router'
+import store from './store/store'
+
 import App from './App'
 
 import { messages } from './configs/app.config'
-import VueI18n from 'vue-i18n'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import router from './router/router'
-import store from './store/store'
 import './plugins/element.js'
 
 Vue.config.productionTip = false
@@ -21,8 +22,8 @@ export const i18n = new VueI18n({
 })
 
 new Vue({
+  i18n,
   render: (h) => h(App),
   router,
-  i18n,
   store,
 }).$mount('#app')

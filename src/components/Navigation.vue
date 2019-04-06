@@ -12,18 +12,17 @@
     export default {
         data() {
             return {
-                routes: routes,
-                msg: 'main container some',
                 activeIndex: '0',
+                routes,
             }
         },
         methods: {
-            handleSelect(key, keyPath) {
+            handleSelect(key: string, keyPath: string) {
                 // console.log('handlesubmit key', key)
                 // console.log('handlesubmit keyPath', keyPath)
                 // this.$router.push(keyPath)
                 // this.activeIndex = key
-            }
+            },
         },
         name: 'Navigation',
     }
@@ -32,5 +31,9 @@
 <style lang="scss" scoped>
     .main-nav {
         width: 100%;
+    }
+
+    .el-menu.el-menu--horizontal {
+        border-bottom: solid 1px #fff;
     }
 </style>

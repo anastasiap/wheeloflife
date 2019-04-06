@@ -20,23 +20,25 @@
 </template>
 
 <script lang="ts">
-    export default {
+    import Vue from 'vue'
+
+    export default Vue.extend({
         computed: {
             btnMethod(): string {
-                return this.type;
+                return this.type
             },
         },
         methods: {
             add() {
                 this.$store.commit('addCategory')
-            }, 
+            },
             resetMarks() {
                 this.$store.commit('resetMarks')
             },
             resetWheel() {
                 this.$store.dispatch('getData', this.$i18n.locale)
             },
-            download() {},
+            // download() {},
         },
         name: 'ActionBtn',
         props: [
@@ -44,7 +46,7 @@
             'icon',
             'type',
         ],
-    }
+    })
 </script>
 
 <style lang="scss" scoped>

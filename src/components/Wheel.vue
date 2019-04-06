@@ -1,39 +1,41 @@
 <template>
     <div class="wheel-container" id="canvas-wrapper">
-        <canvas id="wheel" width="408" height="408" @click="setData"></canvas>        
+        <canvas id="wheel" width="408" height="408" @mousedown="setData"></canvas>        
     </div>
 </template>
 
 <script lang="ts">
+    import Vue from 'vue'
     import Wheel from '../lib/Wheel'
+    import { IWheel } from '../lib/Wheel'
     import { updateData } from '../services/service'
 
-    export default {
+    export default Vue.extend({
         data() {
             return {
-                wil: {} as object,
+                // todo add wheel type
+                wil: {} as IWheel,
             }
         },
         methods: {
-            setWheel() {
+            setWheel(): void {
                 // todo get and set marks
                 const markSystem = 10
-                this.wil = new Wheel(document.getElementById("wheel"), this.categories, markSystem)
+                this.wil = new Wheel(document.getElementById('wheel') as HTMLCanvasElement, this.categories, markSystem)
             },
-            setData(e: MouseEvent) {
-                this.wil.getClickedData(e);
+            setData(e: MouseEvent): void {
+                this.wil.getClickedData(e)
                 const mark = this.wil.getData().mark
                 const categoryID = this.wil.getData().categoryID
                 updateData(mark, categoryID, 'mark')
             },
         },
         mounted() {
-            this.setWheel();
-            
+            this.setWheel()
         },
         name: 'Wheel',
         props: [ 'categories' ],
-    }
+    })
 </script>
 
 <style lang="scss">

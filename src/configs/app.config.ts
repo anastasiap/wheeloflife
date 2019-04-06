@@ -1,40 +1,49 @@
 // Routes config
 export const routes: {[key: string]: {[key: string]: string}} = {
-    home: {
-        name: 'Home',
-        path: '/',
-    },
-    help: {
-        name: 'How To',
-        path: '/howto',
-    },
-    info: {
-        name: 'Useful info',
-        path: 'info',
-    },
+    // home: {
+    //     name: 'Home',
+    //     path: '/',
+    // },
+    // help: {
+    //     name: 'How To',
+    //     path: '/howto',
+    // },
+    // info: {
+    //     name: 'Useful info',
+    //     path: 'info',
+    // },
 }
 
 // i18n config
 export const messages = {
     en: {
-        hello: 'hello world',
         addCat: 'Add category',
+        download: 'Download result',
+        hello: 'hello world',
+        labelEditCategory: 'Edit description or color',
         resetMarks: 'Reset marks',
         resetWheel: 'Reset wheel changes',
-        download: 'Download result',
-        labelEditCategory: 'Edit description or color',
     },
     ru: {
-        hello: 'Привет!',
         addCat: 'Добавить категорию',
+        download: 'Скачать результат',
+        hello: 'Привет!',
+        labelEditCategory: 'Изменить текст или цвет',
         resetMarks: 'Обнулить оценки',
         resetWheel: 'Сбросить изменения колеса',
-        download: 'Скачать результат',
-        labelEditCategory: 'Изменить текст или цвет',
     },
 }
 
 // Constants
+// export const LANGUAGES = {
+//     'ru': 'Русский',
+//     'en': 'English',
+// }
+
+export const LANGUAGES = [
+    'Русский',
+    'English',
+]
 
 /* Can be used to get set IDs  */
 enum Categories { Health, Finances }
@@ -47,6 +56,7 @@ export interface ICategory {
     id: number
     mark: number
     name: string
+    [key: string]: any
 }
 
 export class Category implements ICategory {

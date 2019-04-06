@@ -5,7 +5,7 @@
             <Main v-if="categories.length > 0" class="main-container">
                 <el-row>
                     <el-col :xs="24" :lg="10">
-                        <Wheel :categories="categories" />
+                        <Wheel :categories="categories" :key="wheelKey" />
                     </el-col>
                     <el-col :xs="24" :lg="14">
                         <Description :categories="categories" />
@@ -22,12 +22,14 @@
 </template>
 
 <script lang="ts">
+    import Vue from 'vue'
+    import { ICategory } from '../configs/app.config'
     import ActionBtn from './ActionBtn.vue'
     import Description from './Description.vue'
     import Main from './Main.vue'
     import Wheel from './Wheel.vue'
-
-    export default {
+    
+    export default Vue.extend({
         components: {
             ActionBtn,
             Description,
@@ -35,16 +37,19 @@
             Wheel,
         },
         computed: {
-            categories() {
+            categories(): ICategory {
                 return this.$store.state.categories
-            }
+            },
+            wheelKey(): void {
+                return this.$store.state.wheelKey
+            },
         },
         name: 'Home',
-    }
+    })
 </script>
 
 <style lang="scss" scoped>
-    .main-container {
-        
+    .home {
+        margin-bottom: 30px;
     }
 </style>

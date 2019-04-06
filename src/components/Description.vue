@@ -24,10 +24,11 @@
 </template>
 
 <script lang="ts">
-import { ICategory } from '../configs/app.config'
-    import Category from './Category'
+    import Vue from 'vue'
+    import { ICategory } from '../configs/app.config'
+    import Category from './Category.vue'
 
-    export default {
+    export default Vue.extend({
         components: {
             Category,
         },
@@ -37,41 +38,37 @@ import { ICategory } from '../configs/app.config'
                 secondCol: [] as ICategory[],
             }
         },
-        props: [ 'categories' ],
         methods: {
             // TODO refactor this
-            filteredItems(column, columns): any {
-                const self  = this;                         // Enables us to pass this to the method
-                const total = this.categories.length;       // How many items
-                const gap   = Math.ceil(total / columns);   // 4  How many per col
-                let   top   = gap * column;                 // 4 , 8  Top of the column
-                const bottom = top - gap;           // 0 , 4  Bottom of the column
-                top -= 1;                                   // 3 , 7 Adjust top back down one
+            filteredItems(column: number, columns: number): any {
+                const self  = this                         // Enables us to pass this to the method
+                const total = this.categories.length       // How many items
+                const gap   = Math.ceil(total / columns)   // 4  How many per col
+                let   top   = gap * column                 // 4 , 8  Top of the column
+                const bottom = top - gap           // 0 , 4  Bottom of the column
+                top -= 1                                   // 3 , 7 Adjust top back down one
 
-
-                const result = self.categories.filter(item => 
-                    self.categories.indexOf(item) >= bottom  
-                    && self.categories.indexOf(item) <= top);
-                
+                const result = self.categories.filter((item: ICategory) =>
+                self.categories.indexOf(item) >= bottom && self.categories.indexOf(item) <= top)
                 // Return the items for the given col
-                return result;
-                
+                return result
             },
 
             // orderData(d){
             //     // todo sort array by order key before splitting
             // },
             // splitData(d: ICategory[]) {
-            //     const pivot = Math.ceil(d.length / 2);
+            //     const pivot = Math.ceil(d.length / 2)
 
             //     while (d.length > pivot) {
-            //         this.firstCol.push(d.shift());
+            //         this.firstCol.push(d.shift())
             //     }
-            //     this.secondCol = d;
+            //     this.secondCol = d
             // },
         },
         name: 'Description',
-    }
+        props: [ 'categories' ],
+    })
 </script>
 
 <style scoped>

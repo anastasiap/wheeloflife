@@ -2,13 +2,13 @@ import Vue from 'vue'
 import MainContainer from './components/MainContainer.vue'
 
 const App = Vue.extend({
-    components: { 
-        MainContainer, 
+    components: {
+        MainContainer,
     },
     computed: {
-        initialLang() {
+        initialLang(): string {
             return this.$i18n.locale
-        }, 
+        },
     },
     created() {
         this.detectBrowserLocale()
@@ -16,12 +16,12 @@ const App = Vue.extend({
     },
     data() {
         return {
-            test: 'ru'
+            test: 'ru',
         }
     },
     methods: {
-        detectBrowserLocale() {
-            // check if coocie from previous session is set
+        detectBrowserLocale(): void {
+            // todo check if coocie from previous session is set
             // if not
             // detect browser settings, set locale and fetch relevant data
 

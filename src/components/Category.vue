@@ -52,19 +52,24 @@
 </template>
 
 <script lang="ts">
-    import { ICategory } from '../configs/app.config'
+    import Vue from 'vue'
     import compact from 'vue-color/src/components/Compact.vue'
+    import { ICategory } from '../configs/app.config'
     import { updateData } from '../services/service'
 
-    export default {
+    interface IRefs {
+        descViewMode: HTMLFormElement
+    }
+
+    export default Vue.extend({
         data() {
             return {
-                isEditMode: false as boolean,
-                isHidden: true as boolean,
-                isColorEditMode: false as boolean,
-                isMarkEditMode: false as boolean,
                 catColor: this.color as string,
                 descInputHeight: {},
+                isColorEditMode: false as boolean,
+                isEditMode: false as boolean,
+                isHidden: true as boolean,
+                isMarkEditMode: false as boolean,
             }
         },
         components: {
@@ -72,44 +77,49 @@
         },
         mounted() {
             if (!this.isEditMode) {
-                const FormHeight = this.$refs.descViewMode.clientHeight;
+                const FormEl = this.$refs.descViewMode as HTMLElement
+                const FormHeight = FormEl.clientHeight
             }
         },
         methods: {
-            updateData: updateData, 
+            updateData,
             toggleMarkInput(): void {
-                this.isMarkEditMode = !this.isMarkEditMode;
+                this.isMarkEditMode = !this.isMarkEditMode
             },
             toggleTools(): void {
                 // todo check if color picker is on and hide it
-                this.isHidden = this.isEditMode ? false : !this.isHidden;
+                this.isHidden = this.isEditMode ? false : !this.isHidden
             },
             toggleView(): boolean {
                 if (this.isColorEditMode) {
-                    this.toggleColorPicker();
+                    this.toggleColorPicker()
                 }
                 // TODO research how to reverse boolean
                 if (this.$refs.descViewMode) {
-                    this.$set(this.descInputHeight, 'height', this.$refs.descViewMode.clientHeight + 10  + 'px')
+                    // todo refactor - dry with mounted
+                    const FormEl = this.$refs.descViewMode as HTMLElement
+                    const FormHeight = FormEl.clientHeight
+
+                    this.$set(this.descInputHeight, 'height', FormHeight + 10  + 'px')
                 }
                 return this.isEditMode = !this.isEditMode
             },
             deleteCategory(id: string): void {
                 if (this.isColorEditMode) {
-                    this.toggleColorPicker();
+                    this.toggleColorPicker()
                 }
-                this.$store.commit('deleteCategory', id);
+                this.$store.commit('deleteCategory', id)
             },
             toggleColorPicker(): boolean {
                 return this.isColorEditMode = !this.isColorEditMode
             },
-            updateColor(value): void {
-                this.catColor = value.hex
-            }
+            updateColor(value: { hex: string }): void {
+                updateData(value.hex, this.id, 'color')
+            },
         },
         name: 'Category',
-        props: ['name', 'description', 'mark', 'id', 'color']
-    }
+        props: ['name', 'description', 'mark', 'id', 'color'],
+    })
 </script>
 
 <style lang="scss" scoped>

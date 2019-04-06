@@ -1,4 +1,11 @@
 import { ICategory } from '@/configs/app.config'
+import { shadeColor } from '../services/helpers'
+
+export interface IWheel {
+    data: IUserData
+    getData(): IUserData
+    getClickedData(e: MouseEvent): void
+}
 
 interface ILabel {
     color: string
@@ -6,32 +13,37 @@ interface ILabel {
     name: string
     radius: number
 }
-
 interface IArc {
     arc: Path2D
-    name: string
+    name: number
     arcType: string
 }
 
 interface IUserData {
-    categoryID: string
+    categoryID: number
     mark: number
 }
 
-export default class Wheel {
-    public data: IUserData
-    private canvas: HTMLElement
-    private ctx: object
+interface ICoords {
+    x: number
+    y: number
+}
+
+export default class Wheel implements IWheel {
+    public data!: IUserData
+    private canvas: HTMLCanvasElement
+    private ctx: CanvasRenderingContext2D
     private categories: ICategory[]
     private markSystem: number
     private centerX: number
     private centerY: number
     private radius: number
-    private arcs = []
+    private arcs: IArc[] = []
 
-    constructor(canvas: HTMLElement, categories: ICategory[], markSystem: number) {
-        this.canvas = canvas
-        this.ctx = canvas.getContext('2d')
+    constructor(canvas: HTMLCanvasElement, categories: ICategory[], markSystem: number) {
+        this.canvas = canvas as HTMLCanvasElement
+        // todo learn wtf is assertion
+        this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
         this.categories = categories
         this.markSystem = markSystem
 
@@ -39,19 +51,19 @@ export default class Wheel {
         this.centerY = canvas.height / 2
         this.radius = canvas.width / 2
 
-        // todo check if setting returning value to default values in constructor is a good idea
-        this.setData({ categoryID: '', mark: 0})
+        // todo check if setting default values in constructor is a good idea
+        this.setData({ categoryID: 0, mark: 0})
         this.drawWheel()
     }
 
     // todo check how setters and getters work here
-    public getData() {
+    public getData(): IUserData {
         return this.data
     }
 
-    public getClickedData(e: MouseEvent) {
+    public getClickedData(e: MouseEvent): void {
         const marksCollection: number[] = []
-        const coords: object = this.getCursorPosition(e)
+        const coords: ICoords = this.getCursorPosition(e)
 
         this.arcs.forEach((a: IArc) => {
             if (this.ctx.isPointInPath(a.arc, coords.x, coords.y)) {
@@ -59,6 +71,9 @@ export default class Wheel {
                     this.data.categoryID = a.name
                 } else {
                     marksCollection.push(+a.name)
+
+                    this.ctx.fillStyle = 'rgba(0,0,0, 0.75)'
+                    this.ctx.fill(a.arc)
                 }
             }
         })
@@ -82,7 +97,7 @@ export default class Wheel {
 
         // font settings for labels
         // todo move this to config as constants
-        const fontSize = Math.floor(this.ctx.height / 33)
+        const fontSize = Math.floor(this.canvas.height / 33)
 
         this.ctx.textAlign = 'center'
         this.ctx.textBaseline = 'middle'
@@ -113,25 +128,25 @@ export default class Wheel {
         this.addLabels(labels)
     }
 
-    private drawTextAlongArc(context, str, centerX, centerY, radius, angle, dx, dy, color) {
-        context.save()
-        context.translate(centerX, centerY)
-        context.rotate(-1 * angle / 2) // rotate context
-        context.rotate(-1 * (angle / str.length) / 2)
+    // private drawTextAlongArc(context, str, centerX, centerY, radius, angle, dx, dy, color) {
+    //     context.save()
+    //     context.translate(centerX, centerY)
+    //     context.rotate(-1 * angle / 2) // rotate context
+    //     context.rotate(-1 * (angle / str.length) / 2)
 
-        for (var n = 0; n < str.length; n++) {
-            context.rotate(angle / str.length)
-            context.save()
-            context.translate(0, -1 * radius)
+    //     for (var n = 0; n < str.length; n++) {
+    //         context.rotate(angle / str.length)
+    //         context.save()
+    //         context.translate(0, -1 * radius)
 
-            var char = str[n]
+    //         var char = str[n]
 
-            context.fillText(char, 0, 0)
-            context.fillStyle = `color`
-            context.restore()
-        }
-        context.restore()
-    }
+    //         context.fillText(char, 0, 0)
+    //         context.fillStyle = `color`
+    //         context.restore()
+    //     }
+    //     context.restore()
+    // }
 
     private drawArc(
         radius: number,
@@ -140,7 +155,6 @@ export default class Wheel {
         id: number,
         color: string,
         arcType: string): void {
-
             const endPoint = startingPoint + arcAngle
 
             // create Path object with to keep track of each arc
@@ -154,18 +168,19 @@ export default class Wheel {
             this.ctx.fill(section)
 
             // save all paths for future manipulations
-            const newArc: IArc = { arc: section, name: id, arcType: arcType } 
+            const newArc: IArc = { arc: section, name: id, arcType }
             this.arcs.push(newArc)
     }
 
     private drawMarks(category: ICategory, startingPoint: number, arcAngle: number, marks: number): void {
         let counter = 0
-        let color = ''
+        const markColor = shadeColor(category.color, -75)
+        // const markColor = ''
         let markRadius = this.radius
         const marksLabels: ILabel[] = []
 
         while (counter < marks) {
-            this.drawArc(markRadius, startingPoint, arcAngle, counter + 1, 'rgba(0,0,0, 0.1)', 'mark')
+            this.drawArc(markRadius, startingPoint, arcAngle, counter + 1, markColor, 'mark')
 
             // save settings for current arc label
             const labelRadius = markRadius - 10
@@ -193,14 +208,22 @@ export default class Wheel {
             const dx = this.centerX + l.radius * Math.cos(labelAngle)
             const dy = this.centerY + l.radius * Math.sin(labelAngle)
 
-             this.ctx.fillText(l.name, dx, dy)
-             this.ctx.fillStyle = l.color
+            this.ctx.fillText(l.name, dx, dy)
+            this.ctx.fillStyle = l.color
 
-            //this.drawTextAlongArc(labelsCtx, labelxy[i]['name'], centerX, centerY, radius, thisCategoryPercentage, dx, dy, labelxy[i]['color'])
+            // this.drawTextAlongArc(
+            //     labelsCtx,
+            //     labelxy[i]['name'],
+            //     centerX,
+            //     centerY,
+            //     radius,
+            //     thisCategoryPercentage,
+            //     dx, dy,
+            //     labelxy[i]['color'])
         })
     }
 
-    private getCursorPosition(event: MouseEvent): object {
+    private getCursorPosition(event: MouseEvent): ICoords {
         const rect = this.canvas.getBoundingClientRect()
         const x = event.clientX - rect.left
         const y = event.clientY - rect.top
@@ -208,12 +231,12 @@ export default class Wheel {
         return {x, y}
     }
 
-    private getMark(marks: number[]) {
+    private getMark(marks: number[]): number {
         return marks.reduce((acc, cur) => Math.max(acc, cur), marks[0])
     }
 
     // todo check how setters and getters work here
-    private setData(selected: IUserData) {
+    private setData(selected: IUserData): void {
         this.data = selected
     }
 }

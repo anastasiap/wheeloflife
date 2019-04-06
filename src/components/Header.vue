@@ -1,44 +1,50 @@
 <template>
     <header>
         <el-row>
-             <el-col :xs="24" :lg="3">
+             <el-col :xs="24" :lg="10">
                 <div class="header-logo">
-                    <img src="../assets/wil-logo.jpg" alt="WiL Logo">
+                    <h1>Wheel of Life: online quick tool </h1>  
                 </div>
             </el-col>
-            <el-col :xs="24" :lg="19">
+            <el-col :xs="24" :lg="12">
                 <slot></slot>
             </el-col>
             <el-col :xs="24" :lg="2">
                 <div class="lang-switch">
-                    <select v-model="locale">
-                        <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
-                    </select>
+                    <el-select v-model="locale">
+                        <el-option
+                        v-for="(lang, i) in langs"
+                        :key="`Lang${i}`"
+                        :label="lang"
+                        :value="lang">
+                        </el-option>
+                    </el-select>
                 </div>
             </el-col>
         </el-row>
-        <p>{{ $t("hello") }}</p>
     </header>
 </template>
 
 <script>
+    import { LANGUAGES } from '../configs/app.config'
+
     export default {
-        data () {
-            return { 
-                // move array to config
-                langs: [ 'ru', 'en' ],
-                locale: this.initialLang
+        data() {
+            return {
+                // todo create object with locales keys
+                langs: LANGUAGES,
+                locale: this.initialLang,
             }
         },
         name: 'Header',
-        props: [ 
-            'initialLang' 
+        props: [
+            'initialLang',
         ],
         watch: {
             locale(val) {
                 this.$i18n.locale = val
-                this.$store.dispatch('getData', this.$i18n.locale)      
-            }
+                this.$store.dispatch('getData', this.$i18n.locale)
+            },
         },
     }
 </script>
