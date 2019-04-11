@@ -62,7 +62,7 @@ export default class Wheel implements IWheel {
     }
 
     public getClickedData(e: MouseEvent): void {
-        const marksCollection: number[] = []
+        const marksCollection: IArc[] = []
         const coords: ICoords = this.getCursorPosition(e)
 
         this.arcs.forEach((a: IArc) => {
@@ -70,15 +70,17 @@ export default class Wheel implements IWheel {
                 if (a.arcType === 'category') {
                     this.data.categoryID = a.name
                 } else {
-                    marksCollection.push(+a.name)
-
-                    this.ctx.fillStyle = 'rgba(0,0,0, 0.75)'
-                    this.ctx.fill(a.arc)
+                    marksCollection.push(a)
                 }
             }
         })
 
-        this.data.mark = this.markSystem - this.getMark(marksCollection) + 1
+        const markArc = marksCollection[0]
+
+        this.data.mark = markArc.name
+        this.ctx.fillStyle = 'rgba(0,0,0, 0.65)'
+        this.ctx.fill(markArc.arc)
+        console.log(this.data.mark)
     }
 
     private drawWheel(): void {
@@ -128,25 +130,25 @@ export default class Wheel implements IWheel {
         this.addLabels(labels)
     }
 
-    // private drawTextAlongArc(context, str, centerX, centerY, radius, angle, dx, dy, color) {
-    //     context.save()
-    //     context.translate(centerX, centerY)
-    //     context.rotate(-1 * angle / 2) // rotate context
-    //     context.rotate(-1 * (angle / str.length) / 2)
+    private drawTextAlongArc(context, str, centerX, centerY, radius, arcAngle, dx, dy, color) {
+        context.save()
+        context.translate(centerX, centerY)
+        context.rotate(-1 * arcAngle / 2) // rotate context
+        context.rotate(-1 * (arcAngle / str.length) / 2)
 
-    //     for (var n = 0; n < str.length; n++) {
-    //         context.rotate(angle / str.length)
-    //         context.save()
-    //         context.translate(0, -1 * radius)
+        for (var n = 0; n < str.length; n++) {
+            context.rotate(arcAngle / str.length)
+            context.save()
+            context.translate(0, -1 * radius)
 
-    //         var char = str[n]
+            var char = str[n]
 
-    //         context.fillText(char, 0, 0)
-    //         context.fillStyle = `color`
-    //         context.restore()
-    //     }
-    //     context.restore()
-    // }
+            context.fillText(char, 0, 0)
+            context.fillStyle = color
+            context.restore()
+        }
+        context.restore()
+    }
 
     private drawArc(
         radius: number,
@@ -174,18 +176,23 @@ export default class Wheel implements IWheel {
 
     private drawMarks(category: ICategory, startingPoint: number, arcAngle: number, marks: number): void {
         let counter = 0
-        const markColor = shadeColor(category.color, -75)
-        // const markColor = ''
-        let markRadius = this.radius
+        const currentMark = category.mark
+        let markRadius = this.radius / marks
         const marksLabels: ILabel[] = []
 
         while (counter < marks) {
+            let markColor = 'transparent'
+
+            if (counter < currentMark) {
+                markColor = shadeColor(category.color, -35)
+            }
+
             this.drawArc(markRadius, startingPoint, arcAngle, counter + 1, markColor, 'mark')
 
             // save settings for current arc label
             const labelRadius = markRadius - 10
             const coordinates = startingPoint + arcAngle / 2 + Math.PI * 2
-            const name = marks - counter
+            const name = counter + 1
 
             marksLabels.push({
                 color: 'black',
@@ -195,7 +202,7 @@ export default class Wheel implements IWheel {
             })
 
             // reduce radius by fraction to draw smaller arcs for marks
-            markRadius -= this.radius / marks
+            markRadius += this.radius / marks
             counter++
         }
 
@@ -232,7 +239,7 @@ export default class Wheel implements IWheel {
     }
 
     private getMark(marks: number[]): number {
-        return marks.reduce((acc, cur) => Math.max(acc, cur), marks[0])
+        return marks.reduce((acc, cur) => Math.min(acc, cur), marks[0])
     }
 
     // todo check how setters and getters work here

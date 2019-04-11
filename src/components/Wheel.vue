@@ -21,7 +21,10 @@
             setWheel(): void {
                 // todo get and set marks
                 const markSystem = 10
-                this.wil = new Wheel(document.getElementById('wheel') as HTMLCanvasElement, this.categories, markSystem)
+                this.wil = new Wheel(
+                    document.getElementById('wheel') as HTMLCanvasElement, 
+                    this.categories, 
+                    markSystem)
             },
             setData(e: MouseEvent): void {
                 this.wil.getClickedData(e)

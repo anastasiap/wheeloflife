@@ -91,9 +91,9 @@
                 this.isHidden = this.isEditMode ? false : !this.isHidden
             },
             toggleView(): boolean {
-                if (this.isColorEditMode) {
-                    this.toggleColorPicker()
-                }
+                // if (this.isColorEditMode) {
+                //     this.toggleColorPicker()
+                // }
                 // TODO research how to reverse boolean
                 if (this.$refs.descViewMode) {
                     // todo refactor - dry with mounted
@@ -115,6 +115,7 @@
             },
             updateColor(value: { hex: string }): void {
                 updateData(value.hex, this.id, 'color')
+                this.isColorEditMode = false
             },
         },
         name: 'Category',
