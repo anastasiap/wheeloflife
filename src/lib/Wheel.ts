@@ -8,10 +8,12 @@ export interface IWheel {
 }
 
 interface ILabel {
+    angle?: number
     color: string
     coord: number
     name: string
     radius: number
+    startingPoint?: number
 }
 interface IArc {
     arc: Path2D
@@ -49,7 +51,7 @@ export default class Wheel implements IWheel {
 
         this.centerX = canvas.width / 2
         this.centerY = canvas.height / 2
-        this.radius = canvas.width / 2
+        this.radius = (canvas.width - 50) / 2
 
         // todo check if setting default values in constructor is a good idea
         this.setData({ categoryID: 0, mark: 0})
@@ -80,7 +82,6 @@ export default class Wheel implements IWheel {
         this.data.mark = markArc.name
         this.ctx.fillStyle = 'rgba(0,0,0, 0.65)'
         this.ctx.fill(markArc.arc)
-        console.log(this.data.mark)
     }
 
     private drawWheel(): void {
@@ -105,22 +106,26 @@ export default class Wheel implements IWheel {
         this.ctx.textBaseline = 'middle'
         this.ctx.font = `${fontSize} * 3 px Didact Gothic`
 
-        // iterate through given categories to draw arcs
+        // iterate through categories to draw arcs
         this.categories.forEach((category) => {
             const arcAngle = arcLength / total * 2 * Math.PI
 
             this.drawArc(this.radius, startingPoint, arcAngle, category.id, category.color, 'category')
             this.drawMarks(category, startingPoint, arcAngle, this.markSystem)
 
-            // save settings for current arc label
+            // save settings for current arc label if placed inside the wheel
             const coordinates = startingPoint + arcAngle / 2 + Math.PI * 2
             const labelRadius = this.radius * 3 / 4
 
+            console.log(category.name, {startingPoint})
+
             labels.push({
+                angle: arcAngle,
                 color: category.color,
                 coord: coordinates,
                 name: category.name,
                 radius: labelRadius,
+                startingPoint: startingPoint,
             })
 
              // move starting point to the end of current arc
@@ -128,26 +133,6 @@ export default class Wheel implements IWheel {
         })
 
         this.addLabels(labels)
-    }
-
-    private drawTextAlongArc(context, str, centerX, centerY, radius, arcAngle, dx, dy, color) {
-        context.save()
-        context.translate(centerX, centerY)
-        context.rotate(-1 * arcAngle / 2) // rotate context
-        context.rotate(-1 * (arcAngle / str.length) / 2)
-
-        for (var n = 0; n < str.length; n++) {
-            context.rotate(arcAngle / str.length)
-            context.save()
-            context.translate(0, -1 * radius)
-
-            var char = str[n]
-
-            context.fillText(char, 0, 0)
-            context.fillStyle = color
-            context.restore()
-        }
-        context.restore()
     }
 
     private drawArc(
@@ -215,19 +200,48 @@ export default class Wheel implements IWheel {
             const dx = this.centerX + l.radius * Math.cos(labelAngle)
             const dy = this.centerY + l.radius * Math.sin(labelAngle)
 
-            this.ctx.fillText(l.name, dx, dy)
-            this.ctx.fillStyle = l.color
-
-            // this.drawTextAlongArc(
-            //     labelsCtx,
-            //     labelxy[i]['name'],
-            //     centerX,
-            //     centerY,
-            //     radius,
-            //     thisCategoryPercentage,
-            //     dx, dy,
-            //     labelxy[i]['color'])
+            if (l.angle !== undefined && l.startingPoint !== undefined) {
+                this.drawTextAlongArc(l.name, l.color, l.angle, l.startingPoint)
+            } else {
+                this.ctx.fillText(l.name, dx, dy)
+                this.ctx.fillStyle = l.color
+            }
         })
+    }
+
+    private drawTextAlongArc(label: string, color: string, arcAngle: number, startingPoint: number) {
+        this.ctx.save()
+        this.ctx.translate(this.centerX, this.centerY)
+        console.log(label, {startingPoint})
+
+        this.ctx.rotate(startingPoint)
+
+        const labeCentering = (arcAngle) / 2  + (label.length * 0.04 / 2)
+
+        // rotate context in counterclock direction by half length (center) of angle
+        this.ctx.rotate(-1 * labeCentering)
+        // rotate context in counterclock direction by half length of a letter (center)
+        // this.ctx.rotate(-1 * (arcAngle / label.length) / 2)
+
+        for (const n of label) {
+            const charLength = arcAngle / label.length
+
+            // rotate context in clockwise direction by letter size
+            // todo replace with constant
+            this.ctx.rotate(0.04)
+            this.ctx.save()
+            // move context to x = 0, y = -204
+            this.ctx.translate(0, -1 * this.radius)
+
+            const char = n
+            // write a letter at 0.0
+            this.ctx.font = 'bold 25px Amatic SC'
+            this.ctx.textBaseline = 'bottom'
+            this.ctx.fillStyle = color
+            this.ctx.fillText(char, 0, 0)
+            this.ctx.restore()
+        }
+        this.ctx.restore()
     }
 
     private getCursorPosition(event: MouseEvent): ICoords {

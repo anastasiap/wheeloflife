@@ -38,7 +38,7 @@
             resetWheel() {
                 this.$store.dispatch('getData', this.$i18n.locale)
             },
-            // download() {},
+            download() {},
         },
         name: 'ActionBtn',
         props: [

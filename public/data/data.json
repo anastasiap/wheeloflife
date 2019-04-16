@@ -1,55 +1,55 @@
 {
 	"ru": [{
-		"color": "#fff0f2",
+		"color": "red",
 		"description": "Самочувствие, внешний вид, подвижность, настроение, прогулки, бодрость, питание, режим, спорт, сон",
 		"id": 0,
 		"mark": 0,
 		"name": "Здоровье",
 		"order": 1
 	}, {
-		"color": "#ddffdd",
+		"color": "green",
 		"description": "Общение, дружба, любовь, семья",
 		"id": 1,
 		"mark": 0,
 		"name": "Отношения",
 		"order": 2
 	}, {
-		"color": "#dfddff",
+		"color": "orange",
 		"description": "Родные, коллеги, друзья, соседи, оппоненты",
 		"id": 2,
 		"mark": 0,
 		"name": "Окружение",
 		"order": 3
 	}, {
-		"color": "#ddfeff",
+		"color": "blue",
 		"description": "Работа, карьера, бизнес, профессия, занятость, социальный статус",
 		"id": 3,
 		"mark": 0,
 		"name": "Призвание",
 		"order": 4
 	}, {
-		"color": "#ffffdd",
+		"color": "grey",
 		"description": "Доходы, расходы, условия жизни",
 		"id": 4,
 		"mark": 0,
 		"name": "Обеспеченность",
 		"order": 5
 	}, {
-		"color": "#e4ffdd",
+		"color": "violet",
 		"description": "Обучение, работа над собой, личностный рост",
 		"id": 5,
 		"mark": 0,
 		"name": "Самосовершенствование",
 		"order": 6
 	}, {
-		"color": "#ffddfd",
+		"color": "purple",
 		"description": "Развлечения, отдых, хобби, путешествия, впечатления",
 		"id": 6,
 		"mark": 5,
 		"name": "Яркость жизни",
 		"order": 7
 	}, {
-		"color": "#ffecdd",
+		"color": "lightgreen",
 		"description": "Вера, творчество, искусство",
 		"id": 7,
 		"mark": 3,
@@ -57,56 +57,56 @@
 		"order": 8
 	}],
 	"en": [{
-		"color": "#f3ddff",
+		"color": "red",
 		"description": "Самочувствие, внешний вид, подвижность, настроение, прогулки, бодрость, питание, режим, спорт, сон",
 		"id": 0,
 		"mark": 0,
 		"name": "Health",
 		"order": 1
 	}, {
-		"color": "#ffdde4",
+		"color": "green",
 		"description": "Общение, дружба, любовь, семья",
 		"id": 1,
 		"mark": 0,
 		"name": "Relationships",
 		"order": 2
 	}, {
-		"color": "#ffddfe",
+		"color": "orange",
 		"description": "Родные, коллеги, друзья, соседи, оппоненты",
 		"id": 2,
 		"mark": 0,
 		"name": "Social",
 		"order": 3
 	}, {
-		"color": "#dde0ff",
+		"color": "blue",
 		"description": "Работа, карьера, бизнес, профессия, занятость, социальный статус",
 		"id": 3,
 		"mark": 0,
 		"name": "Job",
 		"order": 4
 	}, {
-		"color": "#ddfbff",
+		"color": "yellow",
 		"description": "Доходы, расходы, условия жизни",
 		"id": 4,
 		"mark": 0,
 		"name": "Finance",
 		"order": 5
 	}, {
-		"color": "#ddffde",
+		"color": "violet",
 		"description": "Обучение, работа над собой, личностный рост",
 		"id": 5,
 		"mark": 0,
 		"name": "Education",
 		"order": 6
 	}, {
-		"color": "#fcffdd",
+		"color": "grey",
 		"description": "Развлечения, отдых, хобби, путешествия, впечатления",
 		"id": 6,
 		"mark": 5,
 		"name": "Life quality",
 		"order": 7
 	}, {
-		"color": "#ffecdd",
+		"color": "purple",
 		"description": "Вера, творчество, искусство",
 		"id": 7,
 		"mark": 3,
