@@ -1,11 +1,11 @@
 <template>
-    <div class="home">
+    <div class="home container">
         <el-main>
             <!-- TODO try to fix it with watcher in child (wheel) -->
-            <Main v-if="categories.length > 0" class="main-container">
-                <el-row>
+            <Main v-if="categories.length > 0" class="main-container" :key="wheelKey">
+                <el-row align="middle">
                     <el-col :xs="24" :lg="10">
-                        <Wheel :categories="categories" :key="wheelKey" />
+                        <Wheel :categories="categories" />
                     </el-col>
                     <el-col :xs="24" :lg="14">
                         <Description :categories="categories" />
@@ -13,7 +13,7 @@
                 </el-row>
                 <el-row>
                     <el-col :span="24">
-                        <ActionBtn type="add" label="hello" icon='plus' />
+                        <ActionBtn />
                     </el-col>
                 </el-row>
             </Main>
@@ -49,7 +49,18 @@
 </script>
 
 <style lang="scss" scoped>
+    .container {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
     .home {
         margin-bottom: 30px;
+    }
+
+    .is-align-middle {
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
     }
 </style>

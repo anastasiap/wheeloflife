@@ -32,7 +32,16 @@ const store: StoreOptions<RootState> = {
          * Load default categories
          */
         loadDefaultCategories(state, payload) {
-            state.categories = payload
+            state.categories = payload.map((category: ICategory) => {
+                return new Category(
+                    category.order,
+                    category.id,
+                    category.color,
+                    category.description,
+                    category.mark,
+                    category.name)
+            })
+
             // re-draw the wheel
             state.wheelKey += 1
         },

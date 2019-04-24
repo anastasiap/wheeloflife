@@ -30,7 +30,7 @@ export const messages = {
         hello: 'Привет!',
         labelEditCategory: 'Изменить текст или цвет',
         resetMarks: 'Обнулить оценки',
-        resetWheel: 'Сбросить изменения колеса',
+        resetWheel: 'Сбросить все изменения',
     },
 }
 
@@ -41,8 +41,8 @@ export const messages = {
 // }
 
 export const LANGUAGES = [
-    'Русский',
-    'English',
+    'en',
+    'ru',
 ]
 
 /* Can be used to get set IDs  */
@@ -67,12 +67,18 @@ export class Category implements ICategory {
     public mark: number
     public name: string
 
-    constructor(order: number, id: number) {
-        this.color = 'gray'
-        this.description = 'Describe what this category mean to you'
+    constructor(order: number,
+                id: number,
+                color = 'gray',
+                description = 'Describe what this category means to you',
+                mark = 0,
+                name = 'Title'
+                ) {
+        this.color = color
+        this.description = description
         this.order = order
         this.id = id
-        this.mark = 0
-        this.name = 'Title'
+        this.mark = mark
+        this.name = name
     }
 }

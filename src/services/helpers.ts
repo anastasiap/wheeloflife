@@ -18,3 +18,12 @@ export function shadeColor(color: string, percent: number) {
 
     return '#' + RR + GG + BB
 }
+
+export function mapLangKeys(key: string): string {
+    const LANGUAGES = {
+        en: 'English',
+        ru: 'Русский',
+    }
+
+    return LANGUAGES[key]
+}

@@ -14,11 +14,6 @@ const App = Vue.extend({
         this.detectBrowserLocale()
         this.$store.dispatch('getData', this.$i18n.locale)
     },
-    data() {
-        return {
-            test: 'ru',
-        }
-    },
     methods: {
         detectBrowserLocale(): void {
             // todo check if coocie from previous session is set

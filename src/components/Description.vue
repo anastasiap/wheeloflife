@@ -6,7 +6,6 @@
                     :name="category.name" 
                     :description="category.description" 
                     :mark="category.mark" 
-                    :id="category.id" 
                     :color="category.color" />
             </div>
         </el-col>
@@ -16,7 +15,6 @@
                     :name="category.name" 
                     :description="category.description" 
                     :mark="category.mark" 
-                    :id="category.id" 
                     :color="category.color" />
             </div>
         </el-col>
@@ -40,31 +38,17 @@
         },
         methods: {
             // TODO refactor this
-            filteredItems(column: number, columns: number): any {
-                const self  = this                         // Enables us to pass this to the method
-                const total = this.categories.length       // How many items
+            filteredItems(column: number, columns: number): ICategory[] {
+                const categoriesList = this.categories
+                const total = categoriesList.length       // How many items
                 const gap   = Math.ceil(total / columns)   // 4  How many per col
                 let   top   = gap * column                 // 4 , 8  Top of the column
-                const bottom = top - gap           // 0 , 4  Bottom of the column
-                top -= 1                                   // 3 , 7 Adjust top back down one
+                const bottom = top - gap                   // 0 , 4  Bottom of the column
+                top -= 1                                   // 3 , 7  Adjust top back down one
 
-                const result = self.categories.filter((item: ICategory) =>
-                self.categories.indexOf(item) >= bottom && self.categories.indexOf(item) <= top)
-                // Return the items for the given col
-                return result
+                return categoriesList.filter((item: ICategory) => 
+                    categoriesList.indexOf(item) >= bottom && categoriesList.indexOf(item) <= top)
             },
-
-            // orderData(d){
-            //     // todo sort array by order key before splitting
-            // },
-            // splitData(d: ICategory[]) {
-            //     const pivot = Math.ceil(d.length / 2)
-
-            //     while (d.length > pivot) {
-            //         this.firstCol.push(d.shift())
-            //     }
-            //     this.secondCol = d
-            // },
         },
         name: 'Description',
         props: [ 'categories' ],

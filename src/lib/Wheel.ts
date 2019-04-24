@@ -117,8 +117,6 @@ export default class Wheel implements IWheel {
             const coordinates = startingPoint + arcAngle / 2 + Math.PI * 2
             const labelRadius = this.radius * 3 / 4
 
-            console.log(category.name, {startingPoint})
-
             labels.push({
                 angle: arcAngle,
                 color: category.color,
@@ -169,7 +167,7 @@ export default class Wheel implements IWheel {
             let markColor = 'transparent'
 
             if (counter < currentMark) {
-                markColor = shadeColor(category.color, -35)
+                markColor = shadeColor(category.color, -65)
             }
 
             this.drawArc(markRadius, startingPoint, arcAngle, counter + 1, markColor, 'mark')
@@ -212,8 +210,6 @@ export default class Wheel implements IWheel {
     private drawTextAlongArc(label: string, color: string, arcAngle: number, startingPoint: number) {
         this.ctx.save()
         this.ctx.translate(this.centerX, this.centerY)
-        console.log(label, {startingPoint})
-
         this.ctx.rotate(startingPoint)
 
         const labeCentering = (arcAngle) / 2  + (label.length * 0.04 / 2)
@@ -221,7 +217,7 @@ export default class Wheel implements IWheel {
         // rotate context in counterclock direction by half length (center) of angle
         this.ctx.rotate(-1 * labeCentering)
         // rotate context in counterclock direction by half length of a letter (center)
-        // this.ctx.rotate(-1 * (arcAngle / label.length) / 2)
+        this.ctx.rotate(-1 * (arcAngle / label.length) / 2)
 
         for (const n of label) {
             const charLength = arcAngle / label.length

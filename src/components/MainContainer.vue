@@ -1,5 +1,4 @@
 <template>
-    <div id="main-wrapper">
         <el-container>
             <el-header>
                 <Header :initialLang=initialLang>
@@ -11,7 +10,6 @@
                 <Footer />
             </el-footer>
         </el-container>
-    </div>
 </template>
 
 <script>
@@ -35,10 +33,20 @@
 <style lang="scss">
     body {
         font-family: 'Didact Gothic', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        border-bottom: 1px solid #f1f1f1; 
     }
 
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Amatic SC', italic;
+    }
 
+    .el-header {
+        margin: 0;
+        padding: 0;
     }
 </style>

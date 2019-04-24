@@ -1,6 +1,6 @@
 <template>
     <div class="wheel-container" id="canvas-wrapper">
-        <canvas id="wheel" width="408" height="408" @mousedown="setData"></canvas>        
+        <canvas id="wheel" width="448" height="448" @mousedown="setData"></canvas>        
     </div>
 </template>
 
