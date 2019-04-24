@@ -4,7 +4,8 @@
             <div v-for="(category, index) in filteredItems(1, 2)" :key="index">
                 <Category 
                     :name="category.name" 
-                    :description="category.description" 
+                    :description="category.description"
+                    :id="category.id" 
                     :mark="category.mark" 
                     :color="category.color" />
             </div>
@@ -14,7 +15,8 @@
                 <Category 
                     :name="category.name" 
                     :description="category.description" 
-                    :mark="category.mark" 
+                    :mark="category.mark"
+                    :id="category.id" 
                     :color="category.color" />
             </div>
         </el-col>

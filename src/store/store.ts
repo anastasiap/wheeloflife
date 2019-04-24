@@ -24,9 +24,15 @@ const store: StoreOptions<RootState> = {
          * Delete category
          */
         deleteCategory: (state, id) => {
-            state.categories.splice(id, 1)
+            state.categories.forEach((c, idx) => {
+                if (c.id === id)  {
+                    state.categories.splice(idx, 1)
+                }
+            })
+
             // re-draw the wheel
             state.wheelKey += 1
+            state.descriptionKey += 1
         },
         /*
          * Load default categories
@@ -68,6 +74,7 @@ const store: StoreOptions<RootState> = {
             state.categories.push(new Category(order, id))
             // re-draw the wheel
             state.wheelKey += 1
+            state.descriptionKey += 1
         },
         /*
          * Set all marks to zero
@@ -77,15 +84,10 @@ const store: StoreOptions<RootState> = {
             // re-draw the wheel
             state.wheelKey += 1
         },
-        /*
-         * Re-draw the wheel
-         */
-        redraWheel(state) {
-            state.wheelKey += 1
-        },
     },
     state: {
         categories: [] as ICategory[],
+        descriptionKey: 0 as number,
         wheelKey: 0 as number,
     },
 }

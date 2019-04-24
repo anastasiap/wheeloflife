@@ -107,8 +107,8 @@
                 // this.toggleTools();
                 return this.isEditMode = !this.isEditMode
             },
-            deleteCategory(id: string): void {
-                this.$store.commit('deleteCategory', id)
+            deleteCategory(): void {
+                this.$store.commit('deleteCategory', this.id)
             },
             toggleColorPicker(): boolean {
                 return this.isColorEditMode = !this.isColorEditMode

@@ -32,6 +32,8 @@ interface ICoords {
 }
 
 export default class Wheel implements IWheel {
+    // todo why the hell is static at the top? what is static method?
+
     public data!: IUserData
     private canvas: HTMLCanvasElement
     private ctx: CanvasRenderingContext2D
@@ -46,12 +48,12 @@ export default class Wheel implements IWheel {
         this.canvas = canvas as HTMLCanvasElement
         // todo learn wtf is assertion
         this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-        this.categories = categories
-        this.markSystem = markSystem
-
         this.centerX = canvas.width / 2
         this.centerY = canvas.height / 2
         this.radius = (canvas.width - 50) / 2
+
+        this.categories = categories
+        this.markSystem = markSystem
 
         // todo check if setting default values in constructor is a good idea
         this.setData({ categoryID: 0, mark: 0})
@@ -80,8 +82,7 @@ export default class Wheel implements IWheel {
         const markArc = marksCollection[0]
 
         this.data.mark = markArc.name
-        this.ctx.fillStyle = 'rgba(0,0,0, 0.65)'
-        this.ctx.fill(markArc.arc)
+        this.fillArc('rgba(0,0,0, 0.65)', markArc.arc)
     }
 
     private drawWheel(): void {
@@ -140,6 +141,7 @@ export default class Wheel implements IWheel {
         id: number,
         color: string,
         arcType: string): void {
+            console.log('drawArc startingPoint', startingPoint)
             const endPoint = startingPoint + arcAngle
 
             // create Path object with to keep track of each arc
@@ -149,8 +151,8 @@ export default class Wheel implements IWheel {
             section.arc(this.centerX, this.centerY, radius, startingPoint, endPoint)
             section.lineTo(this.centerX, this.centerY)
 
-            this.ctx.fillStyle = color
-            this.ctx.fill(section)
+            // TODO move to a function eg fillArc()
+            this.fillArc(color, section)
 
             // save all paths for future manipulations
             const newArc: IArc = { arc: section, name: id, arcType }
@@ -204,39 +206,45 @@ export default class Wheel implements IWheel {
                 this.ctx.fillText(l.name, dx, dy)
                 this.ctx.fillStyle = l.color
             }
+
+            this.ctx.fillText(l.name, dx, dy)
+            this.ctx.fillStyle = l.color
         })
     }
 
     private drawTextAlongArc(label: string, color: string, arcAngle: number, startingPoint: number) {
-        this.ctx.save()
-        this.ctx.translate(this.centerX, this.centerY)
-        this.ctx.rotate(startingPoint)
-
+        // todo replace with constant
         const labeCentering = (arcAngle) / 2  + (label.length * 0.04 / 2)
+
+        this.ctx.save()
+
+        this.ctx.translate(this.centerX, this.centerY)
+        // hack. aligns labels with arcs
+        this.ctx.rotate(startingPoint + Math.PI / 2 + arcAngle)
 
         // rotate context in counterclock direction by half length (center) of angle
         this.ctx.rotate(-1 * labeCentering)
         // rotate context in counterclock direction by half length of a letter (center)
-        this.ctx.rotate(-1 * (arcAngle / label.length) / 2)
+        // this.ctx.rotate(-1 * (arcAngle / label.length) / 2)
 
         for (const n of label) {
-            const charLength = arcAngle / label.length
-
             // rotate context in clockwise direction by letter size
+            // can be done by actual letter size - const charLength = arcAngle / label.length
             // todo replace with constant
             this.ctx.rotate(0.04)
-            this.ctx.save()
-            // move context to x = 0, y = -204
-            this.ctx.translate(0, -1 * this.radius)
 
-            const char = n
-            // write a letter at 0.0
+            this.ctx.save()
+
+            // move context to x = 0, y = -224
+            this.ctx.translate(0, -1 * this.radius)
             this.ctx.font = 'bold 25px Amatic SC'
             this.ctx.textBaseline = 'bottom'
             this.ctx.fillStyle = color
-            this.ctx.fillText(char, 0, 0)
+            this.ctx.fillText(n, 0, 0)
+
             this.ctx.restore()
         }
+
         this.ctx.restore()
     }
 
@@ -255,5 +263,10 @@ export default class Wheel implements IWheel {
     // todo check how setters and getters work here
     private setData(selected: IUserData): void {
         this.data = selected
+    }
+
+    private fillArc(color: string, target: Path2D): void {
+        this.ctx.fillStyle = color
+        this.ctx.fill(target)
     }
 }
