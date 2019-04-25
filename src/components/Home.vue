@@ -57,13 +57,10 @@
         margin: 0 auto;
     }
 
-    .home {
-        margin-bottom: 30px;
-    }
-
     .is-align-middle {
         display: flex;
         align-items: center;
-        margin-bottom: 50px;
+        margin-bottom: 80px;
+        margin-top: 30px;
     }
 </style>

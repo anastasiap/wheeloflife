@@ -49,4 +49,8 @@
         margin: 0;
         padding: 0;
     }
+
+    .el-footer {
+        background-color: #f3f3f3;
+    }
 </style>

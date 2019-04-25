@@ -34,7 +34,7 @@
             },
         },
         mounted() {
-            this.setWheel()
+            setTimeout(this.setWheel(), 10000)
         },
         name: 'Wheel',
         props: [ 'categories' ],
@@ -45,8 +45,8 @@
   .wheel-container {
     position: relative;
     margin: 20px auto;
-    width: 410px;
-    height: 410px;
+    width: 448px;
+    height: 448px;
     text-align: center;
   }
 
