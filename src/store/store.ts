@@ -50,6 +50,7 @@ const store: StoreOptions<RootState> = {
 
             // re-draw the wheel
             state.wheelKey += 1
+            state.descriptionKey += 1
         },
         /*
          * Update entry

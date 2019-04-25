@@ -1,23 +1,21 @@
 <template>
     <div class="home container">
-        <el-main>
-            <!-- TODO try to fix it with watcher in child (wheel) -->
-            <Main v-if="categories.length > 0" class="main-container" >
-                <el-row align="middle">
-                    <el-col :xs="24" :lg="10">
-                        <Wheel :categories="categories" :key="wheelKey" />
-                    </el-col>
-                    <el-col :xs="24" :lg="14">
-                        <Description :categories="categories" :key="descriptionKey" />
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="24">
-                        <ActionBtn />
-                    </el-col>
-                </el-row>
-            </Main>
+         <!-- TODO try to fix it with watcher in child (wheel) -->
+        <el-main v-if="categories.length > 0" id="main-container">
+            <el-row align="middle">
+                <el-col :xs="24" :lg="10">
+                    <Wheel :categories="categories" :key="wheelKey" />
+                </el-col>
+                <el-col :xs="24" :lg="14">
+                    <Description :categories="categories" :key="descriptionKey" />
+                </el-col>
+            </el-row>
         </el-main>
+        <el-row>
+            <el-col :span="24">
+                <ActionBtn />
+            </el-col>
+        </el-row>
     </div>
 </template>
 
