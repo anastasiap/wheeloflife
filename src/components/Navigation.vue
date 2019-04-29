@@ -18,8 +18,6 @@
         },
         methods: {
             handleSelect(key: string, keyPath: string) {
-                // console.log('handlesubmit key', key)
-                // console.log('handlesubmit keyPath', keyPath)
                 // this.$router.push(keyPath)
                 // this.activeIndex = key
             },

@@ -6,7 +6,7 @@
                 <LeftSidebar />
             </el-aside>
             <el-main>
-                <Main />
+                
             </el-main>
             <el-aside width="200px">
                 <RightSidebar />
@@ -17,13 +17,11 @@
 
 <script>
     import LeftSidebar from './LeftSidebar.vue'
-    import Main from './Main.vue'
     import RightSidebar from './RightSidebar.vue'
 
     export default {
         components: {
             LeftSidebar,
-            Main,
             RightSidebar,
         },
         name: 'Howto',

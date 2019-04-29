@@ -1,6 +1,7 @@
 <template>
     <el-row :gutter="40">
-        <el-col :xs="24" :lg="12">
+        <!-- TODO refactor as loop for 2 columns where 2 is constant in config -->
+        <el-col :xs="24" :sm="24" :md="24" :lg="12">
             <div v-for="(category, index) in filteredItems(1, 2)" :key="index">
                 <Category 
                     :name="category.name" 
@@ -10,7 +11,7 @@
                     :color="category.color" />
             </div>
         </el-col>
-        <el-col :xs="24" :lg="12">
+        <el-col :xs="24" :sm="24" :md="24" :lg="12">
             <div v-for="(category, index) in filteredItems(2, 2)" :key="index">
                 <Category 
                     :name="category.name" 
@@ -25,7 +26,7 @@
 
 <script lang="ts">
     import Vue from 'vue'
-    import { ICategory } from '../configs/app.config'
+    import { ICategory } from '../../configs/app.config'
     import Category from './Category.vue'
 
     export default Vue.extend({
@@ -42,13 +43,13 @@
             // TODO refactor this
             filteredItems(column: number, columns: number): ICategory[] {
                 const categoriesList = this.categories
-                const total = categoriesList.length       // How many items
+                const total = categoriesList.length        // How many items
                 const gap   = Math.ceil(total / columns)   // 4  How many per col
                 let   top   = gap * column                 // 4 , 8  Top of the column
                 const bottom = top - gap                   // 0 , 4  Bottom of the column
                 top -= 1                                   // 3 , 7  Adjust top back down one
 
-                return categoriesList.filter((item: ICategory) => 
+                return categoriesList.filter((item: ICategory) =>
                     categoriesList.indexOf(item) >= bottom && categoriesList.indexOf(item) <= top)
             },
         },
@@ -57,8 +58,15 @@
     })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .el-col:last-child {
         margin-left: -30px;
+    }
+
+    
+    @media (max-width: 1200px) { 
+        .el-col:last-child {
+            margin-left: 0;
+        }
     }
 </style>

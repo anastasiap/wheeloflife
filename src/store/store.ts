@@ -15,6 +15,7 @@ const store: StoreOptions<RootState> = {
                 return data[lang]
             })
         },
+        // TODO check if needed, might be replaced by getData
         setInitialCategories(context, data) {
             context.commit('loadDefaultCategories', data)
         },
@@ -49,8 +50,8 @@ const store: StoreOptions<RootState> = {
             })
 
             // re-draw the wheel
-            state.wheelKey += 1
-            state.descriptionKey += 1
+            state.wheelKey = 0
+            state.descriptionKey = 0
         },
         /*
          * Update entry
@@ -85,10 +86,36 @@ const store: StoreOptions<RootState> = {
             // re-draw the wheel
             state.wheelKey += 1
         },
+        /*
+         * Redraw the wheel
+         */
+        updateWheelKey(state) {
+            state.wheelKey += 1
+        },
+        /*
+         * Redraw the wheel
+         */
+        updateDescriptionKey(state) {
+            state.descriptionKey += 1
+        },
+        /*
+         * Set current language
+         */
+        setLang(state, lang) {
+            state.lang = lang
+        },
+        /*
+         * Update home page
+         */
+        updateHome(state) {
+            state.homeWheel += 1
+        },
     },
     state: {
         categories: [] as ICategory[],
         descriptionKey: 0 as number,
+        homeWheel: 0 as number,
+        lang: '' as string,
         wheelKey: 0 as number,
     },
 }

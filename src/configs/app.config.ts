@@ -1,3 +1,6 @@
+// Mark system
+export const MARK_SYSTEM = 10
+
 // Routes config
 export const routes: {[key: string]: {[key: string]: string}} = {
     // home: {
@@ -34,16 +37,15 @@ export const messages = {
     },
 }
 
-// Constants
-// export const LANGUAGES = {
-//     'ru': 'Русский',
-//     'en': 'English',
-// }
-
 export const LANGUAGES = [
     'en',
     'ru',
 ]
+
+export const LANG_MAP = {
+    en: 'English',
+    ru: 'Русский',
+}
 
 /* Can be used to get set IDs  */
 enum Categories { Health, Finances }
@@ -72,8 +74,7 @@ export class Category implements ICategory {
                 color = 'gray',
                 description = 'Describe what this category means to you',
                 mark = 0,
-                name = 'Title'
-                ) {
+                name = 'Title') {
         this.color = color
         this.description = description
         this.order = order

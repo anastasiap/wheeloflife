@@ -1,14 +1,14 @@
 <template>
     <el-row>
-        <el-col :xs="24" :lg="10">
-            <div class="c-header-logo">
-                <h1>Wheel of Life: online quick tool </h1>  
+        <el-col :xs="12" :sm="10" :md="10" :lg="10">
+            <div class="c-header-title">
+                <h1>Wheel of Life<span class="c-header-title__subtitle">: online quick tool</span> </h1>  
             </div>
         </el-col>
-        <el-col :xs="24" :lg="12">
+        <el-col :xs="1" :sm="8" :md="10" :lg="12">
             <slot></slot>
         </el-col>
-        <el-col :xs="24" :lg="2">
+        <el-col :xs="11" :sm="8" :md="4" :lg="2">
             <div class="c-language-switcher">
                 <el-select v-model="locale">
                     <el-option
@@ -24,21 +24,20 @@
 </template>
 
 <script>
-    import { LANGUAGES } from '../configs/app.config'
+    import { LANG_MAP, LANGUAGES } from '../configs/app.config'
     import { mapLangKeys } from '../services/helpers'
 
     export default {
+        computed: {
+            wheelKey() {
+                return this.$store.state.wheelKey
+            },
+        },
         data() {
             return {
-                // todo create object with locales keys
-                // todo refactor all languages objects
                 langs: LANGUAGES,
                 locale: this.initialLang,
-                langMap: {
-                    'ru': 'Русский',
-                    'en': 'English',
-                }
-
+                langMap: LANG_MAP,
             }
         },
         name: 'Header',
@@ -49,13 +48,19 @@
             locale(val) {
                 this.$i18n.locale = val
                 this.$store.dispatch('getData', this.$i18n.locale)
+                this.$store.commit('setLang', this.$i18n.locale)
+                // todo set cokies in other way
+                document.cookie = `wil_lang=${this.$i18n.locale}`
+                this.$store.commit('updateHome')
+                this.$store.commit('updateWheelKey')
+                this.$store.commit('updateDescriptionKey')
             },
         },
     }
 </script>
 
 <style lang="scss">
-    .c-header-logo {
+    .c-header-title {
         h1 {
             font-size: 2.2em;
             margin: 0;
@@ -66,9 +71,31 @@
 
     .c-language-switcher {
         padding: 10px 5px;
+        max-width: 100px;
+        float: right;
 
         .el-select .el-input--suffix .el-input__inner {
             border: 0;
+        }
+    }
+
+    @media (max-width: 1024px) { 
+        .c-header-title {
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    }
+
+    @media (max-width: 560px) { 
+        .c-header-title {
+            h1 {
+                font-size: 1.6em;
+            }
+
+            &__subtitle {
+                display: none;
+            }
         }
     }
     

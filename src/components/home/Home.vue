@@ -1,12 +1,11 @@
 <template>
-    <div class="home container">
-         <!-- TODO try to fix it with watcher in child (wheel) -->
+    <div class="home container animated fadeIn delay-1s" :key="homeWheel">
         <el-main v-if="categories.length > 0" id="main-container">
             <el-row align="middle">
-                <el-col :xs="24" :lg="10">
+                <el-col :xs="24" :sm="24" :md="24" :lg="10">
                     <Wheel :categories="categories" :key="wheelKey" />
                 </el-col>
-                <el-col :xs="24" :lg="14">
+                <el-col :xs="24" :sm="24" :md="24" :lg="14">
                     <Description :categories="categories" :key="descriptionKey" />
                 </el-col>
             </el-row>
@@ -21,28 +20,32 @@
 
 <script lang="ts">
     import Vue from 'vue'
-    import { ICategory } from '../configs/app.config'
+    import { ICategory } from '../../configs/app.config'
     import ActionBtn from './ActionBtn.vue'
     import Description from './Description.vue'
-    import Main from './Main.vue'
     import Wheel from './Wheel.vue'
     
     export default Vue.extend({
         components: {
             ActionBtn,
             Description,
-            Main,
             Wheel,
         },
         computed: {
             categories(): ICategory {
                 return this.$store.state.categories
             },
-            wheelKey(): void {
+            wheelKey(): number {
                 return this.$store.state.wheelKey
             },
-            descriptionKey(): void {
+            descriptionKey(): number {
                 return this.$store.state.descriptionKey
+            },
+            lang(): string {
+                return this.$store.state.lang
+            },
+            homeWheel(): number {
+                return this.$store.state.homeWheel
             },
         },
         name: 'Home',
@@ -55,10 +58,22 @@
         margin: 0 auto;
     }
 
+    .el-main {
+        overflow: inherit;
+    }
+
     .is-align-middle {
         display: flex;
         align-items: center;
-        margin-bottom: 80px;
         margin-top: 30px;
+        margin-bottom: 60px;
+    }
+
+    @media (max-width: 768px) { 
+        .is-align-middle {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
     }
 </style>

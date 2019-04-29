@@ -6,7 +6,7 @@ import store from '../store/store'
 // https://vuex.vuejs.org/guide/actions.html
 
 // todo replace promise any with type
-export const getInitialData = (): Promise<any> => {
+export const getInitialData = (): Promise<ICategory[]> => {
     return fetch('/data/data.json')
         .then((response) => {
             return response.clone().json()

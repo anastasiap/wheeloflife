@@ -1,115 +1,115 @@
 {
 	"ru": [{
-		"color": "#731DA2",
-		"description": "Самочувствие, внешний вид, подвижность, настроение, прогулки, бодрость, питание, режим, спорт, сон",
+		"color": "#ffdb00",
+		"description": "Самочувствие, внешний вид, бодрость, питание, режим, спорт, сон",
 		"id": 0,
 		"mark": 0,
 		"name": "Здоровье",
 		"order": 1
 	}, {
-		"color": "#B6BB1B",
+		"color": "#63cb00",
 		"description": "Общение, дружба, любовь, семья",
 		"id": 1,
 		"mark": 0,
 		"name": "Отношения",
 		"order": 2
 	}, {
-		"color": "#5AEC48",
-		"description": "Родные, коллеги, друзья, соседи, оппоненты",
+		"color": "#3395d0",
+		"description": "Родные, друзья, коллеги, соседи, оппоненты",
 		"id": 2,
 		"mark": 0,
 		"name": "Окружение",
 		"order": 3
 	}, {
-		"color": "#BB0B0B",
+		"color": "#ff188c",
 		"description": "Работа, карьера, бизнес, профессия, занятость, социальный статус",
 		"id": 3,
 		"mark": 0,
 		"name": "Призвание",
 		"order": 4
 	}, {
-		"color": "#2AD9F1",
+		"color": "#89FF18",
 		"description": "Доходы, расходы, условия жизни",
 		"id": 4,
 		"mark": 0,
 		"name": "Обеспеченность",
 		"order": 5
 	}, {
-		"color": "#FF911B",
+		"color": "#0063cb",
 		"description": "Обучение, работа над собой, личностный рост",
 		"id": 5,
 		"mark": 0,
 		"name": "Самосовершенствование",
 		"order": 6
 	}, {
-		"color": "#300AC7",
+		"color": "#d20831",
 		"description": "Развлечения, отдых, хобби, путешествия, впечатления",
 		"id": 6,
-		"mark": 5,
+		"mark": 0,
 		"name": "Яркость жизни",
 		"order": 7
 	}, {
-		"color": "#FD4C6D",
+		"color": "#18a8ff",
 		"description": "Вера, творчество, искусство",
 		"id": 7,
-		"mark": 3,
+		"mark": 0,
 		"name": "Духовность",
 		"order": 8
 	}],
 	"en": [{
-		"color": "#731DA2",
-		"description": "Самочувствие, внешний вид, подвижность, настроение, прогулки, бодрость, питание, режим, спорт, сон",
+		"color": "#ffdb00",
+		"description": "Wellbeing, look, nutrition, daily regime, sport, sleep",
 		"id": 0,
 		"mark": 0,
 		"name": "Health",
 		"order": 1
 	}, {
-		"color": "#B6BB1B",
-		"description": "Общение, дружба, любовь, семья",
+		"color": "#63cb00",
+		"description": "Communication, friendship, love, family",
 		"id": 1,
 		"mark": 0,
-		"name": "Relationships",
+		"name": "Relations",
 		"order": 2
 	}, {
-		"color": "#5AEC48",
-		"description": "Родные, коллеги, друзья, соседи, оппоненты",
+		"color": "#3395d0",
+		"description": "Siblings, friends, co-workers, opponents",
 		"id": 2,
 		"mark": 0,
-		"name": "Social",
+		"name": "People",
 		"order": 3
 	}, {
-		"color": "#BB0B0B",
-		"description": "Работа, карьера, бизнес, профессия, занятость, социальный статус",
+		"color": "#ff188c",
+		"description": "Work, career, business, occupation, social status",
 		"id": 3,
 		"mark": 0,
-		"name": "Job",
+		"name": "Vocation",
 		"order": 4
 	}, {
-		"color": "#2AD9F1",
-		"description": "Доходы, расходы, условия жизни",
+		"color": "#89FF18",
+		"description": "Income, outcome, living conditions",
 		"id": 4,
 		"mark": 0,
-		"name": "Finance",
+		"name": "Finances",
 		"order": 5
 	}, {
-		"color": "#FF911B",
-		"description": "Обучение, работа над собой, личностный рост",
+		"color": "#0063cb",
+		"description": "Education, personal growth",
 		"id": 5,
 		"mark": 0,
-		"name": "Education",
+		"name": "Self-improvement",
 		"order": 6
 	}, {
-		"color": "#300AC7",
-		"description": "Развлечения, отдых, хобби, путешествия, впечатления",
+		"color": "#d20831",
+		"description": "Entertainment, rest, hobby, travel, expriences",
 		"id": 6,
-		"mark": 5,
-		"name": "Life quality",
+		"mark": 0,
+		"name": "Life richness",
 		"order": 7
 	}, {
-		"color": "#FD4C6D",
-		"description": "Вера, творчество, искусство",
+		"color": "#18a8ff",
+		"description": "Faith, creativity, arts",
 		"id": 7,
-		"mark": 3,
+		"mark": 0,
 		"name": "Spiritual",
 		"order": 8
 	}]

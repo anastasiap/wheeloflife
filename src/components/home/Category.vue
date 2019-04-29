@@ -20,7 +20,7 @@
                 </svg>
             </span>
         </div>
-        <div v-if="!isEditMode" class="display-mode">
+        <div v-if="!isEditMode" class="c-category--display-mode">
             <div class="c-category__heading">
                 <h4 @click="toggleView" class="c-category__title" :style="{ color: catColor }">{{ name }}</h4>
                 <div class="c-category__mark-wrapper" :style="{ 'background-color': catColor }">
@@ -36,7 +36,7 @@
             </div>
             <div ref="descViewMode" @click="toggleView" class="c-category__description">{{ description }}</div>
         </div>
-        <div v-if="isEditMode" class="edit-mode">
+        <div v-if="isEditMode" class="c-category--edit-mode">
             <form action="">
                 <input 
                     class="c-category__inputTitle" 
@@ -61,8 +61,8 @@
 <script lang="ts">
     import Vue from 'vue'
     import chrome from 'vue-color/src/components/Chrome.vue'
-    import { ICategory } from '../configs/app.config'
-    import { updateData } from '../services/service'
+    import { ICategory } from '../../configs/app.config'
+    import { updateData } from '../../services/service'
 
     interface IRefs {
         descViewMode: HTMLFormElement
@@ -90,7 +90,7 @@
         },
         methods: {
             updateData,
-            toggleTools(): boolean {
+            toggleTools(): boolean | void {
                 if (!this.isColorEditMode && !this.isEditMode) {
                     return this.isHidden = !this.isHidden
                 }
@@ -114,14 +114,20 @@
                 return this.isColorEditMode = !this.isColorEditMode
             },
             updateColor(value: { hex: string }): void {
-                // todo fix hack: catColor model get object on click not store value
+                // hack: catColor model get object on click not store value
                 this.catColor = value.hex
 
                 updateData(value.hex, this.id, 'color')
             },
         },
         name: 'Category',
-        props: ['name', 'description', 'mark', 'id', 'color'],
+        props: [
+            'name',
+            'description',
+            'mark',
+            'id',
+            'color',
+        ],
     })
 </script>
 <style lang="scss" scoped>
@@ -206,8 +212,8 @@
             line-break: 1;
         }
 
-        .display-mode,
-        .edit-mode {
+        &--display-mode,
+        &--edit-mode {
             //min-height: 5rem;
             max-width: 18rem;
             width: 100%;
@@ -261,5 +267,24 @@
         position: absolute;
         top: 35px;
         z-index: 9999;
+    }
+
+    @media (max-width: 768px) { 
+        .c-editing-icons {
+            display: none;
+        }
+
+        .c-category {
+            justify-content: center;
+            max-width: 100%;
+
+            &--display-mode,
+            &--edit-mode {
+                // max-width: inherit;
+            }
+
+
+        } 
+        
     }
 </style>

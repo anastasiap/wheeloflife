@@ -141,7 +141,6 @@ export default class Wheel implements IWheel {
         id: number,
         color: string,
         arcType: string): void {
-            console.log('drawArc startingPoint', startingPoint)
             const endPoint = startingPoint + arcAngle
 
             // create Path object with to keep track of each arc
@@ -151,7 +150,6 @@ export default class Wheel implements IWheel {
             section.arc(this.centerX, this.centerY, radius, startingPoint, endPoint)
             section.lineTo(this.centerX, this.centerY)
 
-            // TODO move to a function eg fillArc()
             this.fillArc(color, section)
 
             // save all paths for future manipulations
@@ -206,9 +204,6 @@ export default class Wheel implements IWheel {
                 this.ctx.fillText(l.name, dx, dy)
                 this.ctx.fillStyle = l.color
             }
-
-            this.ctx.fillText(l.name, dx, dy)
-            this.ctx.fillStyle = l.color
         })
     }
 

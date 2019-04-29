@@ -27,3 +27,7 @@ export function mapLangKeys(key: string): string {
 
     return LANGUAGES[key]
 }
+
+export function getLocale(): string {
+    return navigator.language.split('-')[0]
+}
