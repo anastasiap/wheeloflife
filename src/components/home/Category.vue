@@ -61,8 +61,8 @@
 <script lang="ts">
     import Vue from 'vue'
     import chrome from 'vue-color/src/components/Chrome.vue'
-    import { ICategory } from '../../configs/app.config'
-    import { updateData } from '../../services/service'
+    import { ICategory } from '@/types/category'
+    import { updateData } from '@/services/service'
 
     interface IRefs {
         descViewMode: HTMLFormElement
@@ -96,15 +96,14 @@
                 }
             },
             toggleView(): boolean {
-                // TODO research how to reverse boolean
+                // set height for textearea element
                 if (this.$refs.descViewMode) {
-                    // todo refactor - dry with mounted
                     const FormEl = this.$refs.descViewMode as HTMLElement
                     const FormHeight = FormEl.clientHeight
 
                     this.$set(this.descInputHeight, 'height', FormHeight + 25 + 'px')
                 }
-                // this.toggleTools();
+
                 return this.isEditMode = !this.isEditMode
             },
             deleteCategory(): void {
@@ -114,7 +113,7 @@
                 return this.isColorEditMode = !this.isColorEditMode
             },
             updateColor(value: { hex: string }): void {
-                // hack: catColor model get object on click not store value
+                // hack: fixing - catColor model gets object on click, not store value
                 this.catColor = value.hex
 
                 updateData(value.hex, this.id, 'color')

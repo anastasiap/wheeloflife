@@ -6,19 +6,15 @@
 
 <script lang="ts">
     import Vue from 'vue'
-    import Wheel from '../../lib/Wheel'
-    import { IWheel } from '../../lib/Wheel'
-    import { MARK_SYSTEM } from '../../configs/app.config'
-    import { updateData } from '../../services/service'
+    import Wheel from '@/lib/Wheel'
+    import { IWheel } from '@/lib/Wheel'
+    import { MARK_SYSTEM } from '@/config/app.config'
+    import { updateData } from '@/services/service'
 
     export default Vue.extend({
         computed: {
-            wheelKey(): number {
-                return this.$store.state.wheelKey
-            },
-            canvas() {
-                return document.getElementById('wheel') as HTMLCanvasElement
-            },
+            wheelKey(): number { return this.$store.state.wheelKey },
+            canvas(): HTMLCanvasElement { return document.getElementById('wheel') as HTMLCanvasElement },
         },
         data() {
             return {
@@ -33,13 +29,16 @@
                 this.wil.getClickedData(e)
                 const mark = this.wil.getData().mark
                 const categoryID = this.wil.getData().categoryID
+
                 updateData(mark, categoryID, 'mark')
             },
             setResponsiveCanvas(): void {
                 const wrapper = document.getElementById('wrapper')
                 const canvasElement = document.getElementById('wheel')
+
                 if (wrapper && canvasElement) {
                     const wrapperWidth = wrapper.offsetWidth
+
                     canvasElement.setAttribute('height', `${wrapperWidth}`)
                     canvasElement.setAttribute('width', `${wrapperWidth}`)
                     wrapper.setAttribute('style', `height: ${wrapperWidth}px;`)
@@ -72,6 +71,7 @@
 
     #wheel {
         width: 100%;
+        cursor: pointer;
     }
 
     #labels, #marks, #wheel {

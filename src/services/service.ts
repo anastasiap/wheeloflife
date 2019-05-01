@@ -1,5 +1,5 @@
-import { ICategory } from '../configs/app.config'
-import store from '../store/store'
+import store from '@/store/store'
+import { ICategory } from '@/types/category'
 
 // Should be a promise call to server
 // https://forum.vuejs.org/t/help-with-promise-vuex-axios/36253
@@ -12,7 +12,7 @@ export const getInitialData = (): Promise<ICategory[]> => {
             return response.clone().json()
         })
         .catch((error) => {
-            throw new Error('Something wrong with initial data')
+            throw new Error('Something wrong with the initial data')
         })
 }
 

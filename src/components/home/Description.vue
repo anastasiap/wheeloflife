@@ -1,8 +1,7 @@
 <template>
     <el-row :gutter="40">
-        <!-- TODO refactor as loop for 2 columns where 2 is constant in config -->
         <el-col :xs="24" :sm="24" :md="24" :lg="12">
-            <div v-for="(category, index) in filteredItems(1, 2)" :key="index">
+            <div v-for="(category, index) in filteredItems(1, COLUMNS)" :key="index">
                 <Category 
                     :name="category.name" 
                     :description="category.description"
@@ -12,7 +11,7 @@
             </div>
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="12">
-            <div v-for="(category, index) in filteredItems(2, 2)" :key="index">
+            <div v-for="(category, index) in filteredItems(2, COLUMNS)" :key="index">
                 <Category 
                     :name="category.name" 
                     :description="category.description" 
@@ -26,7 +25,8 @@
 
 <script lang="ts">
     import Vue from 'vue'
-    import { ICategory } from '../../configs/app.config'
+    import { COLUMNS_NUMBER } from '@/config/app.config'
+    import { ICategory } from '@/types/category'
     import Category from './Category.vue'
 
     export default Vue.extend({
@@ -35,12 +35,12 @@
         },
         data() {
             return {
+                COLUMNS: COLUMNS_NUMBER,
                 firstCol: [] as ICategory[],
                 secondCol: [] as ICategory[],
             }
         },
         methods: {
-            // TODO refactor this
             filteredItems(column: number, columns: number): ICategory[] {
                 const categoriesList = this.categories
                 const total = categoriesList.length        // How many items
@@ -62,7 +62,6 @@
     .el-col:last-child {
         margin-left: -30px;
     }
-
     
     @media (max-width: 1200px) { 
         .el-col:last-child {

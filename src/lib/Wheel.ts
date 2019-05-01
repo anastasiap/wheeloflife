@@ -1,39 +1,7 @@
-import { ICategory } from '@/configs/app.config'
-import { shadeColor } from '../services/helpers'
-
-export interface IWheel {
-    data: IUserData
-    getData(): IUserData
-    getClickedData(e: MouseEvent): void
-}
-
-interface ILabel {
-    angle?: number
-    color: string
-    coord: number
-    name: string
-    radius: number
-    startingPoint?: number
-}
-interface IArc {
-    arc: Path2D
-    name: number
-    arcType: string
-}
-
-interface IUserData {
-    categoryID: number
-    mark: number
-}
-
-interface ICoords {
-    x: number
-    y: number
-}
+import { shadeColor } from '@/services/helpers'
+import { ICategory } from '@/types/category'
 
 export default class Wheel implements IWheel {
-    // todo why the hell is static at the top? what is static method?
-
     public data!: IUserData
     private canvas: HTMLCanvasElement
     private ctx: CanvasRenderingContext2D
@@ -46,7 +14,6 @@ export default class Wheel implements IWheel {
 
     constructor(canvas: HTMLCanvasElement, categories: ICategory[], markSystem: number) {
         this.canvas = canvas as HTMLCanvasElement
-        // todo learn wtf is assertion
         this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
         this.centerX = canvas.width / 2
         this.centerY = canvas.height / 2
@@ -86,14 +53,13 @@ export default class Wheel implements IWheel {
     }
 
     private drawWheel(): void {
-        // dividing half circle by negative 0.5 for some reason
-        // sets the start at the top of a circle
+        // set the start at the top of a circle
         let startingPoint = -0.5 * Math.PI
 
         // assume sum of all arcs is 100%
         const total = 100
 
-        // todo ? what's happening here
+        // todo ?what's happening here
         const arcLength = total / this.categories.length
 
         // store the position of each label
@@ -143,7 +109,7 @@ export default class Wheel implements IWheel {
         arcType: string): void {
             const endPoint = startingPoint + arcAngle
 
-            // create Path object with to keep track of each arc
+            // create Path object to keep track of each arc
             const section = new Path2D()
 
             section.moveTo(this.centerX, this.centerY)
@@ -159,8 +125,8 @@ export default class Wheel implements IWheel {
 
     private drawMarks(category: ICategory, startingPoint: number, arcAngle: number, marks: number): void {
         let counter = 0
-        const currentMark = category.mark
         let markRadius = this.radius / marks
+        const currentMark = category.mark
         const marksLabels: ILabel[] = []
 
         while (counter < marks) {
@@ -201,8 +167,7 @@ export default class Wheel implements IWheel {
             if (l.angle !== undefined && l.startingPoint !== undefined) {
                 this.drawTextAlongArc(l.name, l.color, l.angle, l.startingPoint)
             } else {
-                this.ctx.fillText(l.name, dx, dy)
-                this.ctx.fillStyle = l.color
+                this.writeText(l.color, l.name, dx, dy)
             }
         })
     }
@@ -234,8 +199,8 @@ export default class Wheel implements IWheel {
             this.ctx.translate(0, -1 * this.radius)
             this.ctx.font = 'bold 25px Amatic SC'
             this.ctx.textBaseline = 'bottom'
-            this.ctx.fillStyle = color
-            this.ctx.fillText(n, 0, 0)
+
+            this.writeText(color, n,  0, 0)
 
             this.ctx.restore()
         }
@@ -264,4 +229,38 @@ export default class Wheel implements IWheel {
         this.ctx.fillStyle = color
         this.ctx.fill(target)
     }
+
+    private writeText(color: string, text: string, x: number, y: number): void {
+        this.ctx.fillStyle = color
+        this.ctx.fillText(text, x, y)
+    }
+}
+export interface IWheel {
+    data: IUserData
+    getData(): IUserData
+    getClickedData(e: MouseEvent): void
+}
+
+interface ILabel {
+    angle?: number
+    color: string
+    coord: number
+    name: string
+    radius: number
+    startingPoint?: number
+}
+interface IArc {
+    arc: Path2D
+    name: number
+    arcType: string
+}
+
+interface IUserData {
+    categoryID: number
+    mark: number
+}
+
+interface ICoords {
+    x: number
+    y: number
 }

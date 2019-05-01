@@ -1,20 +1,18 @@
 import Vue from 'vue'
-import MainContainer from './components/MainContainer.vue'
+import Container from './components/Container.vue'
 
 const App = Vue.extend({
     components: {
-        MainContainer,
+        Container,
     },
     computed: {
-        initialLang(): string {
-            return this.$i18n.locale
-        },
+        initialLang(): string { return this.$i18n.locale },
     },
     created() {
         this.$store.dispatch('getData', this.$i18n.locale)
     },
     name: 'App',
-    template: `<MainContainer :initialLang=initialLang />`,
+    template: `<Container :initialLang=initialLang />`,
 })
 
 export default App

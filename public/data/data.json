@@ -1,13 +1,13 @@
 {
 	"ru": [{
-		"color": "#ffdb00",
+		"color": "#FFC800",
 		"description": "Самочувствие, внешний вид, бодрость, питание, режим, спорт, сон",
 		"id": 0,
 		"mark": 0,
 		"name": "Здоровье",
 		"order": 1
 	}, {
-		"color": "#63cb00",
+		"color": "#478908",
 		"description": "Общение, дружба, любовь, семья",
 		"id": 1,
 		"mark": 0,
@@ -28,14 +28,14 @@
 		"name": "Призвание",
 		"order": 4
 	}, {
-		"color": "#89FF18",
+		"color": "#F8FF50",
 		"description": "Доходы, расходы, условия жизни",
 		"id": 4,
 		"mark": 0,
 		"name": "Обеспеченность",
 		"order": 5
 	}, {
-		"color": "#0063cb",
+		"color": "#89FF18",
 		"description": "Обучение, работа над собой, личностный рост",
 		"id": 5,
 		"mark": 0,
@@ -57,14 +57,14 @@
 		"order": 8
 	}],
 	"en": [{
-		"color": "#ffdb00",
+		"color": "#FFC800",
 		"description": "Wellbeing, look, nutrition, daily regime, sport, sleep",
 		"id": 0,
 		"mark": 0,
 		"name": "Health",
 		"order": 1
 	}, {
-		"color": "#63cb00",
+		"color": "#478908",
 		"description": "Communication, friendship, love, family",
 		"id": 1,
 		"mark": 0,
@@ -85,14 +85,14 @@
 		"name": "Vocation",
 		"order": 4
 	}, {
-		"color": "#89FF18",
+		"color": "#F8FF50",
 		"description": "Income, outcome, living conditions",
 		"id": 4,
 		"mark": 0,
 		"name": "Finances",
 		"order": 5
 	}, {
-		"color": "#0063cb",
+		"color": "#89FF18",
 		"description": "Education, personal growth",
 		"id": 5,
 		"mark": 0,

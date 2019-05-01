@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-    import { routes } from '../configs/app.config'
+    import { routes } from '@/config/app.config'
 
     export default {
         data() {

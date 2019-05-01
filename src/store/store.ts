@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex'
 
-import { Category, ICategory } from '@/configs/app.config'
-import { getInitialData } from '../services/service'
-import { RootState } from '../types'
+import { Category } from '@/lib/Category'
+import { getInitialData } from '@/services/service'
+import { ICategory } from '@/types/category'
+import { RootState } from '@/types/store'
 
 Vue.use(Vuex)
 
@@ -108,13 +109,13 @@ const store: StoreOptions<RootState> = {
          * Update home page
          */
         updateHome(state) {
-            state.homeWheel += 1
+            state.homeWheelKey += 1
         },
     },
     state: {
         categories: [] as ICategory[],
         descriptionKey: 0 as number,
-        homeWheel: 0 as number,
+        homeWheelKey: 0 as number,
         lang: '' as string,
         wheelKey: 0 as number,
     },

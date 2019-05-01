@@ -1,5 +1,5 @@
 <template>
-    <div class="home container animated fadeIn delay-1s" :key="homeWheel">
+    <div class="home container animated fadeIn delay-1s" :key="homeWheelKey">
         <el-main v-if="categories.length > 0" id="main-container">
             <el-row align="middle">
                 <el-col :xs="24" :sm="24" :md="24" :lg="10">
@@ -20,7 +20,7 @@
 
 <script lang="ts">
     import Vue from 'vue'
-    import { ICategory } from '../../configs/app.config'
+    import { ICategory } from '@/config/app.config'
     import ActionBtn from './ActionBtn.vue'
     import Description from './Description.vue'
     import Wheel from './Wheel.vue'
@@ -32,21 +32,10 @@
             Wheel,
         },
         computed: {
-            categories(): ICategory {
-                return this.$store.state.categories
-            },
-            wheelKey(): number {
-                return this.$store.state.wheelKey
-            },
-            descriptionKey(): number {
-                return this.$store.state.descriptionKey
-            },
-            lang(): string {
-                return this.$store.state.lang
-            },
-            homeWheel(): number {
-                return this.$store.state.homeWheel
-            },
+            categories(): ICategory { return this.$store.state.categories }, 
+            wheelKey(): number { return this.$store.state.wheelKey },
+            descriptionKey(): number { return this.$store.state.descriptionKey },
+            homeWheelKey(): number { return this.$store.state.homeWheelKey },
         },
         name: 'Home',
     })
