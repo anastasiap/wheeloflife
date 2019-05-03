@@ -1,7 +1,7 @@
 <template>
-    <el-row class="footer">
+    <el-row class="c-footer">
         <el-col :span="24">
-            <div class="footer__link">
+            <div class="c-footer__link">
                 <a href="https://thewebbird.me">(c) thewebbird</a>
             </div>        
         </el-col>
@@ -15,11 +15,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .footer {        
-        &__contacts {
-            text-align: left;
-        }
-        
+    .c-footer {                
         &__link {
             padding: 15px; 
             text-align: center;

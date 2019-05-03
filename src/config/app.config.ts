@@ -22,7 +22,7 @@ export const messages = {
         labelEditCategory: 'Изменить текст или цвет',
         resetMarks: 'Обнулить оценки',
         resetWheel: 'Сбросить все изменения',
-        siteSubTitle: ': онлайн',
+        siteSubTitle: '',
         siteTitle: 'Колесо жизненного баланса',
     },
 }

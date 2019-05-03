@@ -90,7 +90,7 @@ export default class Wheel implements IWheel {
                 coord: coordinates,
                 name: category.name,
                 radius: labelRadius,
-                startingPoint: startingPoint,
+                startingPoint,
             })
 
              // move starting point to the end of current arc
@@ -173,7 +173,6 @@ export default class Wheel implements IWheel {
     }
 
     private drawTextAlongArc(label: string, color: string, arcAngle: number, startingPoint: number) {
-        // todo replace with constant
         const labeCentering = (arcAngle) / 2  + (label.length * 0.04 / 2)
 
         this.ctx.save()
@@ -199,7 +198,6 @@ export default class Wheel implements IWheel {
             this.ctx.translate(0, -1 * this.radius)
             this.ctx.font = 'bold 25px Amatic SC'
             this.ctx.textBaseline = 'bottom'
-
             this.writeText(color, n,  0, 0)
 
             this.ctx.restore()

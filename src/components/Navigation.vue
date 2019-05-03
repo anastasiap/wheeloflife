@@ -1,5 +1,5 @@
 <template>
-    <div class="main-nav">
+    <div class="c-main-nav">
         <el-menu mode="horizontal" :default-active="activeIndex" @select="handleSelect" :router=true>
             <el-menu-item v-for="(item, index) in routes" :key="index" :route="item.path" :index="index">{{ item.name }}</el-menu-item>  
         </el-menu>
@@ -27,7 +27,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .main-nav {
+    .c-main-nav {
         width: 100%;
     }
 

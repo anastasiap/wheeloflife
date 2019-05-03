@@ -5,10 +5,10 @@
                 <h1>{{ $t("siteTitle") }}<span class="c-header-title__subtitle">{{ $t("siteSubTitle") }}</span> </h1>  
             </div>
         </el-col>
-        <el-col :xs="1" :sm="8" :md="10" :lg="12">
+        <el-col :xs="1" :sm="8" :md="10" :lg="11">
             <slot></slot>
         </el-col>
-        <el-col :xs="11" :sm="8" :md="4" :lg="2">
+        <el-col :xs="11" :sm="8" :md="4" :lg="3">
             <div class="c-language-switcher">
                 <el-select v-model="locale">
                     <el-option
@@ -59,7 +59,7 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .c-header-title {
         h1 {
             font-size: 2.2em;
@@ -71,7 +71,7 @@
 
     .c-language-switcher {
         padding: 10px 5px;
-        max-width: 100px;
+        max-width: 110px;
         float: right;
 
         .el-select .el-input--suffix .el-input__inner {
@@ -98,5 +98,4 @@
             }
         }
     }
-    
 </style>

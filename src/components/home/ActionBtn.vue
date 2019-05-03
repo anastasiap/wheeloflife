@@ -115,6 +115,13 @@
     }
 
     .el-button {
+        cursor: pointer;
+        
+        &:active,
+        &:focus {
+            outline: none;
+        }
+
         &--primary {
             background-color: #f3f3f3;
             border: 0;

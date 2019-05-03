@@ -59,82 +59,81 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue'
-    import chrome from 'vue-color/src/components/Chrome.vue'
-    import { ICategory } from '@/types/category'
-    import { updateData } from '@/services/service'
+import { updateData } from '@/services/service'
+import { ICategory } from '@/types/category'
+import Vue from 'vue'
+import chrome from 'vue-color/src/components/Chrome.vue'
 
-    interface IRefs {
-        descViewMode: HTMLFormElement
-    }
+interface IRefs {
+    descViewMode: HTMLFormElement
+}
 
-    export default Vue.extend({
-        data() {
-            return {
-                catColor: this.color as string,
-                descInputHeight: {},
-                isColorEditMode: false as boolean,
-                isEditMode: false as boolean,
-                isHidden: true as boolean,
-                isMarkEditMode: false as boolean,
+export default Vue.extend({
+    data() {
+        return {
+            catColor: this.color as string,
+            descInputHeight: {},
+            isColorEditMode: false as boolean,
+            isEditMode: false as boolean,
+            isHidden: true as boolean,
+            isMarkEditMode: false as boolean,
+        }
+    },
+    components: {
+        'chrome-picker': chrome,
+    },
+    mounted() {
+        if (!this.isEditMode) {
+            const FormEl = this.$refs.descViewMode as HTMLElement
+            const FormHeight = FormEl.clientHeight
+        }
+    },
+    methods: {
+        updateData,
+        toggleTools(): boolean | void {
+            if (!this.isColorEditMode && !this.isEditMode) {
+                return this.isHidden = !this.isHidden
             }
         },
-        components: {
-            'chrome-picker': chrome,
-        },
-        mounted() {
-            if (!this.isEditMode) {
+        toggleView(): boolean {
+            // set height for textearea element
+            if (window.innerWidth < 768) {
+                return false
+            }
+
+            if (this.$refs.descViewMode) {
                 const FormEl = this.$refs.descViewMode as HTMLElement
                 const FormHeight = FormEl.clientHeight
+
+                this.$set(this.descInputHeight, 'height', FormHeight + 25 + 'px')
             }
+
+            return this.isEditMode = !this.isEditMode
         },
-        methods: {
-            updateData,
-            toggleTools(): boolean | void {
-                if (!this.isColorEditMode && !this.isEditMode) {
-                    return this.isHidden = !this.isHidden
-                }
-            },
-            toggleView(): boolean {
-                // set height for textearea element
-                if (this.$refs.descViewMode) {
-                    const FormEl = this.$refs.descViewMode as HTMLElement
-                    const FormHeight = FormEl.clientHeight
-
-                    this.$set(this.descInputHeight, 'height', FormHeight + 25 + 'px')
-                }
-
-                return this.isEditMode = !this.isEditMode
-            },
-            deleteCategory(): void {
-                this.$store.commit('deleteCategory', this.id)
-            },
-            toggleColorPicker(): boolean {
-                return this.isColorEditMode = !this.isColorEditMode
-            },
-            updateColor(value: { hex: string }): void {
-                // hack: fixing - catColor model gets object on click, not store value
-                this.catColor = value.hex
-
-                updateData(value.hex, this.id, 'color')
-            },
+        deleteCategory(): void {
+            this.$store.commit('deleteCategory', this.id)
         },
-        name: 'Category',
-        props: [
-            'name',
-            'description',
-            'mark',
-            'id',
-            'color',
-        ],
-    })
+        toggleColorPicker(): boolean {
+            return this.isColorEditMode = !this.isColorEditMode
+        },
+        updateColor(value: { hex: string }): void {
+            // hack: fixing - catColor model gets object on click, not store value
+            this.catColor = value.hex
+
+            updateData(value.hex, this.id, 'color')
+        },
+    },
+    name: 'Category',
+    props: [
+        'name',
+        'description',
+        'mark',
+        'id',
+        'color',
+    ],
+})
 </script>
 <style lang="scss" scoped>
-    // helpers
-    .hide-visually {
-        visibility: hidden;
-    }
-
     .c-category {
         margin-bottom: 1rem;
         display: flex;
@@ -213,7 +212,6 @@
 
         &--display-mode,
         &--edit-mode {
-            //min-height: 5rem;
             max-width: 18rem;
             width: 100%;
         }
@@ -276,14 +274,6 @@
         .c-category {
             justify-content: center;
             max-width: 100%;
-
-            &--display-mode,
-            &--edit-mode {
-                // max-width: inherit;
-            }
-
-
         } 
-        
     }
 </style>

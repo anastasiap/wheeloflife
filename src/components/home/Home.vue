@@ -19,26 +19,26 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue'
-    import { ICategory } from '@/config/app.config'
-    import ActionBtn from './ActionBtn.vue'
-    import Description from './Description.vue'
-    import Wheel from './Wheel.vue'
-    
-    export default Vue.extend({
-        components: {
-            ActionBtn,
-            Description,
-            Wheel,
-        },
-        computed: {
-            categories(): ICategory { return this.$store.state.categories }, 
-            wheelKey(): number { return this.$store.state.wheelKey },
-            descriptionKey(): number { return this.$store.state.descriptionKey },
-            homeWheelKey(): number { return this.$store.state.homeWheelKey },
-        },
-        name: 'Home',
-    })
+import { ICategory } from '@/types/category'
+import Vue from 'vue'
+import ActionBtn from './ActionBtn.vue'
+import Description from './Description.vue'
+import Wheel from './Wheel.vue'
+
+export default Vue.extend({
+    components: {
+        ActionBtn,
+        Description,
+        Wheel,
+    },
+    computed: {
+        categories(): ICategory { return this.$store.state.categories },
+        wheelKey(): number { return this.$store.state.wheelKey },
+        descriptionKey(): number { return this.$store.state.descriptionKey },
+        homeWheelKey(): number { return this.$store.state.homeWheelKey },
+    },
+    name: 'Home',
+})
 </script>
 
 <style lang="scss" scoped>
