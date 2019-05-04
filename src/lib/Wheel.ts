@@ -27,7 +27,6 @@ export default class Wheel implements IWheel {
         this.drawWheel()
     }
 
-    // todo check how setters and getters work here
     public getData(): IUserData {
         return this.data
     }
@@ -59,16 +58,15 @@ export default class Wheel implements IWheel {
         // assume sum of all arcs is 100%
         const total = 100
 
-        // todo ?what's happening here
+        // todo
         const arcLength = total / this.categories.length
 
         // store the position of each label
         const labels: ILabel[] = []
 
         // font settings for labels
-        // todo move this to config as constants
         const fontSize = Math.floor(this.canvas.height / 33)
-
+        // todo move this to config as constants
         this.ctx.textAlign = 'center'
         this.ctx.textBaseline = 'middle'
         this.ctx.font = `${fontSize} * 3 px Didact Gothic`
@@ -218,7 +216,6 @@ export default class Wheel implements IWheel {
         return marks.reduce((acc, cur) => Math.min(acc, cur), marks[0])
     }
 
-    // todo check how setters and getters work here
     private setData(selected: IUserData): void {
         this.data = selected
     }

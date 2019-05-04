@@ -45,6 +45,7 @@ export default Vue.extend({
     .container {
         max-width: 1440px;
         margin: 0 auto;
+        flex: 1 auto;
     }
 
     .el-main {

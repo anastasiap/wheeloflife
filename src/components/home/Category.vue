@@ -31,6 +31,7 @@
                         class="c-category__inputMark" 
                         :value="mark" 
                         @input="updateData($event.target.value, id, 'mark')"
+                        maxlength="2"
                     />
                 </div>
             </div>
@@ -42,7 +43,9 @@
                     class="c-category__inputTitle" 
                     :style="{ color: catColor }"
                     :value="name" 
-                    @input="updateData($event.target.value, id, 'name')" />
+                    @input="updateData($event.target.value, id, 'name')"
+                    maxlength="22"
+                />
                 <textarea 
                     ref="descEditMode"
                     v-bind:style="descInputHeight"

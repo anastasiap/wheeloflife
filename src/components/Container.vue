@@ -49,8 +49,13 @@
         margin: 0;
     }
 
+    .el-container {
+        height: 100vh;
+    }
+
     .el-footer {
         background-color: #f3f3f3;
+        flex-shrink: 0;
     }
 
     .hide-visually {
