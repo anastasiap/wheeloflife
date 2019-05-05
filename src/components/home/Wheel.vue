@@ -38,7 +38,7 @@ export default Vue.extend({
 
             if (wrapper && canvasElement) {
                 const wrapperWidth = wrapper.offsetWidth
-
+console.log(wrapperWidth)
                 canvasElement.setAttribute('height', `${wrapperWidth}`)
                 canvasElement.setAttribute('width', `${wrapperWidth}`)
                 wrapper.setAttribute('style', `height: ${wrapperWidth}px;`)
@@ -65,7 +65,7 @@ export default Vue.extend({
     .wheel-container {
         position: relative;
         margin: 20px auto;
-        width: 448px;
+        width: 100%;
         text-align: center;
     }
 
@@ -79,7 +79,7 @@ export default Vue.extend({
 
     @media (max-width: 520px) { 
         .wheel-container {
-            margin: 0;
+            margin: 0 0 45px 0;
         }
     }
 </style>
