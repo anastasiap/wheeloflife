@@ -90,7 +90,8 @@
     @media (max-width: 560px) { 
         .c-header-title {
             h1 {
-                font-size: 1.6em;
+                font-size: 1.2em;
+                padding-top: 15px;
             }
 
             &__subtitle {

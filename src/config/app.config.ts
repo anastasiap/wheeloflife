@@ -9,10 +9,9 @@ export const messages = {
     en: {
         addCat: 'Add category',
         download: 'Download result',
-        hello: 'hello world',
         labelEditCategory: 'Edit description or color',
         resetMarks: 'Reset marks',
-        resetWheel: 'Reset wheel changes',
+        resetWheel: 'Drop all changes',
         siteSubTitle: ': online quick tool',
         siteTitle: 'Wheel of Life',
     },

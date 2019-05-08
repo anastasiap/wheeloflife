@@ -65,7 +65,7 @@ console.log(wrapperWidth)
     .wheel-container {
         position: relative;
         margin: 20px auto;
-        width: 100%;
+        width: 448px;
         text-align: center;
     }
 
@@ -80,6 +80,7 @@ console.log(wrapperWidth)
     @media (max-width: 520px) { 
         .wheel-container {
             margin: 0 0 45px 0;
+            width: 100%;
         }
     }
 </style>

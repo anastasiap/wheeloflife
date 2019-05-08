@@ -1,7 +1,7 @@
 <template>
     <div class="c-category" @mouseenter="toggleTools" @mouseleave="toggleTools">
         <div v-bind:class="{ 'hide-visually': isHidden }" class="c-editing-icons animated fadeIn">
-            <span class="c-editing-icons__icon-wrapper" @click="deleteCategory">
+            <span class="c-editing-icons__icon-wrapper" @click="alert">
                 <svg class="icon-delete" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 470.7 470.7">
                     <path  d="M96 133.5c3.9 2.7 8.2 4.3 12.6 5.3 -5.3 99-15.8 202.4 20.4 297 1.7 4.5 4.9 7.4 8.6 8.8 1.3 1.8 3.1 3.3 5.6 4.5 64.7 28.7 133.5 27.5 199.9 4.5 8.7-3 11.3-11.2 9.7-18.3 12.6-95.9 24.6-194.7 14.7-291.4 7.8-1.7 15.1-5 20.6-11.1 10.7-12 8.7-27.3 3.4-41.1 0-3.8-1.8-7.5-5.9-10 -1.6-1.3-3.5-2.1-5.6-2.6 -29.7-12.7-61.4-19.3-93.7-22.4 0.6-2.9 0.3-6.1-1.1-9.3C275.2 24.1 255-3.4 226.1 0.3c-27.9 3.6-41.4 30.8-47 55.7 -18.6 1-37 2.2-55 3.2 -0.1 0-0.2 0-0.4 0.1 -0.9-0.1-1.7-0.2-2.6-0.1 -19.3 2.3-35.5 11.5-44 29.6 -1.1 2.4-1.7 4.9-1.7 7.4 -0.7 2.5-0.8 5.3 0.2 8.4C79.5 116.7 85.7 126.3 96 133.5zM324.1 428.5c-54.9 16.9-112.2 18.7-165.8-5.1 -0.8-0.4-1.6-0.6-2.4-0.8 -33-90.8-22.6-189.4-17.5-284.2 65.5-4.6 131.5-5.7 196.8 2.6 0.8 0.8 1.7 1.5 2.6 2.1C347.6 237.8 336.4 334.5 324.1 428.5zM228.7 29.7c12.9-1.7 22 13.3 27.6 25.1 -15.4-0.5-31-0.4-46.4 0C212.9 43.4 218.4 31 228.7 29.7zM110.8 92.7c-1.8 1.6 4.9-2.5 2.8-1.6 1.5-0.6 3.1-1 4.6-1.5 -0.4 0.1 4.9-0.9 2.8-0.6 0.2 0 0.4-0.1 0.5-0.1 0.8 0.1 1.6 0.2 2.4 0.1 77.3-4.5 167.3-15.4 240.8 15.7 0.2 0.7 0.5 1.4 0.7 2.1 0.3 1 0.5 2.1 0.7 3.1 0 0.2 0 0.5 0.1 0.8 0 0.5 0 1.1 0 1.6 0 0 0 0.2-0.1 0.2 -0.3-0.1-2.5 1.5-1.6 1.3 -1.6 0.6-3.3 1-5 1.4 -0.8 0.2-1.9 0.3-3.1 0.4 -1.6-1.1-3.5-2-6-2.3 -75.3-10.3-150.9-9.4-226.5-3.5 -1.4 0.1-2.6 0.4-3.8 0.8 -7.4-0.1-12.1-3.7-15.2-11.3C106.6 96.9 108.1 95.1 110.8 92.7z"/><path d="M186.4 186.9c-0.2-19.1-29.9-19.1-29.7 0 0.4 47.8 5.9 95.1 11.9 142.5 2.3 18.7 32 19 29.7 0C192.3 282 186.8 234.7 186.4 186.9z"/><path d="M248.7 184c-1-19-30.7-19.1-29.7 0 2.8 52.5 4.7 105 10.4 157.3 2 18.8 31.7 19 29.7 0C253.4 289 251.5 236.5 248.7 184z"/><path d="M284.9 186.4c8 58.7 4.2 118.1 3.9 177.1 -0.1 19.1 29.6 19.1 29.7 0 0.3-61.9 3.4-123.4-5-185C310.9 159.6 282.3 167.7 284.9 186.4z"/>
                 </svg>
@@ -38,7 +38,7 @@
             <div ref="descViewMode" @click="toggleView" class="c-category__description">{{ description }}</div>
         </div>
         <div v-if="isEditMode" class="c-category--edit-mode">
-            <form action="">
+            <form name="categoryform" id="categoryform" action="" >
                 <input 
                     class="c-category__inputTitle" 
                     :style="{ color: catColor }"
@@ -57,7 +57,11 @@
             </form>
         </div>
         
-        <chrome-picker class="" v-model="catColor" v-if="isColorEditMode" @input="updateColor"></chrome-picker>
+        <div class="c-color-picker" v-if="isColorEditMode">
+            <span class="close-btn" @click="closePallete">x</span>
+            <chrome-picker v-model="catColor" @input="updateColor"></chrome-picker>
+        </div>
+        
     </div>   
 </template>
 
@@ -93,17 +97,19 @@ export default Vue.extend({
     },
     methods: {
         updateData,
-        toggleTools(): boolean | void {
+        toggleTools(e: MouseEvent): boolean | void {
+            console.log('toggleTools', e.type)
             if (!this.isColorEditMode && !this.isEditMode) {
                 return this.isHidden = !this.isHidden
             }
         },
-        toggleView(): boolean {
+        toggleView(): void | boolean {
             // set height for textearea element
             if (window.innerWidth < 768) {
                 return false
             }
 
+            // set description textearea height
             if (this.$refs.descViewMode) {
                 const FormEl = this.$refs.descViewMode as HTMLElement
                 const FormHeight = FormEl.clientHeight
@@ -111,12 +117,45 @@ export default Vue.extend({
                 this.$set(this.descInputHeight, 'height', FormHeight + 25 + 'px')
             }
 
-            return this.isEditMode = !this.isEditMode
+            this.isEditMode = !this.isEditMode
+
+            // save on enter
+            if (this.isEditMode) {
+                document.addEventListener('keydown', this.saveOnEnter)
+            } else {
+                document.removeEventListener('keydown', this.saveOnEnter)
+            }
+        },
+        saveOnEnter(e: KeyboardEvent): void {
+            if (e.keyCode === 13){
+                this.isEditMode = false
+            }
+        },
+        alert() {
+            this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                type: 'warning'
+            })
+            .then(() => {
+                this.$message({
+                    type: 'success',
+                    message: 'Delete completed'
+                })
+            })
+            .catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: 'Delete canceled'
+                })
+            })
         },
         deleteCategory(): void {
             this.$store.commit('deleteCategory', this.id)
         },
-        toggleColorPicker(): boolean {
+        toggleColorPicker(e: MouseEvent): boolean {
+            console.log(e);
+            e.stopPropagation()
             return this.isColorEditMode = !this.isColorEditMode
         },
         updateColor(value: { hex: string }): void {
@@ -124,6 +163,10 @@ export default Vue.extend({
             this.catColor = value.hex
 
             updateData(value.hex, this.id, 'color')
+        },
+        closePallete(): void {
+            this.isColorEditMode = false
+            this.isHidden = false
         },
     },
     name: 'Category',
@@ -263,10 +306,24 @@ export default Vue.extend({
         }
     }
 
-    .vc-compact, .vc-chrome {
+    .c-color-picker {
         position: absolute;
         top: 35px;
         z-index: 9999;
+    }
+
+    .close-btn {
+        text-align: center;
+        background-color: white;
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 0 5px #696969;
+        padding: 0 8px 4px;
+        cursor: pointer; 
+        position: absolute;
+        z-index: 999;
+        top: -5px;
+        right: -5px;
     }
 
     @media (max-width: 768px) { 
