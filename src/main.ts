@@ -23,7 +23,8 @@ Vue.use(Footer)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Menu)
-Vue.use(MessageBox)
+
+Vue.prototype.$confirm = MessageBox.confirm
 
 const i18n = new VueI18n({
   locale: setLanguage(),

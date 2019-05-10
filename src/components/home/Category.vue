@@ -131,31 +131,23 @@ export default Vue.extend({
                 this.isEditMode = false
             }
         },
-        alert() {
-            this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+        alert() {            
+            const that = this
+
+            this.$confirm(this.$t('deleteCategoryWarning'), this.$t('warning'), {
                 confirmButtonText: 'OK',
-                cancelButtonText: 'Cancel',
+                cancelButtonText: this.$t('cancel'),
                 type: 'warning'
             })
             .then(() => {
-                this.$message({
-                    type: 'success',
-                    message: 'Delete completed'
-                })
+                that.deleteCategory()
             })
-            .catch(() => {
-                this.$message({
-                    type: 'info',
-                    message: 'Delete canceled'
-                })
-            })
+            .catch(() => {})
         },
         deleteCategory(): void {
             this.$store.commit('deleteCategory', this.id)
         },
         toggleColorPicker(e: MouseEvent): boolean {
-            console.log(e);
-            e.stopPropagation()
             return this.isColorEditMode = !this.isColorEditMode
         },
         updateColor(value: { hex: string }): void {

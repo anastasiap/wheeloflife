@@ -38,7 +38,7 @@ export default Vue.extend({
 
             if (wrapper && canvasElement) {
                 const wrapperWidth = wrapper.offsetWidth
-console.log(wrapperWidth)
+
                 canvasElement.setAttribute('height', `${wrapperWidth}`)
                 canvasElement.setAttribute('width', `${wrapperWidth}`)
                 wrapper.setAttribute('style', `height: ${wrapperWidth}px;`)

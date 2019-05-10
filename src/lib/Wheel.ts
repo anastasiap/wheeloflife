@@ -131,7 +131,7 @@ export default class Wheel implements IWheel {
             let markColor = 'transparent'
 
             if (counter < currentMark) {
-                markColor = shadeColor(category.color, -65)
+                markColor = shadeColor(category.color, -70)
             }
 
             this.drawArc(markRadius, startingPoint, arcAngle, counter + 1, markColor, 'mark')
