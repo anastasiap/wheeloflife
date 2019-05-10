@@ -8,7 +8,7 @@ import { setLanguage } from './services/helpers'
 
 import { messages } from './config/app.config'
 
-import { Aside, Col, Container, Footer, Header, Main, Menu, MessageBox, Option, Row, Select } from 'element-ui'
+import { Aside, Col, Container, Footer, Header, Loading, Main, Menu, MessageBox, Option, Row, Select } from 'element-ui'
 
 Vue.config.productionTip = false
 
@@ -23,7 +23,11 @@ Vue.use(Footer)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Menu)
+// Vue.use(Loading)
 
+// Vue.use(Loading.directive);
+
+Vue.prototype.$loading = Loading.service
 Vue.prototype.$confirm = MessageBox.confirm
 
 const i18n = new VueI18n({

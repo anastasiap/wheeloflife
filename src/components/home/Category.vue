@@ -1,5 +1,6 @@
 <template>
     <div class="c-category" @mouseenter="toggleTools" @mouseleave="toggleTools">
+        <!-- TODO create new component for editing tools -->
         <div v-bind:class="{ 'hide-visually': isHidden }" class="c-editing-icons animated fadeIn">
             <span class="c-editing-icons__icon-wrapper" @click="alert">
                 <svg class="icon-delete" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 470.7 470.7">
@@ -56,12 +57,10 @@
                 </textarea>
             </form>
         </div>
-        
         <div class="c-color-picker" v-if="isColorEditMode">
             <span class="close-btn" @click="closePallete">x</span>
             <chrome-picker v-model="catColor" @input="updateColor"></chrome-picker>
         </div>
-        
     </div>   
 </template>
 
@@ -84,6 +83,7 @@ export default Vue.extend({
             isEditMode: false as boolean,
             isHidden: true as boolean,
             isMarkEditMode: false as boolean,
+            isPalleteToBeClosed: false,
         }
     },
     components: {
@@ -97,8 +97,7 @@ export default Vue.extend({
     },
     methods: {
         updateData,
-        toggleTools(e: MouseEvent): boolean | void {
-            console.log('toggleTools', e.type)
+        toggleTools(e?: MouseEvent): boolean | void {
             if (!this.isColorEditMode && !this.isEditMode) {
                 return this.isHidden = !this.isHidden
             }
@@ -127,18 +126,22 @@ export default Vue.extend({
             }
         },
         saveOnEnter(e: KeyboardEvent): void {
-            if (e.keyCode === 13){
+            if (e.keyCode === 13) {
                 this.isEditMode = false
             }
         },
-        alert() {            
+        alert() {
             const that = this
-
-            this.$confirm(this.$t('deleteCategoryWarning'), this.$t('warning'), {
+            const alertMessage = this.$t('deleteCategoryWarning')
+            const alertHeader = this.$t('warning')
+            const cancelBtnMsg = this.$t('cancel')
+            const options = {
+                cancelButtonText: cancelBtnMsg,
                 confirmButtonText: 'OK',
-                cancelButtonText: this.$t('cancel'),
-                type: 'warning'
-            })
+                type: 'warning',
+            }
+
+            this.$confirm(alertMessage, alertHeader, options)
             .then(() => {
                 that.deleteCategory()
             })
@@ -148,6 +151,7 @@ export default Vue.extend({
             this.$store.commit('deleteCategory', this.id)
         },
         toggleColorPicker(e: MouseEvent): boolean {
+            this.isPalleteToBeClosed = false
             return this.isColorEditMode = !this.isColorEditMode
         },
         updateColor(value: { hex: string }): void {
@@ -158,7 +162,7 @@ export default Vue.extend({
         },
         closePallete(): void {
             this.isColorEditMode = false
-            this.isHidden = false
+            this.isHidden = true
         },
     },
     name: 'Category',
@@ -309,13 +313,15 @@ export default Vue.extend({
         background-color: white;
         border-radius: 50%;
         display: inline-block;
-        box-shadow: 0 0 5px #696969;
-        padding: 0 8px 4px;
-        cursor: pointer; 
+        box-shadow: 0 0 4px #cacaca;
+        padding: 3px 5px 7px;
+        cursor: pointer;
         position: absolute;
         z-index: 999;
         top: -5px;
         right: -5px;
+        line-height: 0.5;
+        font-size: 12px;
     }
 
     @media (max-width: 768px) { 

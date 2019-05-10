@@ -4,6 +4,9 @@ export const MARK_SYSTEM = 10
 // Number of category columns
 export const COLUMNS_NUMBER = 2
 
+// Download image name
+export const WHEEL_OF_LIFE = 'WheelOfLife.jpg'
+
 // i18n config
 export const messages = {
     en: {
@@ -12,6 +15,7 @@ export const messages = {
         deleteCategoryWarning: 'This will delete the category. Continue?',
         download: 'Download result',
         labelEditCategory: 'Edit description or color',
+        loading: 'Loading',
         resetMarks: 'Reset marks',
         resetMarksWarning: 'This will reset all your marks to 0. Continue?',
         resetWheel: 'Drop all changes',
@@ -26,6 +30,7 @@ export const messages = {
         deleteCategoryWarning: 'Удалить эту категорию?',
         download: 'Скачать результат',
         labelEditCategory: 'Изменить текст или цвет',
+        loading: 'Загрузка',
         resetMarks: 'Обнулить оценки',
         resetMarksWarning: 'Это сбросит все ваши оценки. Продолжить?',
         resetWheel: 'Сбросить все изменения',

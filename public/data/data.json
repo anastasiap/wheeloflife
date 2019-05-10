@@ -28,7 +28,7 @@
 		"name": "Призвание",
 		"order": 4
 	}, {
-		"color": "#F8FF50",
+		"color": "#DE5900",
 		"description": "Доходы, расходы, условия жизни",
 		"id": 4,
 		"mark": 0,
@@ -85,7 +85,7 @@
 		"name": "Vocation",
 		"order": 4
 	}, {
-		"color": "#F8FF50",
+		"color": "#DE5900",
 		"description": "Income, outcome, living conditions",
 		"id": 4,
 		"mark": 0,

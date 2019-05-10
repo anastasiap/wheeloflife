@@ -16,7 +16,7 @@ const store: StoreOptions<RootState> = {
                 return data[lang]
             })
         },
-        // TODO check if needed, might be replaced by getData
+        // TODO check if needed, might be replaced with getData
         setInitialCategories(context, data) {
             context.commit('loadDefaultCategories', data)
         },

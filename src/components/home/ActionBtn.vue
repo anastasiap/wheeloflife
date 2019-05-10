@@ -38,6 +38,7 @@
 <script lang="ts">
     import domToImage from 'dom-to-image'
     import Vue from 'vue'
+    import { WHEEL_OF_LIFE } from '../../config/app.config'
 
     export default Vue.extend({
         methods: {
@@ -51,12 +52,24 @@
                 this.$store.dispatch('getData', this.$i18n.locale)
             },
             downloadImage() {
-                domToImage.toJpeg(document.getElementById('main-container'), { bgcolor: 'white', quality: 0.95 })
+                // TODO refactor this. create common loader component
+                const loading = this.$loading({
+                    background: 'rgba(255, 255, 255, 0.7)',
+                    lock: false,
+                    spinner: 'el-icon-loading',
+                    text: this.$t('loading'),
+                })
+
+                const wrapperToImage = document.getElementById('main-container')
+                const link = document.createElement('a')
+                link.download = WHEEL_OF_LIFE
+
+                domToImage.toJpeg(wrapperToImage, { bgcolor: 'white', quality: 0.95 })
                     .then((dataUrl: any) => {
-                        const link = document.createElement('a')
-                        link.download = 'WheelOfLife.jpeg'
                         link.href = dataUrl
+                    }).then(() => {
                         link.click()
+                        loading.close()
                     })
             },
             // TODO refactor this. Create common helper for all alerts
@@ -64,9 +77,9 @@
                 const that = this
 
                 this.$confirm(this.$t('resetMarksWarning'), this.$t('warning'), {
-                    confirmButtonText: 'OK',
                     cancelButtonText: this.$t('cancel'),
-                    type: 'warning'
+                    confirmButtonText: 'OK',
+                    type: 'warning',
                 })
                 .then(() => {
                     that.resetMarks()
@@ -77,9 +90,9 @@
                 const that = this
 
                 this.$confirm(this.$t('resetWheelWarning'), this.$t('warning'), {
-                    confirmButtonText: 'OK',
                     cancelButtonText: this.$t('cancel'),
-                    type: 'warning'
+                    confirmButtonText: 'OK',
+                    type: 'warning',
                 })
                 .then(() => {
                     that.resetWheel()
