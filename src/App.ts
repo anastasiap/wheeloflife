@@ -11,8 +11,9 @@ const App = Vue.extend({
     created() {
         this.$store.dispatch('getData', this.$i18n.locale)
     },
-    name: 'App',
     template: `<Container :initialLang=initialLang />`,
+    name: 'App',
+
 })
 
 export default App
